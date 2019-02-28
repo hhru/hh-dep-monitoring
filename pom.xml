@@ -11,7 +11,7 @@
     <parent>
         <groupId>ru.hh.public-pom</groupId>
         <artifactId>public-pom</artifactId>
-        <version>1.35</version>
+        <version>1.36</version>
     </parent>
 
     <name>hh dependency monitoring</name>
@@ -64,5 +64,27 @@
             </plugin>
         </plugins>
     </build>
+
+    <repositories>
+        <repository>
+            <id>hh-public</id>
+            <name>hh public releases repository</name>
+            <url>http://m2.hh.ru/content/repositories/public-releases</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>public-jboss</id>
+            <url>https://repository.jboss.org/nexus/content/groups/public-jboss</url>
+        </repository>
+        <repository>
+            <id>dev-java-net-glassfish-m2</id>
+            <url>http://download.java.net/maven/glassfish</url>
+        </repository>
+    </repositories>
 
 </project>
