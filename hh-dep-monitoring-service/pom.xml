@@ -62,6 +62,11 @@
             <artifactId>nab-hibernate</artifactId>
             <version>${nab.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.kohsuke</groupId>
+            <artifactId>github-api</artifactId>
+            <version>${github.version}</version>
+        </dependency>
     </dependencies>
 
 </project>

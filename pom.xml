@@ -19,6 +19,7 @@
     <properties>
         <jdk.version>11</jdk.version>
         <nab.version>4.12.4</nab.version>
+        <github.version>1.95</github.version>
     </properties>
 
     <groupId>ru.hh.school</groupId>
