@@ -1,5 +1,10 @@
 package ru.hh.school.depmonitoring.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import ru.hh.school.depmonitoring.utils.PostgreSQLEnumType;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -15,23 +20,33 @@ import javax.persistence.EnumType;
 import java.util.Objects;
 
 @Entity
+@TypeDef(name = "priority", typeClass = PostgreSQLEnumType.class)
 @Table(name = "relation")
 public class Relation {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "relation_relation_id_seq")
-    @SequenceGenerator(name = "relation_relation_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "relation_relation_id_seq", allocationSize = 1, sequenceName = "relation_relation_id_seq")
     @Column(name = "relation_id")
     private Integer relationId;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "repository_from_id")
-    private Repository repositoryFrom;
+    @Column(name = "repository_from_id")
+    private Integer repositoryFromId;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "repository_to_id")
+    @JoinColumn(name = "repository_from_id", insertable = false, updatable = false)
+    @JsonIgnore
+    private Repository repositoryFrom;
+
+    @Column(name = "repository_to_id")
+    private Integer repositoryToId;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "repository_to_id", insertable = false, updatable = false)
+    @JsonIgnore
     private Repository repositoryTo;
 
     @Enumerated(EnumType.STRING)
+    @Type(type = "priority")
     @JoinColumn(name = "priority")
     private RepositoryRelationPriority priority;
 
@@ -40,6 +55,23 @@ public class Relation {
      */
     @Column(name = "description")
     private String description;
+
+
+    public Integer getRepositoryFromId() {
+        return repositoryFromId;
+    }
+
+    public void setRepositoryFromId(Integer repositoryFromId) {
+        this.repositoryFromId = repositoryFromId;
+    }
+
+    public Integer getRepositoryToId() {
+        return repositoryToId;
+    }
+
+    public void setRepositoryToId(Integer repositoryToId) {
+        this.repositoryToId = repositoryToId;
+    }
 
     public Integer getRelationId() {
         return relationId;
@@ -95,6 +127,6 @@ public class Relation {
 
     @Override
     public int hashCode() {
-        return (relationId ^ (relationId >>> 32));
+        return Objects.hash(relationId);
     }
 }

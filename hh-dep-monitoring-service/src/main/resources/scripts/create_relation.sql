@@ -1,7 +1,7 @@
 CREATE TYPE priority AS ENUM (
-    'critical',
-    'partial',
-    'optional'
+    'CRITICAL',
+    'PARTIAL',
+    'OPTIONAL'
 );
 
 CREATE TABLE IF NOT EXISTS relation (

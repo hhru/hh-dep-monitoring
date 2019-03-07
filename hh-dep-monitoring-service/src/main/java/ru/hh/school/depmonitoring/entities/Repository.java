@@ -17,9 +17,9 @@ public class Repository {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "repository_repository_id_seq")
-    @SequenceGenerator(name = "repository_repository_id_seq", allocationSize = 1)
+    @SequenceGenerator(name = "repository_repository_id_seq", allocationSize = 1, sequenceName = "repository_repository_id_seq")
     @Column(name = "repository_id")
-    private Integer repositoryId;
+    private int repositoryId;
 
     /**
      * varchar(110)
@@ -140,7 +140,7 @@ public class Repository {
 
     @Override
     public int hashCode() {
-        int result = (repositoryId ^ (repositoryId >>> 32));
-        return 31 * result + name.hashCode();
+
+        return Objects.hash(repositoryId);
     }
 }
