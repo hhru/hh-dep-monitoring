@@ -7,14 +7,14 @@ import Navbar from './Navbar';
 import Search from './Search';
 
 export default function Header() {
-  return (
-    <AppBar position="static">
-      <Toolbar>
-        <MainIcon />
-        <Navbar />
-        <Search />
-        <UserBlock account={{ accountName: 'SuhoyVasya' }} />
-      </Toolbar>
-    </AppBar>
-  );
+    return (
+        <AppBar position="static">
+            <Toolbar>
+                <MainIcon />
+                <Navbar />
+                <Search />
+                <UserBlock account={{ accountName: 'SuhoyVasya' }} />
+            </Toolbar>
+        </AppBar>
+    );
 }
