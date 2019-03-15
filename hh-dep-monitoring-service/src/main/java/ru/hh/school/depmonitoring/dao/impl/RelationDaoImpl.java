@@ -11,11 +11,11 @@ import javax.inject.Singleton;
 
 @Named
 @Singleton
-public class RelationDaoImpl extends AbstractDao<Relation> implements RelationDao {
+public class RelationDaoImpl extends AbstractDao<Relation, Integer> implements RelationDao {
 
     @Inject
     public RelationDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory, Relation.class);
+        super(sessionFactory, Relation.class, Integer.class);
     }
 
 }

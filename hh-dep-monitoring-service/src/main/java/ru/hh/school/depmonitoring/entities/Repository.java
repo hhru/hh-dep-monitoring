@@ -3,9 +3,6 @@ package ru.hh.school.depmonitoring.entities;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.SequenceGenerator;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -16,10 +13,8 @@ import javax.validation.constraints.NotNull;
 public class Repository {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "repository_repository_id_seq")
-    @SequenceGenerator(name = "repository_repository_id_seq", allocationSize = 1, sequenceName = "repository_repository_id_seq")
     @Column(name = "repository_id")
-    private int repositoryId;
+    private Long repositoryId;
 
     /**
      * varchar(110)
@@ -62,11 +57,11 @@ public class Repository {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public Integer getRepositoryId() {
+    public Long getRepositoryId() {
         return repositoryId;
     }
 
-    public void setRepositoryId(Integer repositoryId) {
+    public void setRepositoryId(Long repositoryId) {
         this.repositoryId = repositoryId;
     }
 

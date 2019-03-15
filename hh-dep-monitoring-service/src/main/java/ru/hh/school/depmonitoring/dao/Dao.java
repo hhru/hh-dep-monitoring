@@ -1,21 +1,25 @@
 package ru.hh.school.depmonitoring.dao;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.Optional;
 
-public interface Dao<T> {
+/*
+ *   @param <T> для передачи класса сущности
+ *   @param <I> для передачи класса первичного ключа сущности
+ * */
+public interface Dao<T, I> {
 
-    Optional<T> findOne(int id);
+    Optional<T> findOne(I id);
 
     List<T> findAll();
 
-    void create(@NotNull T entity);
+    void create(@Nonnull T entity);
 
-    void update(@NotNull T entity);
+    void update(@Nonnull T entity);
 
-    void delete(@NotNull T entity);
+    void delete(@Nonnull T entity);
 
-    void deleteById(int entityId);
+    void deleteById(I entityId);
 
 }
