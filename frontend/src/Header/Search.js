@@ -51,8 +51,7 @@ const styles = theme => ({
 
 });
 
-function Search(props) {
-    const { classes } = props;
+function Search({ classes }) {
     return (
         <div className={classes.search}>
             <div className={classes.searchIcon}>
@@ -70,7 +69,7 @@ function Search(props) {
 }
 
 Search.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Search);

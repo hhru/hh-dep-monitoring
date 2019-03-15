@@ -13,8 +13,7 @@ const styles = {
     },
 };
 
-function UserBlock(props) {
-    const { classes, account } = props;
+function UserBlock({ classes, account }) {
     const picLink = `https://avatars.githubusercontent.com/${account.accountName}`;
     return (
         <Fragment>
@@ -25,7 +24,7 @@ function UserBlock(props) {
 }
 
 UserBlock.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
     account: PropTypes.string.isRequired,
 };
 

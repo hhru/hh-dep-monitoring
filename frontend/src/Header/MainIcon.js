@@ -18,8 +18,7 @@ const styles = theme => ({
     },
 });
 
-function MainIcon(props) {
-    const { classes } = props;
+function MainIcon({ classes }) {
     return (
         <div className={classes.root}>
             dm
@@ -28,7 +27,7 @@ function MainIcon(props) {
 }
 
 MainIcon.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(MainIcon);

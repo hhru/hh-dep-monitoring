@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom';
 
-import Repositories from './Repositories';
+import Repositories from './Repositories/Repositories';
 
 const styles = theme => ({
     root: {
@@ -67,7 +67,7 @@ function MainBlock(props) {
 }
 
 MainBlock.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(MainBlock);
