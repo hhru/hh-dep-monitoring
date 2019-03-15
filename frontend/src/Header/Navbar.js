@@ -1,37 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { styled } from '@material-ui/styles';
+import { Link } from 'react-router-dom';
+
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
+import { routing } from '../MainBlock/MainBlock';
+
 const styles = {
-  root: {
-    flexGrow: 1,
-  },
+    root: {
+        flexGrow: 1,
+    },
 };
 
-const navbarItems = [
-  'Feed',
-  'Search',
-  'Repositories',
-  'Ratings',
-  'Users',
-  'Troubles',
-  'About',
-];
+const StyledLink = styled(Link)({
+    textDecoration: 'none',
+    color: '#fff',
+});
 
 function Navbar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      {navbarItems.map(item => (
-        <Button key={item} color="inherit">{item}</Button>
-      ))}
-    </div>
-  );
+    const { classes } = props;
+    return (
+        <div className={classes.root}>
+            {routing && routing.map(item => (
+                <Button key={item.label} color="inherit">
+                    <StyledLink className={classes.link} to={item.path}>{item.label}</StyledLink>
+                </Button>
+            ))}
+        </div>
+    );
 }
 
 Navbar.propTypes = {
-  classes: PropTypes.string.isRequired,
+    classes: PropTypes.string.isRequired,
 };
 
 export default withStyles(styles)(Navbar);
