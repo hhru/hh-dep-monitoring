@@ -11,11 +11,11 @@ import javax.inject.Singleton;
 
 @Named
 @Singleton
-public class RepositoryDaoImpl extends AbstractDao<Repository> implements RepositoryDao {
+public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements RepositoryDao {
 
     @Inject
     public RepositoryDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory, Repository.class);
+        super(sessionFactory, Repository.class, Long.class);
     }
 
 }

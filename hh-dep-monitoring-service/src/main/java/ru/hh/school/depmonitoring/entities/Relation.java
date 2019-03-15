@@ -17,6 +17,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Enumerated;
 import javax.persistence.EnumType;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -29,16 +30,18 @@ public class Relation {
     @Column(name = "relation_id")
     private Integer relationId;
 
+    @NotNull
     @Column(name = "repository_from_id")
-    private Integer repositoryFromId;
+    private Long repositoryFromId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "repository_from_id", insertable = false, updatable = false)
     @JsonIgnore
     private Repository repositoryFrom;
 
+    @NotNull
     @Column(name = "repository_to_id")
-    private Integer repositoryToId;
+    private Long repositoryToId;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "repository_to_id", insertable = false, updatable = false)
@@ -48,6 +51,7 @@ public class Relation {
     @Enumerated(EnumType.STRING)
     @Type(type = "priority")
     @JoinColumn(name = "priority")
+    @NotNull
     private RepositoryRelationPriority priority;
 
     /**
@@ -57,19 +61,19 @@ public class Relation {
     private String description;
 
 
-    public Integer getRepositoryFromId() {
+    public Long getRepositoryFromId() {
         return repositoryFromId;
     }
 
-    public void setRepositoryFromId(Integer repositoryFromId) {
+    public void setRepositoryFromId(Long repositoryFromId) {
         this.repositoryFromId = repositoryFromId;
     }
 
-    public Integer getRepositoryToId() {
+    public Long getRepositoryToId() {
         return repositoryToId;
     }
 
-    public void setRepositoryToId(Integer repositoryToId) {
+    public void setRepositoryToId(Long repositoryToId) {
         this.repositoryToId = repositoryToId;
     }
 
