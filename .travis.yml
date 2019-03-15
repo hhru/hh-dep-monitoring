@@ -7,9 +7,10 @@ after_success:
   - bash <(curl -s https://codecov.io/bash)
 addons:
   sonarcloud:
-    organization: "alinkov-github"
+    organization: "$SONAR_ORGANIZATION"
 
 cache:
   directories:
     - '$HOME/.m2/repository'
     - '$HOME/.sonar/cache'
+    - '$HOME/frontend/node_modules'
