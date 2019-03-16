@@ -47,7 +47,7 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
     }
 
     @Override
-    public void deleteById(I entityId) {
+    public void deleteById(@Nonnull I entityId) {
         Optional<T> entity = findOne(entityId);
         entity.ifPresent(this::delete);
     }

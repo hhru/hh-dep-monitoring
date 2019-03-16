@@ -21,6 +21,6 @@ public interface Dao<T, I extends Serializable> {
 
     void delete(@Nonnull T entity);
 
-    void deleteById(I entityId);
+    void deleteById(@Nonnull I entityId);
 
 }

@@ -7,6 +7,7 @@ import ru.hh.nab.testbase.NabTestConfig;
 import ru.hh.nab.testbase.hibernate.NabHibernateTestBaseConfig;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import ru.hh.school.depmonitoring.service.loaders.GithubLoader;
+import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
 import java.util.List;
@@ -18,7 +19,8 @@ import static org.mockito.Mockito.when;
 @Import({
         CommonConfig.class,
         NabTestConfig.class,
-        NabHibernateTestBaseConfig.class
+        NabHibernateTestBaseConfig.class,
+        DBUtils.class
 })
 public class TestConfig {
     @Bean
