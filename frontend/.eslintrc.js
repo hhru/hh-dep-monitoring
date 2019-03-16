@@ -14,5 +14,9 @@ module.exports = {
     "env":{
         "browser":true,
         "node":true,
+    },
+    "globals": {
+        "it": true,
+        "expect": true,
     }
 };

@@ -11,7 +11,6 @@ import javax.ws.rs.QueryParam;
 @Singleton
 @Path("/")
 public class Resource {
-
   @GET
   @Path("/hello")
   public String hello(@DefaultValue("world") @QueryParam("name") String name) {

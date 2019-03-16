@@ -9,3 +9,5 @@ _Учебный проект школы программистов_
 Собирать: `mvn clean install`
 
 Запускать: `mvn exec:java`
+
+Запустить фронтенд `mvn -P frontend clean test frontend:yarn@yarn-start`
