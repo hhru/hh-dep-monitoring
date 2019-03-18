@@ -1,6 +1,7 @@
 package ru.hh.school.depmonitoring.dao;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,7 @@ import java.util.Optional;
  *   @param <T> для передачи класса сущности
  *   @param <I> для передачи класса первичного ключа сущности
  * */
-public interface Dao<T, I> {
+public interface Dao<T, I extends Serializable> {
 
     Optional<T> findOne(I id);
 

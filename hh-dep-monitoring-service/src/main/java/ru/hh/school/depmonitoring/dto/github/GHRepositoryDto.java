@@ -1,24 +1,27 @@
 package ru.hh.school.depmonitoring.dto.github;
 
+import ru.hh.school.depmonitoring.utils.DateUtils;
+
 import java.io.Serializable;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.Date;
 
-public class Repository implements Serializable {
+public class GHRepositoryDto implements Serializable {
     private final long repositoryId;
     private final String name;
-    private final URL htmlUrl;
+    private final String htmlUrl;
     private final String description;
     private final boolean archived;
     private final boolean active;
-    private final Date createdAt;
-    private final Date updatedAt;
+    private final LocalDateTime createdAt;
+    private final LocalDateTime updatedAt;
 
-    public Repository() {
+    public GHRepositoryDto() {
         this(builder());
     }
 
-    private Repository(RepositoryBuilder repositoryBuilder) {
+    private GHRepositoryDto(RepositoryBuilder repositoryBuilder) {
         this.repositoryId = repositoryBuilder.repositoryId;
         this.name = repositoryBuilder.name;
         this.htmlUrl = repositoryBuilder.htmlUrl;
@@ -41,7 +44,7 @@ public class Repository implements Serializable {
         return name;
     }
 
-    public URL getHtmlUrl() {
+    public String getHtmlUrl() {
         return htmlUrl;
     }
 
@@ -57,23 +60,23 @@ public class Repository implements Serializable {
         return active;
     }
 
-    public Date getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
+    public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
 
     public static final class RepositoryBuilder {
         private long repositoryId;
         private String name;
-        private URL htmlUrl;
+        private String htmlUrl;
         private String description;
         private boolean archived;
         private boolean active;
-        private Date createdAt;
-        private Date updatedAt;
+        private LocalDateTime createdAt;
+        private LocalDateTime updatedAt;
 
         private RepositoryBuilder() {
         }
@@ -89,6 +92,15 @@ public class Repository implements Serializable {
         }
 
         public RepositoryBuilder withHtmlUrl(URL htmlUrl) {
+            if (htmlUrl != null) {
+                this.htmlUrl = htmlUrl.toString();
+            } else {
+                this.htmlUrl = null;
+            }
+            return this;
+        }
+
+        public RepositoryBuilder withHtmlUrl(String htmlUrl) {
             this.htmlUrl = htmlUrl;
             return this;
         }
@@ -98,28 +110,38 @@ public class Repository implements Serializable {
             return this;
         }
 
-        public RepositoryBuilder withIsArchived(boolean archived) {
+        public RepositoryBuilder withArchived(boolean archived) {
             this.archived = archived;
             return this;
         }
 
-        public RepositoryBuilder withIsActive(boolean active) {
+        public RepositoryBuilder withActive(boolean active) {
             this.active = active;
             return this;
         }
 
         public RepositoryBuilder withCreatedAt(Date createdAt) {
+            this.createdAt = DateUtils.toLocalDateTime(createdAt);
+            return this;
+        }
+
+        public RepositoryBuilder withCreatedAt(LocalDateTime createdAt) {
             this.createdAt = createdAt;
             return this;
         }
 
         public RepositoryBuilder withUpdatedAt(Date updatedAt) {
+            this.updatedAt = DateUtils.toLocalDateTime(updatedAt);
+            return this;
+        }
+
+        public RepositoryBuilder withUpdatedAt(LocalDateTime updatedAt) {
             this.updatedAt = updatedAt;
             return this;
         }
 
-        public Repository build() {
-            return new Repository(this);
+        public GHRepositoryDto build() {
+            return new GHRepositoryDto(this);
         }
     }
 }

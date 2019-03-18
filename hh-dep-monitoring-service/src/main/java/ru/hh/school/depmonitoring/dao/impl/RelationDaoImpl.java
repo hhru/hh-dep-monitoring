@@ -15,7 +15,7 @@ public class RelationDaoImpl extends AbstractDao<Relation, Integer> implements R
 
     @Inject
     public RelationDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory, Relation.class, Integer.class);
+        super(sessionFactory, Relation.class);
     }
 
 }

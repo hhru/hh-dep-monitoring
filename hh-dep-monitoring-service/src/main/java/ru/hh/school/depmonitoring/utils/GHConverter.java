@@ -3,7 +3,7 @@ package ru.hh.school.depmonitoring.utils;
 import org.kohsuke.github.GHRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.hh.school.depmonitoring.dto.github.Repository;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import java.io.IOException;
 import java.util.Date;
 
@@ -13,14 +13,14 @@ public class GHConverter {
     private GHConverter() {
     }
 
-    public static Repository convert(GHRepository ghRepository) {
-        return Repository.builder()
+    public static GHRepositoryDto convert(GHRepository ghRepository) {
+        return GHRepositoryDto.builder()
                 .withRepositoryId(ghRepository.getId())
                 .withName(ghRepository.getName())
                 .withHtmlUrl(ghRepository.getHtmlUrl())
                 .withDescription(ghRepository.getDescription())
-                .withIsArchived(ghRepository.isArchived())
-                .withIsActive(true)
+                .withArchived(ghRepository.isArchived())
+                .withActive(true)
                 .withCreatedAt(getCreatedDate(ghRepository))
                 .withUpdatedAt(getUpdatedDate(ghRepository))
                 .build();

@@ -4,25 +4,24 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import javax.annotation.Nonnull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 
 /** @inheritDoc */
-public abstract class AbstractDao<T, I> implements Dao<T, I> {
+public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I> {
 
     private final Class<T> clazz;
-    private final Class<I> idClazz;
     private final SessionFactory sessionFactory;
 
-    public AbstractDao(SessionFactory sessionFactory, Class<T> clazz, Class<I> idClazz) {
+    public AbstractDao(SessionFactory sessionFactory, Class<T> clazz) {
         this.sessionFactory = sessionFactory;
         this.clazz = clazz;
-        this.idClazz = idClazz;
     }
 
     @Override
     public Optional<T> findOne(I id) {
-        return Optional.ofNullable(getSession().get(clazz, idClazz));
+        return Optional.ofNullable(getSession().get(clazz, id));
     }
 
     @Override

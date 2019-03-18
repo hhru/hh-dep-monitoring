@@ -3,8 +3,8 @@ package ru.hh.school.depmonitoring;
 import org.junit.Test;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
-import ru.hh.school.depmonitoring.dto.github.Repository;
-import ru.hh.school.depmonitoring.loaders.GithubLoader;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
+import ru.hh.school.depmonitoring.service.loaders.GithubLoader;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -27,7 +27,7 @@ public class GithubLoaderTest {
 
     @Test
     public void getRepositoriesWithNull() {
-        List<Repository> repositoryList = githubLoader.getReposOfOrganization((GHOrganization) null);
+        List<GHRepositoryDto> repositoryList = githubLoader.getReposOfOrganization((GHOrganization) null);
         assertTrue(repositoryList.isEmpty());
     }
 
@@ -35,7 +35,7 @@ public class GithubLoaderTest {
     public void getRepositoriesWithEmptyOrganization() throws IOException {
         GHOrganization ghOrganization = mock(GHOrganization.class);
         when(ghOrganization.getRepositories()).thenReturn(null);
-        List<Repository> repositoryList = githubLoader.getReposOfOrganization(ghOrganization);
+        List<GHRepositoryDto> repositoryList = githubLoader.getReposOfOrganization(ghOrganization);
         assertTrue(repositoryList.isEmpty());
     }
 
@@ -46,7 +46,7 @@ public class GithubLoaderTest {
                 .collect(Collectors.toMap(GHRepository::getName, Function.identity()));
         GHOrganization ghOrganization = mock(GHOrganization.class);
         when(ghOrganization.getRepositories()).thenReturn(ghRepositoryMap);
-        List<Repository> repositoryList = githubLoader.getReposOfOrganization(ghOrganization);
+        List<GHRepositoryDto> repositoryList = githubLoader.getReposOfOrganization(ghOrganization);
         assertEquals(ghRepositoryMap.size(), repositoryList.size());
     }
 

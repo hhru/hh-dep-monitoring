@@ -12,10 +12,13 @@ import ru.hh.nab.hibernate.NabHibernateCommonConfig;
 import ru.hh.nab.hibernate.datasource.RoutingDataSource;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
-import ru.hh.school.depmonitoring.loaders.GithubLoader;
+import ru.hh.school.depmonitoring.rs.GithubResource;
 import ru.hh.school.depmonitoring.rs.Resource;
+import ru.hh.school.depmonitoring.service.SyncService;
+import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 
 import javax.sql.DataSource;
+import java.util.Optional;
 
 @Configuration
 @Import({
@@ -25,9 +28,11 @@ import javax.sql.DataSource;
         RepositoryDaoImpl.class,
         RelationDaoImpl.class,
 
-        GithubLoader.class,
+        GHRepositoryMapper.class,
+        SyncService.class,
 
-        Resource.class
+        Resource.class,
+        GithubResource.class
 })
 public class CommonConfig {
 
@@ -42,5 +47,17 @@ public class CommonConfig {
     @Primary
     protected DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
         return new RoutingDataSource(dataSourceFactory.create(DataSourceType.MASTER, false, fileSettings));
+    }
+
+    @Bean
+    protected String oauthToken(FileSettings fileSettings) {
+        return Optional.ofNullable(System.getProperty("github.oauth"))
+                .orElseGet(() -> fileSettings.getString("github.oauth"));
+    }
+
+    @Bean
+    protected String githubOrganization(FileSettings fileSettings) {
+        return Optional.ofNullable(fileSettings.getString("github.organization"))
+                .orElseThrow(() -> new IllegalArgumentException("Error in getting github.organization from service.properties"));
     }
 }
