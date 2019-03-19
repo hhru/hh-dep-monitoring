@@ -20,10 +20,14 @@ import javax.sql.DataSource;
 @Configuration
 @Import({
         NabHibernateCommonConfig.class,
+        MigrationConfig.class,
+
         RepositoryDaoImpl.class,
         RelationDaoImpl.class,
-        Resource.class,
-        GithubLoader.class
+
+        GithubLoader.class,
+
+        Resource.class
 })
 public class CommonConfig {
 
