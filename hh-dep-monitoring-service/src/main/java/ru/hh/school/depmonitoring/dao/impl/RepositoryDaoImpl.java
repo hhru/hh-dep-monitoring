@@ -15,7 +15,7 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
 
     @Inject
     public RepositoryDaoImpl(SessionFactory sessionFactory) {
-        super(sessionFactory, Repository.class, Long.class);
+        super(sessionFactory, Repository.class);
     }
 
 }

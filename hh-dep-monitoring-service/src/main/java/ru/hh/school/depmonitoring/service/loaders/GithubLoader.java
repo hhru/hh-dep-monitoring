@@ -1,8 +1,8 @@
-package ru.hh.school.depmonitoring.loaders;
+package ru.hh.school.depmonitoring.service.loaders;
 
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GitHub;
-import ru.hh.school.depmonitoring.dto.github.Repository;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import ru.hh.school.depmonitoring.exceptions.LoadExceptionType;
 import ru.hh.school.depmonitoring.exceptions.LoadRuntimeException;
 import ru.hh.school.depmonitoring.utils.GHConverter;
@@ -22,11 +22,11 @@ public class GithubLoader {
         this.oauthToken = oauthToken;
     }
 
-    public List<Repository> getReposOfOrganization(String organizationName) {
+    public List<GHRepositoryDto> getReposOfOrganization(String organizationName) {
         return getReposOfOrganization(getOrganizationByName(organizationName));
     }
 
-    public List<Repository> getReposOfOrganization(GHOrganization ghOrganization) {
+    public List<GHRepositoryDto> getReposOfOrganization(GHOrganization ghOrganization) {
         try {
             if (ghOrganization == null || ghOrganization.getRepositories() == null || ghOrganization.getRepositories().size() == 0) {
                 return List.of();
