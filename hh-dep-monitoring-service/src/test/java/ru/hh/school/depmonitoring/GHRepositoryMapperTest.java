@@ -21,15 +21,7 @@ public class GHRepositoryMapperTest {
 
     @Test
     public void toDto() {
-        Repository entity = new Repository();
-        entity.setRepositoryId(1L);
-        entity.setName("Repo 1");
-        entity.setHtmlUrl("http://github.com/test/repo1");
-        entity.setDescription("Test repo 1");
-        entity.setArchived(false);
-        entity.setActive(true);
-        entity.setCreatedAt(LocalDateTime.parse("2007-12-03T10:15:30"));
-        entity.setUpdatedAt(LocalDateTime.parse("2008-11-04T09:16:00"));
+        Repository entity = StructCreator.createRepositoryEntity(1L, LocalDateTime.parse("2008-11-04T09:16:00"));
         GHRepositoryDto dto = mapper.toDto(entity);
         assertDtoEqualsEntity(entity, dto);
     }
