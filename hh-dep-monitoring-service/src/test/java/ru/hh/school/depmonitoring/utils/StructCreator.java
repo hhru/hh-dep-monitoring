@@ -5,8 +5,9 @@ import ru.hh.school.depmonitoring.entities.Repository;
 
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.LongStream;
 
 public class StructCreator {
     public static GHRepositoryDto createGHRepositoryDto(long id) {
@@ -36,10 +37,8 @@ public class StructCreator {
     }
 
     public static List<GHRepositoryDto> createGHRepositoryDtoList(long count) {
-        List<GHRepositoryDto> repositoryDtoList= new LinkedList<>();
-        for (long i = 1; i <= count; i++) {
-            repositoryDtoList.add(StructCreator.createGHRepositoryDto(i));
-        }
-        return repositoryDtoList;
+        return LongStream.rangeClosed(1, count)
+                .mapToObj(StructCreator::createGHRepositoryDto)
+                .collect(Collectors.toList());
     }
 }

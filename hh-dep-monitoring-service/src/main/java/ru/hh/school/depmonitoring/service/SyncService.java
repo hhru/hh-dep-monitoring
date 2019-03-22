@@ -1,5 +1,6 @@
 package ru.hh.school.depmonitoring.service;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
@@ -26,6 +27,7 @@ public class SyncService {
         this.repositoryDao = repositoryDao;
     }
 
+    @Scheduled(initialDelay = 60*1000L, fixedDelay = 15*60*1000L)
     @Transactional
     public void syncGithub() {
         List<GHRepositoryDto> repositoryList= githubLoader.getReposOfOrganization(githubOrganization);
