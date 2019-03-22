@@ -1,5 +1,6 @@
 package ru.hh.school.depmonitoring;
 
+import javax.ws.rs.client.ClientBuilder;
 import org.junit.After;
 import org.springframework.test.context.ContextConfiguration;
 import ru.hh.nab.starter.NabApplication;
@@ -31,5 +32,11 @@ public class DepMonitoringTestBase extends NabTestBase {
     public void clean() {
         dbUtils.cleanTable(Repository.class);
         dbUtils.cleanTable(Relation.class);
+    }
+
+    @Override
+    protected ClientBuilder getClientBuilder() {
+        return super.getClientBuilder()
+                .register(ObjectMapperContextResolver.class);
     }
 }
