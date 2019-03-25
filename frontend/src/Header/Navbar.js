@@ -19,8 +19,7 @@ const StyledLink = styled(Link)({
     color: '#fff',
 });
 
-function Navbar(props) {
-    const { classes } = props;
+function Navbar({ classes }) {
     return (
         <div className={classes.root}>
             {routing && routing.map(item => (
@@ -33,7 +32,7 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
-    classes: PropTypes.string.isRequired,
+    classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Navbar);
