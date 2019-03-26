@@ -1,70 +1,55 @@
-package ru.hh.school.depmonitoring.entities;
+package ru.hh.school.depmonitoring.dto;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.Column;
-import javax.persistence.OneToMany;
+import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
-import java.util.Set;
-import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name = "repository")
-public class Repository {
+public class RepositoryDto {
 
-    @Id
-    @Column(name = "repository_id")
+    @NotNull
     private Long repositoryId;
 
-    /**
-     * varchar(110)
-     */
     @NotNull
-    @Column(name = "name")
     private String name;
 
-    /**
-     * varchar(255)
-     */
     @NotNull
-    @Column(name = "html_url")
     private String htmlUrl;
 
-    /**
-     * varchar(500)
-     */
-    @Column(name = "description")
+    @Nullable
     private String description;
 
     @NotNull
-    @Column(name = "is_archived")
     private boolean isArchived;
 
     @NotNull
-    @Column(name = "is_active")
     private boolean isActive;
 
-    /**
-     * timestamptz
-     */
     @NotNull
-    @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    /**
-     * timestamptz
-     */
-    @Column(name = "updated_at")
+    @Nullable
     private LocalDateTime updatedAt;
 
+    private boolean hasRelatedTo;
 
-    @OneToMany(mappedBy = "repositoryFromId")
-    private Set<Relation> relatedTo;
+    private boolean hasRelatedFrom;
 
-    @OneToMany(mappedBy = "repositoryToId")
-    private Set<Relation> relatedFrom;
+    public boolean getHasRelatedTo() {
+        return hasRelatedTo;
+    }
+
+    public boolean getHasRelatedFrom() {
+        return hasRelatedFrom;
+    }
+
+    public void setHasRelatedTo(boolean hasRelatedTo) {
+        this.hasRelatedTo = hasRelatedTo;
+    }
+
+    public void setHasRelatedFrom(boolean hasRelatedFrom) {
+        this.hasRelatedFrom = hasRelatedFrom;
+    }
 
     public Long getRepositoryId() {
         return repositoryId;
@@ -130,14 +115,6 @@ public class Repository {
         this.updatedAt = updatedAt;
     }
 
-    public Set<Relation> getRelatedTo() {
-        return relatedTo;
-    }
-
-    public Set<Relation> getRelatedFrom() {
-        return relatedFrom;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -146,8 +123,8 @@ public class Repository {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Repository repository = (Repository) o;
-        return Objects.equals(repositoryId, repository.repositoryId);
+        RepositoryDto repositoryDto = (RepositoryDto) o;
+        return Objects.equals(repositoryId, repositoryDto.getRepositoryId());
     }
 
     @Override
@@ -155,4 +132,5 @@ public class Repository {
 
         return Objects.hash(repositoryId);
     }
+
 }
