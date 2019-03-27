@@ -4,8 +4,8 @@ import classNames from 'classnames';
 
 import { makeStyles } from '@material-ui/styles';
 
-import Icon from '../../Utils/icons';
-import { archiveColored, archiveIcon, repositoryItemTitle } from '../../Utils/commonStyles';
+import Icon from 'Utils/icons';
+import { archiveColored, archiveIcon, repositoryItemTitle } from 'Utils/commonStyles';
 
 const useStyles = makeStyles({
     repositoryItemTitle,

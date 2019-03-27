@@ -8,8 +8,8 @@ import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
+import { fetchRepositories } from 'redux/models/Repository/repositoriesActions';
 import RepositoryItem from './RepositoryItem';
-import { fetchRepositories } from '../../redux/repositoriesActions';
 
 const styles = theme => ({
     root: {
@@ -47,6 +47,6 @@ Repositories.propTypes = {
 };
 
 export default connect(
-    state => ({ repositories: state.repositories }),
+    state => ({ repositories: state.repositories.list }),
     { fetchRepositories },
 )(withStyles(styles)(Repositories));

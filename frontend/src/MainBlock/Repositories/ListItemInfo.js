@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/styles';
 
-import { dateListItem } from '../../Utils/commonStyles';
-import formatDate from '../../Utils/date';
+import { dateListItem } from 'Utils/commonStyles';
+import formatDate from 'Utils/date';
 
 const useStyles = makeStyles({
     dateListItem,

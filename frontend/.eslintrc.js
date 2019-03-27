@@ -4,6 +4,14 @@ module.exports = {
         "react": {
             "version": "detect",
         },
+        "import/resolver": {
+            "node": {
+                "moduleDirectory": [
+                    "node_modules",
+                    "src/"
+                ]
+            }
+        }
     },
     "rules": {
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
@@ -16,6 +24,14 @@ module.exports = {
             checkContextTypes: true,
             checkChildContextTypes: true,
         }],
+        "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }],
+        "no-unused-expressions": [2, { allowTernary: true }],
+        "object-curly-newline": [
+            "error", {
+                "ObjectPattern": {"multiline": false}
+            }
+        ],
+        "import/no-cycle": "off",
     },
     "env":{
         "browser":true,

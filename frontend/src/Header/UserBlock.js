@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
@@ -25,7 +26,7 @@ function UserBlock({ classes, account }) {
 
 UserBlock.propTypes = {
     classes: PropTypes.object.isRequired,
-    account: PropTypes.string.isRequired,
+    account: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(UserBlock);
