@@ -1,9 +1,6 @@
 package ru.hh.school.depmonitoring.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import ru.hh.school.depmonitoring.utils.PostgreSQLEnumType;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -21,7 +18,6 @@ import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
-@TypeDef(name = "priority", typeClass = PostgreSQLEnumType.class)
 @Table(name = "relation")
 public class Relation {
     @Id
@@ -49,8 +45,7 @@ public class Relation {
     private Repository repositoryTo;
 
     @Enumerated(EnumType.STRING)
-    @Type(type = "priority")
-    @JoinColumn(name = "priority")
+    @Column(name = "priority")
     @NotNull
     private RepositoryRelationPriority priority;
 

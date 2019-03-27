@@ -1,13 +1,14 @@
 package ru.hh.school.depmonitoring.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
 import javax.persistence.OneToMany;
 import java.time.LocalDateTime;
-import java.util.Objects;
 import java.util.Set;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -66,68 +67,39 @@ public class Repository {
     @OneToMany(mappedBy = "repositoryToId")
     private Set<Relation> relatedFrom;
 
+    @OneToMany(mappedBy = "repositoryId", fetch = FetchType.LAZY)
+    private Set<RepositoryLink> linkUrls;
+
     public Long getRepositoryId() {
         return repositoryId;
-    }
-
-    public void setRepositoryId(Long repositoryId) {
-        this.repositoryId = repositoryId;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getHtmlUrl() {
         return htmlUrl;
-    }
-
-    public void setHtmlUrl(String htmlUrl) {
-        this.htmlUrl = htmlUrl;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public boolean isArchived() {
         return isArchived;
-    }
-
-    public void setArchived(boolean archived) {
-        isArchived = archived;
     }
 
     public boolean isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public Set<Relation> getRelatedTo() {
@@ -136,6 +108,42 @@ public class Repository {
 
     public Set<Relation> getRelatedFrom() {
         return relatedFrom;
+    }
+
+    public Set<RepositoryLink> getLinkUrls() {
+        return linkUrls;
+    }
+
+    public void setRepositoryId(Long repositoryId) {
+        this.repositoryId = repositoryId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setArchived(boolean archived) {
+        isArchived = archived;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
