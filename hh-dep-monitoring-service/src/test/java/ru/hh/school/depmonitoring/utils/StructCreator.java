@@ -1,16 +1,39 @@
 package ru.hh.school.depmonitoring.utils;
 
-import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.entities.Repository;
-
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
+import ru.hh.school.depmonitoring.dto.RelationDto;
+import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
+import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
+
 public class StructCreator {
+    public static RelationDto createRelationDto(Integer id) {
+        return RelationDto.builder()
+                .withRelationId(id)
+                .withRepositoryFromId(1L)
+                .withRepositoryToId(2L)
+                .withPriority(RepositoryRelationPriority.CRITICAL)
+                .withDescription("Test description")
+                .build();
+    }
+
+    public static Relation createRelationEntity(Integer id) {
+        Relation relation = new Relation();
+        relation.setRelationId(id);
+        relation.setRepositoryFrom(createRepositoryEntity(1L, LocalDateTime.now()));
+        relation.setRepositoryTo(createRepositoryEntity(2L, LocalDateTime.now()));
+        relation.setPriority(RepositoryRelationPriority.CRITICAL);
+        relation.setDescription("Test description");
+        return relation;
+    }
+
     public static GHRepositoryDto createGHRepositoryDto(long id) {
         return GHRepositoryDto.builder()
                 .withRepositoryId(id)
@@ -44,8 +67,7 @@ public class StructCreator {
     }
 
     public static RepositoryDto createRepositoryDto() {
-        RepositoryDto dto = createRepositoryDto(1L);
-        return dto;
+        return createRepositoryDto(1L);
     }
 
     public static RepositoryDto createRepositoryDto(long id) {
@@ -56,8 +78,9 @@ public class StructCreator {
         repositoryDto.setDescription("Description");
         repositoryDto.setArchived(true);
         repositoryDto.setActive(false);
-        repositoryDto.setCreatedAt(LocalDateTime.of(2019, 03, 12, 14, 51));
-        repositoryDto.setUpdatedAt(LocalDateTime.of(2019, 04, 12, 13, 22));
+        repositoryDto.setCreatedAt(LocalDateTime.of(2019, 3, 12, 14, 51));
+        repositoryDto.setUpdatedAt(LocalDateTime.of(2019, 4, 12, 13, 22));
+
         return repositoryDto;
     }
 
@@ -66,5 +89,4 @@ public class StructCreator {
                 .mapToObj(StructCreator::createRepositoryDto)
                 .collect(Collectors.toList());
     }
-
 }
