@@ -14,6 +14,7 @@ import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
 import ru.hh.school.depmonitoring.rs.GithubResource;
 import ru.hh.school.depmonitoring.service.RepositoryService;
+import ru.hh.school.depmonitoring.rs.RepositoryResource;
 import ru.hh.school.depmonitoring.service.SyncService;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
@@ -28,16 +29,17 @@ import java.util.Optional;
 
         RepositoryDaoImpl.class,
         RelationDaoImpl.class,
+        RepositoryMapper.class,
+        GHRepositoryMapper.class,
 
         SyncService.class,
         RepositoryService.class,
 
-        GHRepositoryMapper.class,
-        RepositoryMapper.class,
 
-        GithubResource.class
-
+        GithubResource.class,
+        RepositoryResource.class
 })
+
 public class CommonConfig {
 
     @Bean

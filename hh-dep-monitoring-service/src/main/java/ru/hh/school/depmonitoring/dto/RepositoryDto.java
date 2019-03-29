@@ -1,11 +1,12 @@
 package ru.hh.school.depmonitoring.dto;
 
+import java.io.Serializable;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class RepositoryDto {
+public class RepositoryDto implements Serializable {
 
     @NotNull
     private Long repositoryId;
@@ -129,8 +130,6 @@ public class RepositoryDto {
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(repositoryId);
+        return Objects.hash(repositoryId, name, htmlUrl, description, isArchived, isActive, createdAt, updatedAt, hasRelatedTo, hasRelatedFrom);
     }
-
 }
