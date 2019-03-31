@@ -1,20 +1,22 @@
 package ru.hh.school.depmonitoring.dto;
 
 import java.io.Serializable;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.DefaultValue;
 
 public class PageDto<T extends Serializable> implements Serializable {
     @NotNull
-    private T[] items;
+    private List<T> items;
 
     private int found;
 
     private int pages;
 
-    @NotNull
-    private Integer perPage;
+    @DefaultValue("20")
+    private int perPage;
 
     private int page;
 
@@ -34,23 +36,23 @@ public class PageDto<T extends Serializable> implements Serializable {
         return new PageDtoBuilder<>();
     }
 
-    public T[] getItems() {
+    public List<T> getItems() {
         return items;
     }
 
-    public Integer getFound() {
+    public int getFound() {
         return found;
     }
 
-    public Integer getPages() {
+    public int getPages() {
         return pages;
     }
 
-    public Integer getPerPage() {
+    public int getPerPage() {
         return perPage;
     }
 
-    public Integer getPage() {
+    public int getPage() {
         return page;
     }
 
@@ -63,22 +65,20 @@ public class PageDto<T extends Serializable> implements Serializable {
             return false;
         }
         PageDto<?> pageDto = (PageDto<?>) o;
-        return Arrays.equals(items, pageDto.items) &&
-                Objects.equals(found, pageDto.found) &&
-                Objects.equals(pages, pageDto.pages) &&
-                Objects.equals(perPage, pageDto.perPage) &&
-                Objects.equals(page, pageDto.page);
+        return found == pageDto.found &&
+                pages == pageDto.pages &&
+                perPage == pageDto.perPage &&
+                page == pageDto.page &&
+                Objects.equals(items, pageDto.items);
     }
 
     @Override
     public int hashCode() {
-        int result = Objects.hash(found, pages, perPage, page);
-        result = 31 * result + Arrays.hashCode(items);
-        return result;
+        return Objects.hash(items, found, pages, perPage, page);
     }
 
     public static final class PageDtoBuilder<T extends Serializable> {
-        private T[] items;
+        private List<T> items;
         private int found;
         private int pages;
         private int perPage;
@@ -87,8 +87,8 @@ public class PageDto<T extends Serializable> implements Serializable {
         private PageDtoBuilder() {
         }
 
-        public PageDtoBuilder<T> withItems(T[] items) {
-            this.items = Objects.requireNonNull(items, "Page items must not be null");
+        public PageDtoBuilder<T> withItems(List<T> items) {
+            this.items = new ArrayList<>(items);
             return this;
         }
 
@@ -103,9 +103,6 @@ public class PageDto<T extends Serializable> implements Serializable {
         }
 
         public PageDtoBuilder<T> withPerPage(int perPage) {
-            if (perPage <= 0) {
-                throw new IllegalArgumentException("perPage parameter must be positive");
-            }
             this.perPage = perPage;
             return this;
         }
@@ -116,6 +113,15 @@ public class PageDto<T extends Serializable> implements Serializable {
         }
 
         public PageDto<T> build() {
+            if (this.perPage <= 0) {
+                throw new IllegalArgumentException("perPage field must be positive");
+            }
+            if (this.pages < 0) {
+                throw new IllegalArgumentException("page field must not be negative");
+            }
+            if (items == null) {
+                throw new IllegalArgumentException("items parameter must not be null");
+            }
             return new PageDto<>(this);
         }
     }

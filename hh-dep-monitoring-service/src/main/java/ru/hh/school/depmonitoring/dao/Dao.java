@@ -1,5 +1,7 @@
 package ru.hh.school.depmonitoring.dao;
 
+import ru.hh.school.depmonitoring.dto.PageRequestDto;
+
 import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +17,8 @@ public interface Dao<T, I extends Serializable> {
 
     List<T> findAll();
 
+    List<T> findPage(@Nonnull PageRequestDto pageRequestDto);
+
     void create(@Nonnull T entity);
 
     void update(@Nonnull T entity);
@@ -22,5 +26,7 @@ public interface Dao<T, I extends Serializable> {
     void delete(@Nonnull T entity);
 
     void deleteById(@Nonnull I entityId);
+
+    int count();
 
 }

@@ -57,7 +57,6 @@ public class StructCreator {
         repositoryDto.setActive(false);
         repositoryDto.setCreatedAt(LocalDateTime.of(2019, 03, 12, 14, 51));
         repositoryDto.setUpdatedAt(LocalDateTime.of(2019, 04, 12, 13, 22));
-
         return repositoryDto;
     }
 
@@ -66,4 +65,5 @@ public class StructCreator {
                 .mapToObj(StructCreator::createRepositoryDto)
                 .collect(Collectors.toList());
     }
+
 }

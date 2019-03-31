@@ -1,9 +1,11 @@
 package ru.hh.school.depmonitoring.rs;
 
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import ru.hh.school.depmonitoring.dto.PageDto;
+import ru.hh.school.depmonitoring.dto.PageRequestDto;
+import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.service.RepositoryService;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -16,9 +18,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import ru.hh.school.depmonitoring.dto.PageDto;
-import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.service.RepositoryService;
+import java.util.List;
+import java.util.Optional;
 
 @Named
 @Singleton
@@ -33,10 +34,22 @@ public class RepositoryResource {
     @GET
     @Path("/")
     @Produces(MediaType.APPLICATION_JSON)
-    public PageDto<RepositoryDto> getAllRepositories(@DefaultValue("0") @QueryParam("page") int page,
-                                                     @DefaultValue("10") @QueryParam("perPage") int perPage) {
-        return getPage(service.getFullList(), page, perPage);
+    public List<RepositoryDto> getAllRepositories() {
+        return service.getFullList();
     }
+
+    @GET
+    @Path("/page")
+    @Produces(MediaType.APPLICATION_JSON)
+    public PageDto<RepositoryDto> getRepositriesPage(@DefaultValue("0") @QueryParam("page") int page,
+                                                     @DefaultValue("10") @QueryParam("perPage") int perPage) {
+        PageRequestDto requestDto = PageRequestDto.builder()
+                .withPage(page)
+                .withPerPage(perPage)
+                .build();
+        return service.getRepositoryPage(requestDto);
+    }
+
 
     @GET
     @Path("/{repositoryId}")
@@ -58,32 +71,6 @@ public class RepositoryResource {
             return Response.status(Response.Status.NO_CONTENT).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
-    }
-
-    private static PageDto<RepositoryDto> getPage(List<RepositoryDto> list, int page, int perPage) {
-        if (list == null) {
-            list = Collections.emptyList();
-        }
-        int found = list.size();
-        int pages = 0;
-        if (perPage > 0) {
-            pages = found / perPage;
-            if (found % perPage > 0) {
-                pages++;
-            }
-        } else {
-            perPage = 0;
-        }
-        int startIndex = perPage * page;
-        int stopIndex = Math.min(startIndex + perPage, found);
-        RepositoryDto[] items = list.subList(startIndex, stopIndex).toArray(new RepositoryDto[0]);
-        return PageDto.<RepositoryDto>builder()
-                .withFound(found)
-                .withItems(items)
-                .withPage(page)
-                .withPages(pages)
-                .withPerPage(perPage)
-                .build();
     }
 
 }

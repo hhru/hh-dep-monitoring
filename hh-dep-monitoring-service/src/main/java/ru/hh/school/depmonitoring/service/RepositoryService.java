@@ -1,15 +1,16 @@
 package ru.hh.school.depmonitoring.service;
 
-import org.springframework.transaction.annotation.Transactional;
-import ru.hh.school.depmonitoring.dao.RepositoryDao;
-import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.entities.Repository;
-import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
-
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
+import org.springframework.transaction.annotation.Transactional;
+import ru.hh.school.depmonitoring.dao.RepositoryDao;
+import ru.hh.school.depmonitoring.dto.PageDto;
+import ru.hh.school.depmonitoring.dto.PageRequestDto;
+import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 
 public class RepositoryService {
 
@@ -37,6 +38,25 @@ public class RepositoryService {
     @Transactional
     public void update(@Nonnull RepositoryDto dto) {
         repositoryDao.update(repositoryMapper.toEntity(dto));
+    }
+
+    @Transactional(readOnly = true)
+    public PageDto<RepositoryDto> getRepositoryPage(@Nonnull PageRequestDto pageRequestDto) {
+        PageDto.PageDtoBuilder<RepositoryDto> builder = PageDto.builder();
+        if (pageRequestDto.getPerPage() <= 0 || pageRequestDto.getPage() < 0) {
+            throw new IllegalArgumentException("Illegal pageRequestDto parameters");
+        }
+        List<RepositoryDto> repositoryDtos = repositoryDao.findPage(pageRequestDto).stream()
+                .map(repositoryMapper::toDto)
+                .collect(Collectors.toList());
+        builder = builder.withItems(repositoryDtos);
+        int found = repositoryDao.count();
+        int pages = (int) Math.ceil((double) found / pageRequestDto.getPerPage());
+        return builder.withFound(found)
+                .withPage(pageRequestDto.getPage())
+                .withPerPage(pageRequestDto.getPerPage())
+                .withPages(pages)
+                .build();
     }
 
 }
