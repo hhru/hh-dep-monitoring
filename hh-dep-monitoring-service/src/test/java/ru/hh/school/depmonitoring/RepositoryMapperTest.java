@@ -1,24 +1,27 @@
 package ru.hh.school.depmonitoring;
 
 import org.junit.Test;
+import org.mockito.Mockito;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
 
 import java.time.LocalDateTime;
 
 public class RepositoryMapperTest {
 
-    private final RepositoryMapper repositoryMapper = new RepositoryMapper();
+    //private final RepositoryMapper repositoryMapper = new RepositoryMapper();
+    private final RepositoryMapper repositoryMapper = new RepositoryMapper(Mockito.mock(RepositoryLinkMapper.class));
 
     @Test
     public void toEntityNull() {
-        Repository entity = repositoryMapper.toEntity(null);
+        Repository entity = repositoryMapper.toEntity((RepositoryDto) null);
         assertNull(entity);
     }
 
@@ -31,7 +34,7 @@ public class RepositoryMapperTest {
 
     @Test
     public void toDtoNull() {
-        RepositoryDto dto = repositoryMapper.toDto(null);
+        RepositoryDto dto = repositoryMapper.toDto((Repository) null);
         assertNull(dto);
     }
 

@@ -3,7 +3,14 @@ package ru.hh.school.depmonitoring.service.mapper;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
 
+
 public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
+
+    private final RepositoryLinkMapper repositoryLinkMapper;
+
+    public RepositoryMapper(RepositoryLinkMapper repositoryLinkMapper) {
+        this.repositoryLinkMapper = repositoryLinkMapper;
+    }
 
     public Repository toEntity(RepositoryDto dto) {
         if (dto == null) {
@@ -38,6 +45,7 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
 
+        dto.setLinkUrls(repositoryLinkMapper.toDto(entity.getLinkUrls()));
 
         dto.setHasRelatedTo(entity.getRelatedTo() != null && !entity.getRelatedTo().isEmpty());
         dto.setHasRelatedFrom(entity.getRelatedFrom() != null && !entity.getRelatedFrom().isEmpty());

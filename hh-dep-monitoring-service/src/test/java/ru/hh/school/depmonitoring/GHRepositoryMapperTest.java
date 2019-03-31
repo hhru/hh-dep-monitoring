@@ -16,7 +16,7 @@ public class GHRepositoryMapperTest {
 
     @Test
     public void toDtoWithNull() {
-        assertNull(mapper.toDto(null));
+        assertNull(mapper.toDto((Repository) null));
     }
 
     @Test
@@ -28,7 +28,7 @@ public class GHRepositoryMapperTest {
 
     @Test
     public void toEntityWithNull() {
-        assertNull(mapper.toEntity(null));
+        assertNull(mapper.toEntity((GHRepositoryDto) null));
     }
 
     @Test

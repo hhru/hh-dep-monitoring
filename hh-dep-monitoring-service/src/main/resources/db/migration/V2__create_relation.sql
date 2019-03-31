@@ -2,7 +2,7 @@ CREATE TYPE priority AS ENUM (
     'CRITICAL',
     'PARTIAL',
     'OPTIONAL'
-);
+    );
 
 CREATE TABLE IF NOT EXISTS relation (
     relation_id SERIAL PRIMARY KEY,

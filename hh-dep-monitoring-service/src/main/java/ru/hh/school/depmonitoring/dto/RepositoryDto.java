@@ -1,10 +1,13 @@
 package ru.hh.school.depmonitoring.dto;
 
 import java.io.Serializable;
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 public class RepositoryDto implements Serializable {
 
@@ -35,6 +38,18 @@ public class RepositoryDto implements Serializable {
     private boolean hasRelatedTo;
 
     private boolean hasRelatedFrom;
+
+    @NotNull
+    private List<RepositoryLinkDto> linkUrls;
+
+    @Nonnull
+    public List<RepositoryLinkDto> getLinkUrls() {
+        return Optional.ofNullable(linkUrls).orElseGet(List::of);
+    }
+
+    public void setLinkUrls(@Nonnull List<RepositoryLinkDto> linkUrls) {
+        this.linkUrls = Objects.requireNonNull(linkUrls);
+    }
 
     public boolean getHasRelatedTo() {
         return hasRelatedTo;

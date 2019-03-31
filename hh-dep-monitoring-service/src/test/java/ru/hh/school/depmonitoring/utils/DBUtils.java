@@ -10,11 +10,12 @@ import java.util.List;
 
 public class DBUtils {
     private final SessionFactory sessionFactory;
+    private final RepositoryMapper repositoryMapper;
 
-    public DBUtils(SessionFactory sessionFactory) {
+    public DBUtils(SessionFactory sessionFactory, RepositoryMapper repositoryMapper) {
+        this.repositoryMapper = repositoryMapper;
         this.sessionFactory = sessionFactory;
     }
-
 
     @Transactional
     public int cleanTable(@Nonnull Class clazz) {
@@ -24,14 +25,11 @@ public class DBUtils {
                 .executeUpdate();
     }
 
-
     @Transactional
     public void fillRepositoryTable() {
         List<RepositoryDto> repositoryDtoList = StructCreator.createRepositoryDtoList();
-        RepositoryMapper mapper = new RepositoryMapper();
         for (RepositoryDto dto : repositoryDtoList) {
-            sessionFactory.getCurrentSession().persist(mapper.toEntity(dto));
+            sessionFactory.getCurrentSession().persist(repositoryMapper.toEntity(dto));
         }
     }
-
 }
