@@ -42,16 +42,6 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
     }
 
     @Test
-    public void getAllItemsTest() {
-        List<RepositoryDto> resultRepositoryDtoList = target("/repository/")
-                .request()
-                .get()
-                .readEntity(new GenericType<List<RepositoryDto>>() {
-                });
-        assertRepositoryDtoListIsEqual(StructCreator.createRepositoryDtoList(), resultRepositoryDtoList);
-    }
-
-    @Test
     public void getFirstPageTest() {
         PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
                 .withItems(StructCreator.createRepositoryDtoList().subList(0, 5))
@@ -101,15 +91,15 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
-
     @Test
     public void putItemWithIdTest() {
+        dbUtils.addItemToRepositoryTable(9999L);
         RepositoryDto dto = StructCreator.createRepositoryDto();
-        Response response = target("/repository/1")
+        dto.setRepositoryId(9999L);
+        Response response = target("/repository/9999")
                 .request()
-                .acceptEncoding("identity")
                 .put(Entity.json(dto));
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
     }
 
     @Test
@@ -117,7 +107,6 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         RepositoryDto dto = StructCreator.createRepositoryDto();
         Response response = target("/repository/2")
                 .request()
-                .acceptEncoding("identity")
                 .put(Entity.json(dto));
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
     }

@@ -6,6 +6,7 @@ import ru.hh.school.depmonitoring.dto.PageRequestDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 
+import javax.annotation.Nonnull;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
@@ -18,11 +19,12 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 import java.util.Optional;
 
 @Named
 @Singleton
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 @Path("/repository")
 public class RepositoryResource {
     private RepositoryService service;
@@ -32,15 +34,7 @@ public class RepositoryResource {
     }
 
     @GET
-    @Path("/")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<RepositoryDto> getAllRepositories() {
-        return service.getFullList();
-    }
-
-    @GET
     @Path("/page")
-    @Produces(MediaType.APPLICATION_JSON)
     public PageDto<RepositoryDto> getRepositriesPage(@DefaultValue("0") @QueryParam("page") int page,
                                                      @DefaultValue("10") @QueryParam("perPage") int perPage) {
         PageRequestDto requestDto = PageRequestDto.builder()
@@ -50,10 +44,8 @@ public class RepositoryResource {
         return service.getRepositoryPage(requestDto);
     }
 
-
     @GET
     @Path("/{repositoryId}")
-    @Produces(MediaType.APPLICATION_JSON)
     public Response getRepositoryById(@PathParam("repositoryId") long id) {
         Optional<RepositoryDto> optionalDto = service.getOneItem(id);
         if (optionalDto.isPresent()) {
@@ -64,13 +56,10 @@ public class RepositoryResource {
 
     @PUT
     @Path("/{repositoryId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateRepositoryById(RepositoryDto dto, @PathParam("repositoryId") long id) {
-        if (dto != null && id == dto.getRepositoryId()) {
-            this.service.update(dto);
-            return Response.status(Response.Status.NO_CONTENT).build();
+    public Response updateRepositoryById(@Nonnull RepositoryDto dto, @PathParam("repositoryId") long id) {
+        if (id == dto.getRepositoryId()) {
+            return Response.status(Response.Status.OK).entity(service.update(dto)).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
-
 }

@@ -1,5 +1,11 @@
 package ru.hh.school.depmonitoring.utils;
 
+import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.dto.RepositoryLinkDto;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
+import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
@@ -7,10 +13,7 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import ru.hh.school.depmonitoring.dto.RelationDto;
-import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import ru.hh.school.depmonitoring.entities.Relation;
-import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 
 public class StructCreator {
@@ -88,5 +91,18 @@ public class StructCreator {
         return LongStream.rangeClosed(1, 10)
                 .mapToObj(StructCreator::createRepositoryDto)
                 .collect(Collectors.toList());
+    }
+
+    public static RepositoryLinkDto createRepositoryLinkDto() {
+        return createRepositoryLinkDto(1L);
+    }
+
+    public static RepositoryLinkDto createRepositoryLinkDto(long repId) {
+        RepositoryLinkDto repositoryLinkDto = new RepositoryLinkDto();
+        repositoryLinkDto.setRepositoryLinkId(null);
+        repositoryLinkDto.setLinkType(RepositoryLinkType.JENKINS);
+        repositoryLinkDto.setRepositoryId(repId);
+        repositoryLinkDto.setLinkUrl("127.0.0.1:8080");
+        return repositoryLinkDto;
     }
 }

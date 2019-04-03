@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.EnumType;
 import javax.validation.constraints.NotNull;
 
@@ -15,8 +18,10 @@ import java.util.Objects;
 public class RepositoryLink {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "repository_link_repository_link_id_seq")
+    @SequenceGenerator(name = "repository_link_repository_link_id_seq", allocationSize = 1, sequenceName = "repository_link_repository_link_id_seq")
     @Column(name = "repository_link_id")
-    private Long repositoryLinkId;
+    private Integer repositoryLinkId;
 
     @NotNull
     @Column(name = "repository_id")
@@ -34,11 +39,11 @@ public class RepositoryLink {
     @Column(name = "link_url")
     private String linkUrl;
 
-    public Long getRepositoryLinkId() {
+    public Integer getRepositoryLinkId() {
         return repositoryLinkId;
     }
 
-    public void setRepositoryLinkId(Long repositoryLinkId) {
+    public void setRepositoryLinkId(Integer repositoryLinkId) {
         this.repositoryLinkId = repositoryLinkId;
     }
 

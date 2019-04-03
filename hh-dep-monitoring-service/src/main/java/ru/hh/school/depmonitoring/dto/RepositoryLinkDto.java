@@ -9,7 +9,7 @@ import java.util.Objects;
 public class RepositoryLinkDto implements Serializable {
 
     @NotNull
-    private Long repositoryLinkId;
+    private Integer repositoryLinkId;
 
     @NotNull
     private Long repositoryId;
@@ -20,11 +20,11 @@ public class RepositoryLinkDto implements Serializable {
     @NotNull
     private String linkUrl;
 
-    public Long getRepositoryLinkId() {
+    public Integer getRepositoryLinkId() {
         return repositoryLinkId;
     }
 
-    public void setRepositoryLinkId(Long repositoryLinkId) {
+    public void setRepositoryLinkId(Integer repositoryLinkId) {
         this.repositoryLinkId = repositoryLinkId;
     }
 

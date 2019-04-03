@@ -7,6 +7,7 @@ import ru.hh.nab.testbase.NabTestBase;
 import ru.hh.school.depmonitoring.config.TestConfig;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryLink;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.ObjectMapperContextResolver;
 
@@ -30,6 +31,7 @@ public class DepMonitoringTestBase extends NabTestBase {
 
     @After
     public void clean() {
+        dbUtils.cleanTable(RepositoryLink.class);
         dbUtils.cleanTable(Relation.class);
         dbUtils.cleanTable(Repository.class);
     }
