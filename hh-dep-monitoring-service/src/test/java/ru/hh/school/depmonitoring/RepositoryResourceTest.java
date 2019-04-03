@@ -1,5 +1,7 @@
 package ru.hh.school.depmonitoring;
 
+import java.util.ArrayList;
+import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
@@ -39,22 +41,64 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
 
     @Test
     public void getAllItemsTest() {
-        RepositoryDto[] repositoryDtoArray = StructCreator.createRepositoryDtoList().toArray(new RepositoryDto[0]);
-        PageDto.PageDtoBuilder<RepositoryDto> builder = PageDto.builder();
-        PageDto<RepositoryDto> controlPageDto = PageDto.<RepositoryDto>builder()
-                .withItems(repositoryDtoArray)
-                .withPerPage(10)
-                .withPages(1)
-                .withPage(0)
-                .withFound(10)
-                .build();
-        PageDto<RepositoryDto> resultPageDto = target("/repository/")
+        List<RepositoryDto> resultRepositoryDtoList = target("/repository/")
                 .request()
                 .get()
-                .readEntity(new GenericType<PageDto<RepositoryDto>>() {
+                .readEntity(new GenericType<List<RepositoryDto>>() {
                 });
-        assertRepositoryPageDtoIsEquals(controlPageDto, resultPageDto);
+        assertRepositoryDtoListIsEqual(StructCreator.createRepositoryDtoList(), resultRepositoryDtoList);
     }
+
+    @Test
+    public void getFirstPageTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList().subList(0, 5))
+                .withFound(10)
+                .withPage(0)
+                .withPerPage(5)
+                .withPages(2)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 5);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getLastPageTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList().subList(8, 10))
+                .withFound(10)
+                .withPage(2)
+                .withPerPage(4)
+                .withPages(3)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(2, 4);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getInvalidPageTest() {
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, 0));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, -1));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(-1, 4));
+    }
+
+
+    @Test
+    public void getNonExistingPageTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(new ArrayList<>())
+                .withFound(10)
+                .withPage(100)
+                .withPages(5)
+                .withPerPage(2)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(100, 2);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
 
     @Test
     public void putItemWithIdTest() {
@@ -78,10 +122,8 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
 
     public static void assertRepositoryDtoIsEquals(RepositoryDto dto1, RepositoryDto dto2) {
         assertEquals(dto1, dto2);
-
         assertNotNull(dto1);
         assertNotNull(dto2);
-
         assertEquals(dto1.getRepositoryId(), dto2.getRepositoryId());
         assertEquals(dto1.getHtmlUrl(), dto2.getHtmlUrl());
         assertEquals(dto1.getDescription(), dto2.getDescription());
@@ -96,12 +138,38 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         assertNotNull(page2);
         assertNotNull(page1.getItems());
         assertNotNull(page2.getItems());
-        for (int i = 0; i < page1.getItems().length; i++) {
-            assertRepositoryDtoIsEquals(page1.getItems()[i], page2.getItems()[i]);
-        }
+        assertEquals(page1.getItems().size(), page2.getItems().size());
+        assertRepositoryDtoListIsEqual(page1.getItems(), page2.getItems());
         assertEquals(page1.getFound(), page2.getFound());
         assertEquals(page1.getPage(), page2.getPage());
         assertEquals(page1.getPerPage(), page2.getPerPage());
         assertEquals(page1.getPages(), page2.getPages());
+    }
+
+    public static void assertRepositoryDtoListIsEqual(List<RepositoryDto> list1, List<RepositoryDto> list2) {
+        assertNotNull(list1);
+        assertNotNull(list2);
+        assertEquals(list1.size(), list2.size());
+        for (int i = 0; i < list1.size(); i++) {
+            assertRepositoryDtoIsEquals(list1.get(i), list2.get(i));
+        }
+    }
+
+    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage) {
+        return target("/repository/page")
+                .queryParam("page", page)
+                .queryParam("perPage", perPage)
+                .request()
+                .get()
+                .readEntity(new GenericType<PageDto<RepositoryDto>>() {
+                });
+    }
+
+    public int getPageRequestStatus(int page, int perPage) {
+        return target("/repository/page")
+                .queryParam("page", page)
+                .queryParam("perPage", perPage)
+                .request()
+                .get().getStatus();
     }
 }

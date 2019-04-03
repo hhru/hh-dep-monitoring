@@ -1,14 +1,16 @@
 package ru.hh.school.depmonitoring.dao;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-
-import javax.annotation.Nonnull;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
+import javax.annotation.Nonnull;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import ru.hh.school.depmonitoring.dto.PageRequestDto;
 
-/** @inheritDoc */
+/**
+ * @inheritDoc
+ */
 public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I> {
 
     private final Class<T> clazz;
@@ -32,6 +34,17 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
     }
 
     @Override
+    public List<T> findPage(@Nonnull PageRequestDto pageRequestDto) {
+        int perPage = pageRequestDto.getPerPage();
+        int offsetIndex = pageRequestDto.getPage() * perPage;
+        return getSession()
+                .createQuery("from " + clazz.getName(), clazz)
+                .setFirstResult(offsetIndex)
+                .setMaxResults(perPage)
+                .list();
+    }
+
+    @Override
     public void create(@Nonnull T entity) {
         getSession().persist(entity);
     }
@@ -50,6 +63,13 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
     public void deleteById(@Nonnull I entityId) {
         Optional<T> entity = findOne(entityId);
         entity.ifPresent(this::delete);
+    }
+
+    @Override
+    public int count() {
+        return getSession()
+                .createQuery("select count(*) from " + clazz.getName(), Long.class)
+                .uniqueResult().intValue();
     }
 
     protected final Session getSession() {
