@@ -1,8 +1,8 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.service;
 
 import org.junit.Test;
+import ru.hh.school.depmonitoring.DepMonitoringTestBase;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
 import javax.inject.Inject;
@@ -10,10 +10,10 @@ import javax.persistence.PersistenceException;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 public class RepositoryServiceTest extends DepMonitoringTestBase {

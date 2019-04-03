@@ -1,17 +1,19 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.rs;
 
-import java.util.ArrayList;
-import java.util.List;
-import javax.inject.Inject;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.Response;
 import org.junit.Before;
 import org.junit.Test;
+import ru.hh.school.depmonitoring.DepMonitoringTestBase;
 import ru.hh.school.depmonitoring.dto.PageDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.StructCreator;
+
+import javax.inject.Inject;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;

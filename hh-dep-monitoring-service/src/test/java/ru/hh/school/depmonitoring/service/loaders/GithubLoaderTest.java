@@ -1,10 +1,9 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.service.loaders;
 
 import org.junit.Test;
 import org.kohsuke.github.GHOrganization;
 import org.kohsuke.github.GHRepository;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.service.loaders.GithubLoader;
 
 import java.io.IOException;
 import java.net.MalformedURLException;

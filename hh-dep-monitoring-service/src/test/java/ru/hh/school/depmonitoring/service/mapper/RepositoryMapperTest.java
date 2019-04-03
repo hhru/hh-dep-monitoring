@@ -1,18 +1,16 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.service.mapper;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
-import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
-import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 import ru.hh.school.depmonitoring.utils.StructCreator;
+
+import java.time.LocalDateTime;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
-
-import java.time.LocalDateTime;
 
 public class RepositoryMapperTest {
 

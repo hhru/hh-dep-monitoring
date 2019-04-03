@@ -1,6 +1,7 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.rs;
 
 import org.junit.Test;
+import ru.hh.school.depmonitoring.DepMonitoringTestBase;
 
 import javax.ws.rs.core.Response;
 

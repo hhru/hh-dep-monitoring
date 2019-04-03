@@ -1,13 +1,14 @@
 package ru.hh.school.depmonitoring.utils;
 
+import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
+import ru.hh.school.depmonitoring.entities.Repository;
+
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
-import ru.hh.school.depmonitoring.dto.RepositoryDto;
-import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.entities.Repository;
 
 public class StructCreator {
     public static GHRepositoryDto createGHRepositoryDto(long id) {
