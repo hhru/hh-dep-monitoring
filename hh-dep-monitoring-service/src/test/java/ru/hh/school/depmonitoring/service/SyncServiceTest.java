@@ -1,10 +1,9 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.service;
 
 import org.junit.Test;
 import org.mockito.Mockito;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.service.SyncService;
 import ru.hh.school.depmonitoring.service.loaders.GithubLoader;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.utils.StructCreator;

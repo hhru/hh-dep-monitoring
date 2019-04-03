@@ -1,9 +1,8 @@
-package ru.hh.school.depmonitoring;
+package ru.hh.school.depmonitoring.service.mapper;
 
 import org.junit.Test;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
-import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
 import java.time.LocalDateTime;
