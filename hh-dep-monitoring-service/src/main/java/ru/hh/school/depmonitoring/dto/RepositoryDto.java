@@ -24,10 +24,10 @@ public class RepositoryDto implements Serializable {
     private String description;
 
     @NotNull
-    private boolean isArchived;
+    private boolean archived;
 
     @NotNull
-    private boolean isActive;
+    private boolean active;
 
     @NotNull
     private LocalDateTime createdAt;
@@ -100,19 +100,19 @@ public class RepositoryDto implements Serializable {
     }
 
     public boolean isArchived() {
-        return isArchived;
+        return archived;
     }
 
     public void setArchived(boolean archived) {
-        isArchived = archived;
+        this.archived = archived;
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -145,6 +145,6 @@ public class RepositoryDto implements Serializable {
 
     @Override
     public int hashCode() {
-        return Objects.hash(repositoryId, name, htmlUrl, description, isArchived, isActive, createdAt, updatedAt, hasRelatedTo, hasRelatedFrom);
+        return Objects.hash(repositoryId, name, htmlUrl, description, archived, active, createdAt, updatedAt, hasRelatedTo, hasRelatedFrom);
     }
 }

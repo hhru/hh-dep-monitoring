@@ -43,14 +43,14 @@ export const archiveColored = {
 
 export const archiveIcon = {
     fill: archivedRepositoryColor,
-    width: '19',
-    height: '19',
+    width: '19px',
+    height: '19px',
     margin: '-1px 3px',
 };
 
 export const archiveIconBig = {
-    width: '30',
-    height: '30',
+    width: '30px',
+    height: '30px',
     margin: '-2px 7px',
 };
 

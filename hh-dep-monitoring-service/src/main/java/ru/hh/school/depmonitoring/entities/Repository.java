@@ -40,12 +40,12 @@ public class Repository {
     private String description;
 
     @NotNull
-    @Column(name = "is_archived")
-    private boolean isArchived;
+    @Column(name = "archived")
+    private boolean archived;
 
     @NotNull
-    @Column(name = "is_active")
-    private boolean isActive;
+    @Column(name = "active")
+    private boolean active;
 
     /**
      * timestamptz
@@ -87,11 +87,11 @@ public class Repository {
     }
 
     public boolean isArchived() {
-        return isArchived;
+        return archived;
     }
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -131,11 +131,11 @@ public class Repository {
     }
 
     public void setArchived(boolean archived) {
-        isArchived = archived;
+        this.archived = archived;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public void setCreatedAt(LocalDateTime createdAt) {
