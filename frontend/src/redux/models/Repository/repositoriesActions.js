@@ -1,8 +1,17 @@
 export const REPOSITORIES_DATA = 'REPOSITORIES_DATA';
+export const REPOSITORY_DATA_BY_ID = 'REPOSITORY_DATA_BY_ID';
 
 export const addRepositories = repositories => ({
     type: REPOSITORIES_DATA,
     payload: repositories,
+});
+
+export const addRepository = (repositoryId, repositoryData) => ({
+    type: REPOSITORY_DATA_BY_ID,
+    payload: {
+        repositoryId,
+        repositoryData,
+    },
 });
 
 const repositoriesData = {
@@ -103,5 +112,13 @@ const repositoriesData = {
 export function fetchRepositories() {
     return (dispatch) => {
         dispatch(addRepositories(repositoriesData));
+    };
+}
+
+
+export function fetchRepositoryById(id) {
+    return (dispatch) => {
+        const repository = repositoriesData.items.find(item => item.repositoryId === Number(id));
+        dispatch(addRepository(id, repository));
     };
 }

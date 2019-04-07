@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom';
 
 import Repositories from './Repositories/Repositories';
+import Repository from './Repository/Repository';
 
 const styles = theme => ({
     root: {
@@ -29,6 +30,12 @@ export const routing = [
         path: '/Repositories',
         label: 'Repositories',
         component: Repositories,
+        inner: [
+            {
+                path: '/Repositories/:repositoryId',
+                component: Repository,
+            },
+        ],
     },
     {
         path: '/Ratings',
@@ -52,15 +59,23 @@ export const routing = [
     },
 ];
 
+const processRouting = (routingArray, componentsArray = []) => {
+    routingArray.map((item) => {
+        componentsArray.push(
+            <Route exact path={item.path} component={item.component} key={item.path} />,
+        );
+        return item.inner && processRouting(item.inner, componentsArray);
+    });
+    return componentsArray;
+};
+
 function MainBlock(props) {
     const { classes } = props;
     return (
         <div className={classes.root}>
             <Switch>
                 <Route exact path="/" component={Repositories} />
-                {routing && routing.map(item => (
-                    <Route path={item.path} component={item.component} />
-                ))}
+                {processRouting(routing)}
             </Switch>
         </div>
     );
