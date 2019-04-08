@@ -30,8 +30,8 @@ public class DepMonitoringTestBase extends NabTestBase {
 
     @After
     public void clean() {
-        dbUtils.cleanTable(Repository.class);
         dbUtils.cleanTable(Relation.class);
+        dbUtils.cleanTable(Repository.class);
     }
 
     @Override

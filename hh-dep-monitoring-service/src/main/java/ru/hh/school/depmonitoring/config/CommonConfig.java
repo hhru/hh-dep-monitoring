@@ -13,10 +13,13 @@ import ru.hh.nab.hibernate.datasource.RoutingDataSource;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
 import ru.hh.school.depmonitoring.rs.GithubResource;
+import ru.hh.school.depmonitoring.rs.RelationResource;
+import ru.hh.school.depmonitoring.service.RelationService;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.rs.RepositoryResource;
 import ru.hh.school.depmonitoring.service.SyncService;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
+import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 
@@ -25,20 +28,23 @@ import java.util.Optional;
 
 @Configuration
 @Import({
-        NabHibernateCommonConfig.class,
         MigrationConfig.class,
+        NabHibernateCommonConfig.class,
 
-        RepositoryDaoImpl.class,
         RelationDaoImpl.class,
+        RepositoryDaoImpl.class,
 
-        SyncService.class,
+        RelationService.class,
         RepositoryService.class,
+        SyncService.class,
 
         GHRepositoryMapper.class,
+        RelationMapper.class,
         RepositoryMapper.class,
         RepositoryLinkMapper.class,
 
         GithubResource.class,
+        RelationResource.class,
         RepositoryResource.class
 })
 

@@ -61,10 +61,10 @@ public class Repository {
     private LocalDateTime updatedAt;
 
 
-    @OneToMany(mappedBy = "repositoryFromId")
+    @OneToMany(mappedBy = "repositoryFrom")
     private Set<Relation> relatedTo;
 
-    @OneToMany(mappedBy = "repositoryToId")
+    @OneToMany(mappedBy = "repositoryTo")
     private Set<Relation> relatedFrom;
 
     @OneToMany(mappedBy = "repositoryId", fetch = FetchType.LAZY)

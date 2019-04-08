@@ -4,9 +4,11 @@ import org.hibernate.SessionFactory;
 import ru.hh.school.depmonitoring.dao.AbstractDao;
 import ru.hh.school.depmonitoring.dao.RelationDao;
 import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.entities.Repository;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import java.util.List;
 
 @Named
 @Singleton
@@ -16,4 +18,19 @@ public class RelationDaoImpl extends AbstractDao<Relation, Integer> implements R
         super(sessionFactory, Relation.class);
     }
 
+    @Override
+    public List<Relation> findRelationsByMainRepositoryId(Repository repository) {
+        return getSession()
+                .createQuery("from Relation where repositoryFrom = :repository", Relation.class)
+                .setParameter("repository", repository)
+                .list();
+    }
+
+    @Override
+    public List<Relation> findRelationsByDependentRepositoryId(Repository repository) {
+        return getSession()
+                .createQuery("from Relation where repositoryTo = :repository", Relation.class)
+                .setParameter("repository", repository)
+                .list();
+    }
 }

@@ -1,7 +1,5 @@
 package ru.hh.school.depmonitoring.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
@@ -26,22 +24,12 @@ public class Relation {
     @Column(name = "relation_id")
     private Integer relationId;
 
-    @NotNull
-    @Column(name = "repository_from_id")
-    private Long repositoryFromId;
-
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "repository_from_id", insertable = false, updatable = false)
-    @JsonIgnore
+    @JoinColumn(name = "repository_from_id")
     private Repository repositoryFrom;
 
-    @NotNull
-    @Column(name = "repository_to_id")
-    private Long repositoryToId;
-
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "repository_to_id", insertable = false, updatable = false)
-    @JsonIgnore
+    @JoinColumn(name = "repository_to_id")
     private Repository repositoryTo;
 
     @Enumerated(EnumType.STRING)
@@ -54,23 +42,6 @@ public class Relation {
      */
     @Column(name = "description")
     private String description;
-
-
-    public Long getRepositoryFromId() {
-        return repositoryFromId;
-    }
-
-    public void setRepositoryFromId(Long repositoryFromId) {
-        this.repositoryFromId = repositoryFromId;
-    }
-
-    public Long getRepositoryToId() {
-        return repositoryToId;
-    }
-
-    public void setRepositoryToId(Long repositoryToId) {
-        this.repositoryToId = repositoryToId;
-    }
 
     public Integer getRelationId() {
         return relationId;
