@@ -1,16 +1,17 @@
 import axios from 'axios';
-import { DEFAULT_PER_PAGE, REPOSITORY_URL } from 'Utils/Constants';
+import { addMessage } from 'redux/models/Notification/notificationsActions';
+import { DEFAULT_PER_PAGE, REPOSITORY_URL } from 'Utils/constants';
 
-export const REPOSITORIES_DATA = 'REPOSITORIES_DATA';
-export const REPOSITORY_DATA_BY_ID = 'REPOSITORY_DATA_BY_ID';
+export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES ';
+export const FETCH_REPOSITORY = 'FETCH_REPOSITORY ';
 
-export const addRepositories = repositories => ({
-    type: REPOSITORIES_DATA,
+export const fetchRepositoriesAction = repositories => ({
+    type: FETCH_REPOSITORIES,
     payload: repositories,
 });
 
-export const addRepository = (repositoryId, repositoryData) => ({
-    type: REPOSITORY_DATA_BY_ID,
+export const fetchRepositoryAction = (repositoryId, repositoryData) => ({
+    type: FETCH_REPOSITORY,
     payload: {
         repositoryId,
         repositoryData,
@@ -22,19 +23,22 @@ export function fetchRepositories() {
     return (dispatch) => {
         axios.get(`${REPOSITORY_URL}/page?perPage=${DEFAULT_PER_PAGE}`)
             .then((result) => {
-                dispatch(addRepositories(result.data));
+                dispatch(fetchRepositoriesAction(result.data));
             })
-            .catch((error) => { console.error(error); });
+            .catch(() => {
+                dispatch(addMessage('Error in fetching repositories', 'error'));
+            });
     };
 }
 
-
-export function fetchRepositoryById(id) {
+export function fetchRepository(id) {
     return (dispatch) => {
         axios.get(`${REPOSITORY_URL}/${id}`)
             .then((result) => {
-                dispatch(addRepository(id, result.data));
+                dispatch(fetchRepositoryAction(id, result.data));
             })
-            .catch((error) => { console.error(error); });
+            .catch(() => {
+                dispatch(addMessage('Error in fetching repository data', 'error'));
+            });
     };
 }

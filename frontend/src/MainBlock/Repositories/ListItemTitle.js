@@ -16,10 +16,7 @@ export default function ListItemTitle({ name, archived }) {
     const classes = useStyles();
     return (
         <Fragment>
-            <span className={classNames(classes.repositoryItemTitle, {
-                [classes.archiveColored]: archived,
-            })}
-            >
+            <span className={classNames(classes.repositoryItemTitle, { [classes.archiveColored]: archived })}>
                 {`${name}`}
             </span>
             {archived && (

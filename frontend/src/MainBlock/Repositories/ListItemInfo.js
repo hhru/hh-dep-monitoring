@@ -15,9 +15,9 @@ export default function ListItemInfo({ descr, date }) {
     return (
         <Fragment>
             {`${descr}`}
-            <div className={classes.dateListItem}>
+            <span className={classes.dateListItem}>
                 {`Updated ${formatDate(date)}`}
-            </div>
+            </span>
         </Fragment>
     );
 }

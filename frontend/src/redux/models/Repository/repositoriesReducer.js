@@ -1,5 +1,5 @@
-import { REPOSITORIES_DATA, REPOSITORY_DATA_BY_ID } from './repositoriesActions';
-import createReducer from '../../createReducer';
+import createReducer from 'redux/createReducer';
+import { FETCH_REPOSITORIES, FETCH_REPOSITORY } from './repositoriesActions';
 
 export const initialState = {
     list: {},
@@ -7,8 +7,8 @@ export const initialState = {
 };
 
 export const repositoriesReducer = createReducer(initialState, {
-    [REPOSITORIES_DATA]: (state, action) => ({ ...state, list: action.payload }),
-    [REPOSITORY_DATA_BY_ID]: (state, action) => {
+    [FETCH_REPOSITORIES]: (state, action) => ({ ...state, list: action.payload }),
+    [FETCH_REPOSITORY]: (state, action) => {
         const { repositoryId, repositoryData } = action.payload;
         return {
             ...state,

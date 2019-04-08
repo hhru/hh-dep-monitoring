@@ -9,6 +9,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 
 import { fetchRepositories } from 'redux/models/Repository/repositoriesActions';
+import { getRepositories } from 'redux/models/Repository/repositoriesSelectors';
 import RepositoryItem from './RepositoryItem';
 
 const styles = theme => ({
@@ -47,6 +48,6 @@ Repositories.propTypes = {
 };
 
 export default connect(
-    state => ({ repositories: state.repositories.list }),
+    state => ({ repositories: getRepositories(state) }),
     { fetchRepositories },
 )(withStyles(styles)(Repositories));
