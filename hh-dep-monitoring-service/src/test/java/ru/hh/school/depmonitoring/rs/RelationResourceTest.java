@@ -3,11 +3,9 @@ package ru.hh.school.depmonitoring.rs;
 import org.junit.Before;
 import org.junit.Test;
 import ru.hh.school.depmonitoring.DepMonitoringTestBase;
-import ru.hh.school.depmonitoring.dao.RelationDao;
 import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
-import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
@@ -17,20 +15,16 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 
 public class RelationResourceTest extends DepMonitoringTestBase {
     @Inject
     private DBUtils dbUtils;
-
-    @Inject
-    private RelationDao relationDao;
-
-    @Inject
-    private RelationMapper relationMapper;
 
     @Before
     public void setUp() {
@@ -38,24 +32,52 @@ public class RelationResourceTest extends DepMonitoringTestBase {
     }
 
     @Test
+    public void getRelationsDependOnNotExistingRepository() {
+        Response response = target("/relations/depend-on/100500")
+                .request()
+                .get();
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+    }
+
+    @Test
     public void getRelationsDependOn() {
-        Relation relation = dbUtils.doInTransaction(this::addRelation);
-        List<RelationDto> relationDtoList = target("/relations/dependOn/" + relation.getRepositoryFrom().getRepositoryId())
+        Relation relation = dbUtils.addRelation();
+        Map<RepositoryRelationPriority, List<RelationDto>> relationDtoMap;
+        relationDtoMap = target("/relations/depend-on/" + relation.getRepositoryFrom().getRepositoryId())
                 .request()
                 .get()
-                .readEntity(new GenericType<List<RelationDto>>() {
+                .readEntity(new GenericType<Map<RepositoryRelationPriority, List<RelationDto>>>() {
                 });
+        assertEqualsRelationWithMap(relation, relationDtoMap);
+    }
+
+    @Test
+    public void getRelationsDependOutNotExistingRepository() {
+        Response response = target("/relations/depend-out/100500")
+                .request()
+                .get();
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
     }
 
     @Test
     public void getRelationsDependOut() {
-        Relation relation = dbUtils.doInTransaction(this::addRelation);
-        List<RelationDto> relationDtoList = target("/relations/dependOut/" + relation.getRepositoryTo().getRepositoryId())
+        Relation relation = dbUtils.addRelation();
+        Map<RepositoryRelationPriority, List<RelationDto>> relationDtoMap;
+        relationDtoMap = target("/relations/depend-out/" + relation.getRepositoryTo().getRepositoryId())
                 .request()
                 .get()
-                .readEntity(new GenericType<List<RelationDto>>() {
+                .readEntity(new GenericType<Map<RepositoryRelationPriority, List<RelationDto>>>() {
                 });
-        assertEqualsRelationWithList(relation, relationDtoList);
+        assertEqualsRelationWithMap(relation, relationDtoMap);
+    }
+
+    @Test
+    public void insertRelationWithoutDto() {
+        Response response = target("/relations")
+                .request()
+                .acceptEncoding("identity")
+                .post(null);
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
     }
 
     @Test
@@ -65,12 +87,44 @@ public class RelationResourceTest extends DepMonitoringTestBase {
                 .request()
                 .acceptEncoding("identity")
                 .post(Entity.json(dto));
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+        isDtoSaved(response);
+    }
+
+    @Test
+    public void updateRelationWithNullData() {
+        Relation relation = dbUtils.addRelation();
+        RelationDto dto = RelationDto.builder()
+                .withRepositoryFromId(null)
+                .withRepositoryToId(null)
+                .withPriority(null)
+                .withDescription(null)
+                .build();
+        Response response = target("/relations/" + relation.getRelationId())
+                .request()
+                .acceptEncoding("identity")
+                .put(Entity.json(dto));
+        isDtoSaved(response);
+    }
+
+    @Test
+    public void updateRelationWithoutNewData() {
+        Relation relation = dbUtils.addRelation();
+        RelationDto dto = RelationDto.builder()
+                .withRepositoryFromId(relation.getRepositoryFrom().getRepositoryId())
+                .withRepositoryToId(relation.getRepositoryTo().getRepositoryId())
+                .withPriority(relation.getPriority())
+                .withDescription(relation.getDescription())
+                .build();
+        Response response = target("/relations/" + relation.getRelationId())
+                .request()
+                .acceptEncoding("identity")
+                .put(Entity.json(dto));
+        isDtoSaved(response);
     }
 
     @Test
     public void updateRelation() {
-        Relation relation = dbUtils.doInTransaction(this::addRelation);
+        Relation relation = dbUtils.addRelation();
         RelationDto dto = RelationDto.builder()
                 .withRepositoryFromId(relation.getRepositoryTo().getRepositoryId())
                 .withRepositoryToId(relation.getRepositoryFrom().getRepositoryId())
@@ -81,12 +135,12 @@ public class RelationResourceTest extends DepMonitoringTestBase {
                 .request()
                 .acceptEncoding("identity")
                 .put(Entity.json(dto));
-        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
+        isDtoSaved(response);
     }
 
     @Test
     public void deleteRelation() {
-        Relation relation = dbUtils.doInTransaction(this::addRelation);
+        Relation relation = dbUtils.addRelation();
         Response response = target("/relations/" + relation.getRelationId())
                 .request()
                 .acceptEncoding("identity")
@@ -94,7 +148,10 @@ public class RelationResourceTest extends DepMonitoringTestBase {
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
     }
 
-    private void assertEqualsRelationWithList(Relation relation, List<RelationDto> relationDtoList) {
+    private void assertEqualsRelationWithMap(Relation relation, Map<RepositoryRelationPriority, List<RelationDto>> relationDtoMap) {
+        assertNotNull(relationDtoMap);
+        assertEquals(1, relationDtoMap.size());
+        List<RelationDto> relationDtoList = relationDtoMap.get(relation.getPriority());
         assertNotNull(relationDtoList);
         assertEquals(1, relationDtoList.size());
         assertEquals(relation.getRelationId(), relationDtoList.get(0).getRelationId());
@@ -106,10 +163,11 @@ public class RelationResourceTest extends DepMonitoringTestBase {
         assertEquals(relation.getDescription(), relationDtoList.get(0).getDescription());
     }
 
-    private Relation addRelation() {
-        RelationDto relationDto = StructCreator.createRelationDto(null);
-        Relation result = relationMapper.toEntity(relationDto);
-        relationDao.create(result);
-        return result;
+    private void isDtoSaved(Response response) {
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+        assertTrue(response.hasEntity());
+        RelationDto responseDto = response.readEntity(RelationDto.class);
+        assertNotNull(responseDto);
+        assertNotNull(responseDto.getRelationId());
     }
 }

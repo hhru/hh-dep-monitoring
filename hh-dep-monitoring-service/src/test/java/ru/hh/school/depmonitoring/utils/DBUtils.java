@@ -3,22 +3,36 @@ package ru.hh.school.depmonitoring.utils;
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 
 import javax.annotation.Nonnull;
+import javax.inject.Named;
+import javax.inject.Singleton;
 import javax.persistence.Table;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+@Named
+@Singleton
 public class DBUtils {
+
+    private final RelationMapper relationMapper;
     private final RepositoryMapper repositoryMapper;
     private final RepositoryLinkMapper repositoryLinkMapper;
     private final SessionFactory sessionFactory;
 
-    public DBUtils(SessionFactory sessionFactory, RepositoryMapper repositoryMapper, RepositoryLinkMapper repositoryLinkMapper) {
+    public DBUtils(
+            RelationMapper relationMapper,
+            RepositoryMapper repositoryMapper,
+            RepositoryLinkMapper repositoryLinkMapper,
+            SessionFactory sessionFactory
+    ) {
+        this.relationMapper = relationMapper;
         this.repositoryMapper = repositoryMapper;
         this.repositoryLinkMapper = repositoryLinkMapper;
         this.sessionFactory = sessionFactory;
@@ -40,6 +54,13 @@ public class DBUtils {
         for (RepositoryDto dto : repositoryDtoList) {
             sessionFactory.getCurrentSession().persist(repositoryMapper.toEntity(dto));
         }
+    }
+
+    @Transactional
+    public Relation addRelation() {
+        Relation result = relationMapper.toEntity(StructCreator.createRelationDto(null));
+        sessionFactory.getCurrentSession().persist(result);
+        return result;
     }
 
     @Transactional
