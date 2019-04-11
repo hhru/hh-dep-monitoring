@@ -12,17 +12,17 @@ const useStyles = makeStyles({
     archiveColored,
 });
 
-export default function ListItemTitle({ name, isArchived }) {
+export default function ListItemTitle({ name, archived }) {
     const classes = useStyles();
     return (
         <Fragment>
             <span className={classNames(classes.repositoryItemTitle, {
-                [classes.archiveColored]: isArchived,
+                [classes.archiveColored]: archived,
             })}
             >
                 {`${name}`}
             </span>
-            {isArchived && (
+            {archived && (
                 <Icon iconName="archive" styles={archiveIcon} />
             )}
         </Fragment>
@@ -31,5 +31,5 @@ export default function ListItemTitle({ name, isArchived }) {
 
 ListItemTitle.propTypes = {
     name: PropTypes.string.isRequired,
-    isArchived: PropTypes.bool.isRequired,
+    archived: PropTypes.bool.isRequired,
 };

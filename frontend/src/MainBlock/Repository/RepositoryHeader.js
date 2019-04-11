@@ -16,7 +16,7 @@ function RepositoryHeader({ repository }) {
             <ListItemText primary={(
                 <Typography variant="h4">
                     {repository.name}
-                    {repository.isArchived && (
+                    {repository.archived && (
                         <Tooltip title="This is an archived repository" enterDelay={300}>
                             <span>
                                 <Icon iconName="archive" styles={archiveIconBig} />

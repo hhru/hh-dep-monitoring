@@ -13,7 +13,7 @@ export default function RepositoryItem({ repository }) {
         <ListItem button component={Link} to={`/Repositories/${repository.repositoryId}`}>
             <ListItemText
                 primary={
-                    <ListItemTitle name={repository.name} isArchived={repository.isArchived} />}
+                    <ListItemTitle name={repository.name} archived={repository.archived} />}
                 secondary={
                     <ListItemInfo descr={repository.description} date={repository.updatedAt} />}
             />
