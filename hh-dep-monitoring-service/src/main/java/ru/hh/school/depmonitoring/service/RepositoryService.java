@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
+
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.PageDto;
@@ -36,8 +37,19 @@ public class RepositoryService {
     }
 
     @Transactional
-    public void update(@Nonnull RepositoryDto dto) {
-        repositoryDao.update(repositoryMapper.toEntity(dto));
+    public RepositoryDto update(@Nonnull RepositoryDto dto) {
+        Repository currentRepository = repositoryDao
+                .findOne(dto.getRepositoryId())
+                .orElseThrow(() -> new IllegalArgumentException("Repository with id = "
+                        + dto.getRepositoryId() + "not found!"));
+
+        currentRepository.setDescription(dto.getDescription());
+        currentRepository.setName(dto.getName());
+        currentRepository.setActive(dto.isActive());
+        currentRepository.setArchived(dto.isArchived());
+
+        repositoryDao.update(currentRepository);
+        return repositoryMapper.toDto(currentRepository);
     }
 
     @Transactional(readOnly = true)

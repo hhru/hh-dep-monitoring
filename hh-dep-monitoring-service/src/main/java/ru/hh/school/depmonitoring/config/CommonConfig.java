@@ -12,9 +12,12 @@ import ru.hh.nab.hibernate.NabHibernateCommonConfig;
 import ru.hh.nab.hibernate.datasource.RoutingDataSource;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
+import ru.hh.school.depmonitoring.dao.impl.RepositoryLinkDaoImpl;
 import ru.hh.school.depmonitoring.rs.GithubResource;
 import ru.hh.school.depmonitoring.rs.RelationResource;
 import ru.hh.school.depmonitoring.service.RelationService;
+import ru.hh.school.depmonitoring.rs.RepositoryLinkResource;
+import ru.hh.school.depmonitoring.service.RepositoryLinkService;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.rs.RepositoryResource;
 import ru.hh.school.depmonitoring.service.SyncService;
@@ -31,12 +34,16 @@ import java.util.Optional;
         MigrationConfig.class,
         NabHibernateCommonConfig.class,
 
+        RepositoryDaoImpl.class,
+        RepositoryLinkDaoImpl.class,
         RelationDaoImpl.class,
         RepositoryDaoImpl.class,
 
         RelationService.class,
         RepositoryService.class,
         SyncService.class,
+        RepositoryService.class,
+        RepositoryLinkService.class,
 
         GHRepositoryMapper.class,
         RelationMapper.class,
@@ -45,7 +52,8 @@ import java.util.Optional;
 
         GithubResource.class,
         RelationResource.class,
-        RepositoryResource.class
+        RepositoryResource.class,
+        RepositoryLinkResource.class
 })
 
 public class CommonConfig {
