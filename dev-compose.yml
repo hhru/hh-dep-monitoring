@@ -1,0 +1,26 @@
+version: '3'
+services:
+  db:
+    image: "postgres:11-alpine"
+    container_name: postgres-monitoring
+    environment:
+      - POSTGRES_USER=monitoring
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=monitoring
+    volumes:
+      - "~/pgdata:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+
+
+
+  frontend:
+    image: "nginx:1.15.11-alpine"
+    container_name: nginx-monitoring
+    volumes:
+      - "./frontend/dev_nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./frontend/build:/frontend"
+    ports:
+      - "80:80"
+    extra_hosts:
+      - "dockerhost:$DOCKERHOST"

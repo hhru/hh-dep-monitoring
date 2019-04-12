@@ -1,7 +1,0 @@
-FROM postgres:11
-
-ENV POSTGRES_USER=monitoring
-ENV POSTGRES_PASSWORD=123
-ENV POSTGRES_DB=monitoring
-
-
