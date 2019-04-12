@@ -1,6 +1,7 @@
 package ru.hh.school.depmonitoring.rs;
 
 import ru.hh.school.depmonitoring.dto.RepositoryLinkDto;
+import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
 import ru.hh.school.depmonitoring.service.RepositoryLinkService;
 
 import javax.annotation.Nonnull;
@@ -72,5 +73,11 @@ public class RepositoryLinkResource {
     public Response deleteById(@PathParam("id") int id) {
         repositoryLinkService.deleteById(id);
         return Response.status(Response.Status.NO_CONTENT).build();
+    }
+
+    @GET
+    @Path("/types")
+    public RepositoryLinkType[] getValidRepositoryTypes() {
+        return RepositoryLinkType.values();
     }
 }

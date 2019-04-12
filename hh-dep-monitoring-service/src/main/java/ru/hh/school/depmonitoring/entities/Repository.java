@@ -1,11 +1,13 @@
 package ru.hh.school.depmonitoring.entities;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.Enumerated;
+import javax.persistence.EnumType;
 import javax.persistence.OneToMany;
+import javax.persistence.FetchType;
 import java.time.LocalDateTime;
 import java.util.Set;
 import java.util.Objects;
@@ -60,6 +62,10 @@ public class Repository {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "repository_type")
+    @NotNull
+    private RepositoryType repositoryType;
 
     @OneToMany(mappedBy = "repositoryFrom")
     private Set<Relation> relatedTo;
@@ -114,6 +120,10 @@ public class Repository {
         return linkUrls;
     }
 
+    public void setRepositoryType(RepositoryType repositoryType) {
+        this.repositoryType = repositoryType;
+    }
+
     public void setRepositoryId(Long repositoryId) {
         this.repositoryId = repositoryId;
     }
@@ -144,6 +154,10 @@ public class Repository {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public RepositoryType getRepositoryType() {
+        return repositoryType;
     }
 
     @Override

@@ -2,6 +2,7 @@ package ru.hh.school.depmonitoring.service.mapper;
 
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryType;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -40,6 +41,7 @@ public class GHRepositoryMapper implements Mapper<GHRepositoryDto, Repository> {
         entity.setActive(dto.isActive());
         entity.setCreatedAt(dto.getCreatedAt());
         entity.setUpdatedAt(dto.getUpdatedAt());
+        entity.setRepositoryType(RepositoryType.OTHER);
         return entity;
     }
 }

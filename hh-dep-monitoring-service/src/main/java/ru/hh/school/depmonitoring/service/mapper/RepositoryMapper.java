@@ -26,6 +26,7 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
         entity.setActive(dto.isActive());
         entity.setCreatedAt(dto.getCreatedAt());
         entity.setUpdatedAt(dto.getUpdatedAt());
+        entity.setRepositoryType(dto.getRepositoryType());
 
         return entity;
     }
@@ -44,6 +45,7 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
         dto.setActive(entity.isActive());
         dto.setCreatedAt(entity.getCreatedAt());
         dto.setUpdatedAt(entity.getUpdatedAt());
+        dto.setRepositoryType(entity.getRepositoryType());
 
         dto.setLinkUrls(repositoryLinkMapper.toDto(entity.getLinkUrls()));
 
