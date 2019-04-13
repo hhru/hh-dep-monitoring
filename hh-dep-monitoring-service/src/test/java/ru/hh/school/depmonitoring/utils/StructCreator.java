@@ -3,7 +3,10 @@ package ru.hh.school.depmonitoring.utils;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.dto.RepositoryLinkDto;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
+import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryType;
 import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
 
 import java.time.LocalDateTime;
@@ -13,8 +16,6 @@ import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import ru.hh.school.depmonitoring.dto.RelationDto;
-import ru.hh.school.depmonitoring.entities.Relation;
-import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 
 public class StructCreator {
     public static RelationDto createRelationDto(Integer id) {
@@ -60,6 +61,7 @@ public class StructCreator {
         repository.setActive(true);
         repository.setCreatedAt(LocalDateTime.now());
         repository.setUpdatedAt(dateTime);
+        repository.setRepositoryType(RepositoryType.APPLICATION);
         return repository;
     }
 
@@ -83,6 +85,7 @@ public class StructCreator {
         repositoryDto.setActive(false);
         repositoryDto.setCreatedAt(LocalDateTime.of(2019, 3, 12, 14, 51));
         repositoryDto.setUpdatedAt(LocalDateTime.of(2019, 4, 12, 13, 22));
+        repositoryDto.setRepositoryType(RepositoryType.APPLICATION);
 
         return repositoryDto;
     }

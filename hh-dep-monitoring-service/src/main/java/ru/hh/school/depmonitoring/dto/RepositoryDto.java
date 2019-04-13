@@ -1,5 +1,7 @@
 package ru.hh.school.depmonitoring.dto;
 
+import ru.hh.school.depmonitoring.entities.RepositoryType;
+
 import java.io.Serializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,6 +36,10 @@ public class RepositoryDto implements Serializable {
 
     @Nullable
     private LocalDateTime updatedAt;
+
+    @NotNull
+    private RepositoryType repositoryType;
+
 
     private boolean hasRelatedTo;
 
@@ -129,6 +135,14 @@ public class RepositoryDto implements Serializable {
 
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public RepositoryType getRepositoryType() {
+        return repositoryType;
+    }
+
+    public void setRepositoryType(RepositoryType repositoryType) {
+        this.repositoryType = repositoryType;
     }
 
     @Override

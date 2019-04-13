@@ -4,6 +4,7 @@ package ru.hh.school.depmonitoring.rs;
 import ru.hh.school.depmonitoring.dto.PageDto;
 import ru.hh.school.depmonitoring.dto.PageRequestDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.entities.RepositoryType;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 
 import javax.annotation.Nonnull;
@@ -61,5 +62,11 @@ public class RepositoryResource {
             return Response.status(Response.Status.OK).entity(service.update(dto)).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
+    }
+
+    @GET
+    @Path("/types")
+    public RepositoryType[] getValidRepositoryTypes() {
+        return RepositoryType.values();
     }
 }
