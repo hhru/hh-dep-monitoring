@@ -35,6 +35,7 @@ public class RelationMapperTest {
     public void toDto() {
         Relation entity = StructCreator.createRelationEntity(1);
         RelationDto dto = mapper.toDto(entity);
+        assertEquals(entity.getRelationId(), dto.getRelationId());
         assertDtoEqualsEntity(entity, dto);
         assertEquals(entity.getRepositoryFrom().getName(), dto.getRepositoryFromName());
         assertEquals(entity.getRepositoryTo().getName(), dto.getRepositoryToName());
@@ -53,7 +54,6 @@ public class RelationMapperTest {
     }
 
     private void assertDtoEqualsEntity(Relation entity, RelationDto dto) {
-        assertEquals(dto.getRelationId(), entity.getRelationId());
         assertEquals(dto.getRepositoryFromId(), entity.getRepositoryFrom().getRepositoryId());
         assertEquals(dto.getRepositoryToId(), entity.getRepositoryTo().getRepositoryId());
         assertEquals(dto.getPriority(), entity.getPriority());

@@ -42,7 +42,6 @@ public class RelationMapper implements Mapper<RelationDto, Relation> {
             return null;
         }
         Relation entity = new Relation();
-        entity.setRelationId(dto.getRelationId());
         entity.setRepositoryFrom(repositoryDao.findOne(dto.getRepositoryFromId()).orElseThrow());
         entity.setRepositoryTo(repositoryDao.findOne(dto.getRepositoryToId()).orElseThrow());
         entity.setPriority(dto.getPriority());

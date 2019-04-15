@@ -21,16 +21,16 @@ public class RelationDaoImpl extends AbstractDao<Relation, Integer> implements R
     @Override
     public List<Relation> findRelationsByMainRepositoryId(Repository repository) {
         return getSession()
-                .createQuery("from Relation where repositoryFrom = :repository", Relation.class)
+                .createQuery("from Relation where repositoryFrom = :repository order by repositoryTo.name asc", Relation.class)
                 .setParameter("repository", repository)
-                .list();
+                .getResultList();
     }
 
     @Override
     public List<Relation> findRelationsByDependentRepositoryId(Repository repository) {
         return getSession()
-                .createQuery("from Relation where repositoryTo = :repository", Relation.class)
+                .createQuery("from Relation where repositoryTo = :repository order by repositoryFrom.name asc", Relation.class)
                 .setParameter("repository", repository)
-                .list();
+                .getResultList();
     }
 }

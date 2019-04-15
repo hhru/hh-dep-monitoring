@@ -1,6 +1,7 @@
 package ru.hh.school.depmonitoring.rs;
 
 import ru.hh.school.depmonitoring.dto.RelationDto;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 import ru.hh.school.depmonitoring.service.RelationService;
 
 import javax.inject.Named;
@@ -16,10 +17,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 
 @Named
 @Singleton
 @Path("/relations/")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class RelationResource {
     private final RelationService relationService;
 
@@ -28,38 +32,39 @@ public class RelationResource {
     }
 
     @GET
-    @Path("/dependOn/{repositoryId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<RelationDto> getRelationsDependOn(@PathParam("repositoryId") long repositoryId) {
+    @Path("/types")
+    public RepositoryRelationPriority[] getValidRepositoryTypes() {
+        return RepositoryRelationPriority.values();
+    }
+
+    @GET
+    @Path("/depend-on/{repositoryId}")
+    public Map<RepositoryRelationPriority, List<RelationDto>> getRelationsDependOn(@PathParam("repositoryId") long repositoryId) {
         return relationService.getRelationsDependOn(repositoryId);
     }
 
     @GET
-    @Path("/dependOut/{repositoryId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public List<RelationDto> getRelationsDependOut(@PathParam("repositoryId") long repositoryId) {
+    @Path("/depend-out/{repositoryId}")
+    public Map<RepositoryRelationPriority, List<RelationDto>> getRelationsDependOut(@PathParam("repositoryId") long repositoryId) {
         return relationService.getRelationsDependOut(repositoryId);
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void insertRelation(RelationDto relationDto) {
-        relationService.insertRelation(relationDto);
+    public RelationDto insertRelation(RelationDto relationDto) {
+        return relationService.insertRelation(relationDto);
     }
 
     @PUT
     @Path("/{relationId}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response updateRelation(@PathParam("relationId") int relationId, RelationDto relationDto) {
-        if (relationDto != null && relationService.updateRelation(relationId, relationDto)) {
-            return Response.status(Response.Status.NO_CONTENT).build();
+        if (relationDto != null) {
+            return Response.ok(relationService.updateRelation(relationId, relationDto)).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
     @DELETE
     @Path("/{relationId}")
-    @Consumes(MediaType.APPLICATION_JSON)
     public void deleteRelation(@PathParam("relationId") int relationId) {
         relationService.deleteRelation(relationId);
     }
