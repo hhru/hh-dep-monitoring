@@ -77,8 +77,10 @@ public class RelationServiceTest extends DepMonitoringTestBase {
         RelationDto newRelationDto = relationService.updateRelation(relation.getRelationId(), relationDto);
         assertNotNull(newRelationDto);
         assertNotNull(newRelationDto.getRelationId());
-        assertEquals(relationDto.getRepositoryFromId(), newRelationDto.getRepositoryFromId());
-        assertEquals(relationDto.getRepositoryToId(), newRelationDto.getRepositoryToId());
+        // эти 2 поля не должны измениться
+        assertEquals(relation.getRepositoryFrom().getRepositoryId(), newRelationDto.getRepositoryFromId());
+        assertEquals(relation.getRepositoryTo().getRepositoryId(), newRelationDto.getRepositoryToId());
+        // эти должны принять новые значения
         assertEquals(relationDto.getPriority(), newRelationDto.getPriority());
         assertEquals(relationDto.getDescription(), newRelationDto.getDescription());
     }

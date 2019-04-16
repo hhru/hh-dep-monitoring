@@ -42,8 +42,12 @@ public class RelationMapper implements Mapper<RelationDto, Relation> {
             return null;
         }
         Relation entity = new Relation();
-        entity.setRepositoryFrom(repositoryDao.findOne(dto.getRepositoryFromId()).orElseThrow());
-        entity.setRepositoryTo(repositoryDao.findOne(dto.getRepositoryToId()).orElseThrow());
+        entity.setRepositoryFrom(repositoryDao
+                .findOne(dto.getRepositoryFromId())
+                .orElseThrow(() -> new IllegalArgumentException("Repository with ID " + dto.getRepositoryFromId() + " not found")));
+        entity.setRepositoryTo(repositoryDao
+                .findOne(dto.getRepositoryToId())
+                .orElseThrow(() -> new IllegalArgumentException("Repository with ID " + dto.getRepositoryToId() + " not found")));
         entity.setPriority(dto.getPriority());
         entity.setDescription(dto.getDescription());
         return entity;

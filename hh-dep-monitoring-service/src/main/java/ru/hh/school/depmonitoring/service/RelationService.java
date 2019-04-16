@@ -53,7 +53,13 @@ public class RelationService {
 
     @Transactional
     public RelationDto insertRelation(RelationDto relationDto) {
+        if (relationDto == null) {
+            throw new IllegalArgumentException("Relation can`t be null");
+        }
+
         Relation relation = relationMapper.toEntity(relationDto);
+        checkCyclicRelations(relation.getRepositoryTo(), relationDto.getRepositoryFromId());
+        searchForDuplicates(relation);
         relationDao.create(relation);
         return relationMapper.toDto(relation);
     }
@@ -62,14 +68,6 @@ public class RelationService {
     public RelationDto updateRelation(int relationId, RelationDto relationDto) {
         Relation relation = relationDao.findOne(relationId)
                 .orElseThrow(() -> new IllegalArgumentException("Relation with id = " + relationId + "not found!"));
-        if (relationDto.getRepositoryFromId() != null &&
-                !relationDto.getRepositoryFromId().equals(relation.getRepositoryFrom().getRepositoryId())) {
-            relation.setRepositoryFrom(getRepositoryData(relationDto.getRepositoryFromId()));
-        }
-        if (relationDto.getRepositoryToId() != null &&
-                !relationDto.getRepositoryToId().equals(relation.getRepositoryTo().getRepositoryId())) {
-            relation.setRepositoryTo(getRepositoryData(relationDto.getRepositoryToId()));
-        }
         if (relationDto.getPriority() != null && !relationDto.getPriority().equals(relation.getPriority())) {
             relation.setPriority(relationDto.getPriority());
         }
@@ -83,5 +81,27 @@ public class RelationService {
     @Transactional
     public void deleteRelation(int relationId) {
         relationDao.deleteById(relationId);
+    }
+
+    private void checkCyclicRelations(Repository repository, long firstId) {
+        if (repository.getRepositoryId() == firstId) {
+            throw new IllegalArgumentException("Repositories in relation must be not equal");
+        }
+
+        for (Relation relation : relationDao.findRelationsByMainRepositoryId(repository)) {
+            if (relation.getRepositoryTo().getRepositoryId() == firstId) {
+                throw new IllegalArgumentException("Cyclic relations detected");
+            }
+            checkCyclicRelations(relation.getRepositoryTo(), firstId);
+        }
+    }
+
+    private void searchForDuplicates(Relation newRelation) {
+        long newRepositoryToId = newRelation.getRepositoryTo().getRepositoryId();
+        for (Relation relation : relationDao.findRelationsByMainRepositoryId(newRelation.getRepositoryFrom())) {
+            if (relation.getRepositoryTo().getRepositoryId() == newRepositoryToId) {
+                throw new IllegalArgumentException("Duplicate relation detected");
+            }
+        }
     }
 }
