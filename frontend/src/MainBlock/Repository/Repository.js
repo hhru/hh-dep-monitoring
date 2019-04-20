@@ -11,6 +11,7 @@ import { fetchRepository } from 'redux/models/Repository/repositoriesActions';
 import { resetFormResult } from 'redux/models/Relation/relationsActions';
 import { addMessage } from 'redux/models/Notification/notificationsActions';
 import { descriptionListItem, relationsHeader, relationsTitle } from 'Utils/commonStyles';
+import RepositoryLinks from 'CommonComponents/RepositoryLinks';
 import AddRelationButton from './RelationForm/OpenFormButton';
 import Relations from './Relations';
 import RepositoryHeader from './RepositoryHeader';
@@ -53,6 +54,7 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
                     <div className={classes.descriptionListItem}>
                         {repository.description}
                     </div>
+                    <RepositoryLinks repositoryId={repositoryId} size={40} />
                     <div className={classes.relationsHeader}>
                         <Typography variant="h5" className={classes.relationsTitle}>Relations</Typography>
                         {adminMode && (

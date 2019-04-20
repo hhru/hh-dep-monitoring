@@ -54,7 +54,7 @@ function RelationItem({ classes, relation, adminMode }) {
                     primary={(
                         <Fragment>
                             <PriorityLabel priority={relation.priority} />
-                            <Link to={`/Repositories/${relation.repositoryToId}`} className={classes.genericLink}>
+                            <Link to={`/repositories/${relation.repositoryToId}`} className={classes.genericLink}>
                                 {relation.repositoryToName}
                             </Link>
                         </Fragment>

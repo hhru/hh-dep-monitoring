@@ -10,7 +10,7 @@ import { FETCH_PRIORITY_TYPES,
 export const initialState = {
     relationsByRepoId: {},
     priorityTypes: undefined,
-    formSuccess: undefined,
+    formResult: undefined,
 };
 
 const getRelation = (relations, relationId) => {

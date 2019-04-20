@@ -15,7 +15,7 @@ import RepositoryItem from './RepositoryItem';
 const styles = theme => ({
     root: {
         padding: theme.spacing.unit * 2,
-        width: theme.spacing.unit * 50,
+        width: theme.spacing.unit * 100,
     },
 });
 
