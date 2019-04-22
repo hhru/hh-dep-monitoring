@@ -82,9 +82,13 @@ public class StructCreator {
     }
 
     public static RepositoryDto createRepositoryDto(long id) {
+        return createRepositoryDto(id, String.format("Name%02d", id));
+    }
+
+    public static RepositoryDto createRepositoryDto(long id, String name) {
         RepositoryDto repositoryDto = new RepositoryDto();
         repositoryDto.setRepositoryId(id);
-        repositoryDto.setName(String.format("Name%02d", id));
+        repositoryDto.setName(name);
         repositoryDto.setHtmlUrl("http://htmlUrl");
         repositoryDto.setDescription("Description");
         repositoryDto.setArchived(true);

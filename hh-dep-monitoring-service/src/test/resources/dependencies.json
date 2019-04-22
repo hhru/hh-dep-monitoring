@@ -1,0 +1,3251 @@
+[
+  {
+    "key": "ru.hh.nab:nab-logging:4.19.6",
+    "name": "nuts'n'bolts logging",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-logging",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ch.qos.logback:logback-classic:1.2.3",
+        "dependencyTree": [
+          {
+            "key": "ch.qos.logback:logback-core:1.2.3",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.apache.commons:commons-lang3:3.8.1",
+        "dependencyTree": []
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.slf4j:slf4j-api:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.slf4j:jul-to-slf4j:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+        "dependencyTree": []
+      },
+      {
+        "key": "io.sentry:sentry-logback:1.7.21",
+        "dependencyTree": [
+          {
+            "key": "io.sentry:sentry:1.7.21",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+        "dependencyTree": [
+          {
+            "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.jetbrains:syslog4j:0.9.46",
+        "dependencyTree": []
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.jclient-common:jclient-common:1.3.0",
+    "name": "jclient-common",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "jclient-common",
+    "viewPath": "client",
+    "lastCommitDateTime": "2019-03-28T14:39:03",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.jclient-common:jclient-common-utils:1.3.0",
+        "dependencyTree": []
+      },
+      {
+        "key": "ru.hh.jclient-common:jclient-common-api:1.3.0",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.asynchttpclient:async-http-client:2.8.1",
+        "dependencyTree": [
+          {
+            "key": "org.asynchttpclient:async-http-client-netty-utils:2.8.1",
+            "dependencyTree": [
+              {
+                "key": "io.netty:netty-buffer:4.1.33.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "io.netty:netty-codec-http:4.1.33.Final",
+            "dependencyTree": [
+              {
+                "key": "io.netty:netty-common:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-transport:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-codec:4.1.33.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "io.netty:netty-handler:4.1.33.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.netty:netty-codec-socks:4.1.33.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.netty:netty-handler-proxy:4.1.33.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.netty:netty-transport-native-epoll:4.1.33.Final",
+            "dependencyTree": [
+              {
+                "key": "io.netty:netty-transport-native-unix-common:4.1.33.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "io.netty:netty-resolver-dns:4.1.33.Final",
+            "dependencyTree": [
+              {
+                "key": "io.netty:netty-resolver:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-codec-dns:4.1.33.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.reactivestreams:reactive-streams:1.0.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.typesafe.netty:netty-reactive-streams:2.0.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.sun.activation:javax.activation:1.2.0",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "com.google.protobuf:protobuf-java:3.7.0",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.google.guava:guava:18.0",
+        "dependencyTree": []
+      },
+      {
+        "key": "javax.ws.rs:jsr311-api:1.1.1",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.slf4j:slf4j-api:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "javax.xml.bind:jaxb-api:2.3.1",
+        "dependencyTree": [
+          {
+            "key": "javax.activation:javax.activation-api:1.2.0",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+        "dependencyTree": [
+          {
+            "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jaxb:txw2:2.3.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.jvnet.staxex:stax-ex:1.8.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+            "dependencyTree": []
+          },
+          {
+            "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:1.3",
+            "dependencyTree": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nab-hibernate:4.19.6",
+    "name": "nuts'n'bolts hibernate and spring integration",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-hibernate",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.nab:nab-common:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "org.apache.commons:commons-lang3:3.8.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:slf4j-api:1.7.25",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-data-source:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.nab:nab-metrics:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "com.datadoghq:java-dogstatsd-client:2.7",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jnr-unixsocket:0.18",
+                    "dependencyTree": [
+                      {
+                        "key": "com.github.jnr:jnr-ffi:2.1.4",
+                        "dependencyTree": [
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-commons:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-analysis:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-tree:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-util:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                            "dependencyTree": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-constants:0.9.8",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-enxio:0.16",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-posix:3.0.35",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-jdbc:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.postgresql:postgresql:42.2.5",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.zaxxer:HikariCP:3.3.1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.hibernate:hibernate-core:5.2.10.Final",
+        "dependencyTree": [
+          {
+            "key": "org.jboss.logging:jboss-logging:3.3.0.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.javassist:javassist:3.20.0-GA",
+            "dependencyTree": []
+          },
+          {
+            "key": "antlr:antlr:2.7.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.1.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.jboss:jandex:2.0.3.Final",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml:classmate:1.3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "dom4j:dom4j:1.6.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.hibernate.common:hibernate-commons-annotations:5.0.1.Final",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-core:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-beans:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.springframework:spring-context:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-aop:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-expression:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-orm:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.springframework:spring-tx:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.aspectj:aspectjrt:1.9.2",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.aspectj:aspectjweaver:1.9.2",
+        "dependencyTree": []
+      },
+      {
+        "key": "javax.servlet:javax.servlet-api:4.0.1",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.glassfish.jersey.core:jersey-common:2.28",
+        "dependencyTree": [
+          {
+            "key": "jakarta.ws.rs:jakarta.ws.rs-api:2.1.5",
+            "dependencyTree": []
+          },
+          {
+            "key": "jakarta.annotation:jakarta.annotation-api:1.3.4",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.hk2.external:jakarta.inject:2.5.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.hk2:osgi-resource-locator:1.0.1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-logging:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ch.qos.logback:logback-classic:1.2.3",
+            "dependencyTree": [
+              {
+                "key": "ch.qos.logback:logback-core:1.2.3",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:jul-to-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.sentry:sentry-logback:1.7.21",
+            "dependencyTree": [
+              {
+                "key": "io.sentry:sentry:1.7.21",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": [
+              {
+                "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.jetbrains:syslog4j:0.9.46",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.mockito:mockito-core:2.25.1",
+        "dependencyTree": [
+          {
+            "key": "net.bytebuddy:byte-buddy:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.objenesis:objenesis:2.6",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.powermock:powermock-module-junit4:2.0.0",
+        "dependencyTree": [
+          {
+            "key": "org.powermock:powermock-module-junit4-common:2.0.0",
+            "dependencyTree": [
+              {
+                "key": "org.powermock:powermock-reflect:2.0.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.powermock:powermock-core:2.0.0",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.powermock:powermock-api-mockito2:2.0.0",
+        "dependencyTree": [
+          {
+            "key": "org.powermock:powermock-api-support:2.0.0",
+            "dependencyTree": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.jclient-common:jclient-common-utils:1.3.0",
+    "name": "jclient-common-utils",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "jclient-common",
+    "viewPath": "client-utils",
+    "lastCommitDateTime": "2019-03-28T14:39:03",
+    "dependencyTree": []
+  },
+  {
+    "key": "ru.hh.jclient-common:jclient-common-testbase:1.3.0",
+    "name": "jclient-common-testbase",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "jclient-common",
+    "viewPath": "client-testbase",
+    "lastCommitDateTime": "2019-03-28T14:39:03",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.jclient-common:jclient-common:1.3.0",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.jclient-common:jclient-common-utils:1.3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "ru.hh.jclient-common:jclient-common-api:1.3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.asynchttpclient:async-http-client:2.8.1",
+            "dependencyTree": [
+              {
+                "key": "org.asynchttpclient:async-http-client-netty-utils:2.8.1",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-buffer:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-codec-http:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-common:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-transport:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-codec:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-handler:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-codec-socks:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-handler-proxy:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-transport-native-epoll:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-transport-native-unix-common:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-resolver-dns:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-resolver:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-codec-dns:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.reactivestreams:reactive-streams:1.0.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.typesafe.netty:netty-reactive-streams:2.0.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.activation:javax.activation:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.google.protobuf:protobuf-java:3.7.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.google.guava:guava:18.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:slf4j-api:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.xml.bind:jaxb-api:2.3.1",
+            "dependencyTree": [
+              {
+                "key": "javax.activation:javax.activation-api:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+            "dependencyTree": [
+              {
+                "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jaxb:txw2:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jvnet.staxex:stax-ex:1.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.mockito:mockito-core:2.24.5",
+        "dependencyTree": [
+          {
+            "key": "net.bytebuddy:byte-buddy:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.objenesis:objenesis:2.6",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:1.3",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ch.qos.logback:logback-classic:1.2.3",
+        "dependencyTree": [
+          {
+            "key": "ch.qos.logback:logback-core:1.2.3",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.slf4j:jul-to-slf4j:1.7.25",
+        "dependencyTree": []
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nuts-and-bolts:1.4.16",
+    "name": "nuts'n'bolts",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "user-behaviour",
+    "viewPath": "hh-ustats/hh-ustats-webservice/lib/nab",
+    "lastCommitDateTime": "2019-04-02T13:23:10",
+    "dependencyTree": []
+  },
+  {
+    "key": "ru.hh.nab:nab-starter:4.19.6",
+    "name": "nuts'n'bolts application starter",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-starter",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.nab:nab-common:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "org.apache.commons:commons-lang3:3.8.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:slf4j-api:1.7.25",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-logging:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ch.qos.logback:logback-classic:1.2.3",
+            "dependencyTree": [
+              {
+                "key": "ch.qos.logback:logback-core:1.2.3",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:jul-to-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.sentry:sentry-logback:1.7.21",
+            "dependencyTree": [
+              {
+                "key": "io.sentry:sentry:1.7.21",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.jetbrains:syslog4j:0.9.46",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-metrics:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "com.datadoghq:java-dogstatsd-client:2.7",
+            "dependencyTree": [
+              {
+                "key": "com.github.jnr:jnr-unixsocket:0.18",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jnr-ffi:2.1.4",
+                    "dependencyTree": [
+                      {
+                        "key": "com.github.jnr:jffi:1.2.15",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jffi:1.2.15",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-commons:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-analysis:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-tree:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-util:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                        "dependencyTree": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-constants:0.9.8",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-enxio:0.16",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-posix:3.0.35",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "javax.inject:javax.inject:1",
+        "dependencyTree": []
+      },
+      {
+        "key": "javax.servlet:javax.servlet-api:4.0.1",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.glassfish.jersey.ext:jersey-spring4:2.28",
+        "dependencyTree": [
+          {
+            "key": "org.glassfish.jersey.core:jersey-server:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.core:jersey-client:2.28",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.annotation:jakarta.annotation-api:1.3.4",
+                "dependencyTree": []
+              },
+              {
+                "key": "javax.validation:validation-api:2.0.1.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.inject:jersey-hk2:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2:hk2-locator:2.5.0",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2.external:aopalliance-repackaged:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.javassist:javassist:3.22.0-CR2",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.hk2:hk2:2.5.0",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2:hk2-utils:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.hk2:hk2-api:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.hk2:hk2-core:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.hk2:hk2-runlevel:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.hk2:class-model:2.5.0",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2.external:asm-repackaged:2.5.0",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.hk2:spring-bridge:2.5.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "jakarta.ws.rs:jakarta.ws.rs-api:2.1.5",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.glassfish.jersey.containers:jersey-container-servlet-core:2.28",
+        "dependencyTree": [
+          {
+            "key": "org.glassfish.hk2.external:jakarta.inject:2.5.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jersey.core:jersey-common:2.28",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.glassfish.jersey.media:jersey-media-jaxb:2.28",
+        "dependencyTree": [
+          {
+            "key": "org.glassfish.hk2:osgi-resource-locator:1.0.1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.glassfish.jersey.media:jersey-media-json-jackson:2.28",
+        "dependencyTree": [
+          {
+            "key": "org.glassfish.jersey.ext:jersey-entity-filtering:2.28",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-core:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-beans:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.springframework:spring-context:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-expression:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-web:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.springframework:spring-aop:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.eclipse.jetty:jetty-servlet:9.4.15.v20190215",
+        "dependencyTree": [
+          {
+            "key": "org.eclipse.jetty:jetty-security:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-server:9.4.15.v20190215",
+                "dependencyTree": [
+                  {
+                    "key": "org.eclipse.jetty:jetty-http:9.4.15.v20190215",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.eclipse.jetty:jetty-io:9.4.15.v20190215",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.eclipse.jetty:jetty-webapp:9.4.15.v20190215",
+        "dependencyTree": [
+          {
+            "key": "org.eclipse.jetty:jetty-xml:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-util:9.4.15.v20190215",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.8",
+        "dependencyTree": [
+          {
+            "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.9.8",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+        "dependencyTree": []
+      },
+      {
+        "key": "javax.xml.bind:jaxb-api:2.3.1",
+        "dependencyTree": [
+          {
+            "key": "javax.activation:javax.activation-api:1.2.0",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+        "dependencyTree": [
+          {
+            "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jaxb:txw2:2.3.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.jvnet.staxex:stax-ex:1.8.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+            "dependencyTree": []
+          },
+          {
+            "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.caffinitas.ohc:ohc-core-j8:0.6.1",
+        "dependencyTree": [
+          {
+            "key": "org.caffinitas.ohc:ohc-core:0.6.1",
+            "dependencyTree": [
+              {
+                "key": "com.google.guava:guava:18.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "net.java.dev.jna:jna:4.1.0",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-test:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.mockito:mockito-core:2.25.1",
+        "dependencyTree": [
+          {
+            "key": "net.bytebuddy:byte-buddy:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.objenesis:objenesis:2.6",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.awaitility:awaitility:3.1.6",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-library:1.3",
+            "dependencyTree": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nab-metrics:4.19.6",
+    "name": "nuts'n'bolts metrics for statsd",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-metrics",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "com.datadoghq:java-dogstatsd-client:2.7",
+        "dependencyTree": [
+          {
+            "key": "com.github.jnr:jnr-unixsocket:0.18",
+            "dependencyTree": [
+              {
+                "key": "com.github.jnr:jnr-ffi:2.1.4",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jffi:1.2.15",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jffi:1.2.15",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.ow2.asm:asm:5.0.3",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.ow2.asm:asm-commons:5.0.3",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.ow2.asm:asm-analysis:5.0.3",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.ow2.asm:asm-tree:5.0.3",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.ow2.asm:asm-util:5.0.3",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "com.github.jnr:jnr-constants:0.9.8",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.github.jnr:jnr-enxio:0.16",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.github.jnr:jnr-posix:3.0.35",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.slf4j:slf4j-api:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.checkstyle:hh-maven-checkstyle-plugin:1.7",
+    "name": "hh-maven-checkstyle-plugin",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "checkstyle",
+    "viewPath": "hh-maven-checkstyle-plugin",
+    "lastCommitDateTime": "2019-03-19T14:21:45",
+    "dependencyTree": [
+      {
+        "key": "org.apache.maven:maven-plugin-api:3.3.9",
+        "dependencyTree": [
+          {
+            "key": "org.apache.maven:maven-model:3.3.9",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven:maven-artifact:3.3.9",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.eclipse.sisu:org.eclipse.sisu.plexus:0.3.2",
+            "dependencyTree": [
+              {
+                "key": "javax.enterprise:cdi-api:1.0",
+                "dependencyTree": [
+                  {
+                    "key": "javax.annotation:jsr250-api:1.0",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.eclipse.sisu:org.eclipse.sisu.inject:0.3.2",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.apache.maven.plugin-tools:maven-plugin-annotations:3.5",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.apache.maven:maven-core:3.3.9",
+        "dependencyTree": [
+          {
+            "key": "org.apache.maven:maven-settings:3.3.9",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven:maven-settings-builder:3.3.9",
+            "dependencyTree": [
+              {
+                "key": "org.apache.maven:maven-builder-support:3.3.9",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.apache.maven:maven-repository-metadata:3.3.9",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven:maven-model-builder:3.3.9",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven:maven-aether-provider:3.3.9",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.aether:aether-spi:1.0.2.v20150114",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.eclipse.aether:aether-impl:1.0.2.v20150114",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.eclipse.aether:aether-api:1.0.2.v20150114",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.eclipse.aether:aether-util:1.0.2.v20150114",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.google.inject:guice:4.0",
+            "dependencyTree": [
+              {
+                "key": "javax.inject:javax.inject:1",
+                "dependencyTree": []
+              },
+              {
+                "key": "aopalliance:aopalliance:1.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.codehaus.plexus:plexus-interpolation:1.21",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.codehaus.plexus:plexus-utils:3.0.22",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.codehaus.plexus:plexus-classworlds:2.5.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.codehaus.plexus:plexus-component-annotations:1.6",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.sonatype.plexus:plexus-sec-dispatcher:1.3",
+            "dependencyTree": [
+              {
+                "key": "org.sonatype.plexus:plexus-cipher:1.4",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.apache.commons:commons-lang3:3.4",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.codehaus.plexus:plexus-resources:1.1.0",
+        "dependencyTree": [
+          {
+            "key": "org.codehaus.plexus:plexus-container-default:1.0-alpha-9-stable-1",
+            "dependencyTree": [
+              {
+                "key": "junit:junit:3.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "classworlds:classworlds:1.1-alpha-2",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.apache.maven.plugins:maven-checkstyle-plugin:3.0.0",
+        "dependencyTree": [
+          {
+            "key": "org.apache.maven.reporting:maven-reporting-api:3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven.reporting:maven-reporting-impl:2.3",
+            "dependencyTree": [
+              {
+                "key": "org.apache.maven.shared:maven-shared-utils:0.6",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.apache.maven.doxia:doxia-core:1.2",
+                "dependencyTree": [
+                  {
+                    "key": "xerces:xercesImpl:2.9.1",
+                    "dependencyTree": [
+                      {
+                        "key": "xml-apis:xml-apis:1.3.04",
+                        "dependencyTree": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "org.apache.httpcomponents:httpclient:4.0.2",
+                    "dependencyTree": [
+                      {
+                        "key": "org.apache.httpcomponents:httpcore:4.0.1",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "commons-codec:commons-codec:1.3",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "commons-validator:commons-validator:1.3.1",
+                "dependencyTree": [
+                  {
+                    "key": "commons-digester:commons-digester:1.6",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.apache.maven.doxia:doxia-sink-api:1.4",
+            "dependencyTree": [
+              {
+                "key": "org.apache.maven.doxia:doxia-logging-api:1.4",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.apache.maven.doxia:doxia-decoration-model:1.4",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.maven.doxia:doxia-site-renderer:1.4",
+            "dependencyTree": [
+              {
+                "key": "org.apache.maven.doxia:doxia-module-xhtml:1.4",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.apache.maven.doxia:doxia-module-fml:1.4",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.codehaus.plexus:plexus-i18n:1.0-beta-7",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.apache.velocity:velocity-tools:2.0",
+                "dependencyTree": [
+                  {
+                    "key": "commons-chain:commons-chain:1.1",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "dom4j:dom4j:1.1",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "sslext:sslext:1.2-0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.apache.struts:struts-core:1.3.8",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.apache.struts:struts-taglib:1.3.8",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.apache.struts:struts-tiles:1.3.8",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.apache.maven.doxia:doxia-integration-tools:1.6",
+            "dependencyTree": [
+              {
+                "key": "commons-io:commons-io:1.4",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.codehaus.plexus:plexus-velocity:1.1.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.velocity:velocity:1.5",
+            "dependencyTree": [
+              {
+                "key": "commons-lang:commons-lang:2.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "oro:oro:2.0.8",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "commons-collections:commons-collections:3.2.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.xml.bind:jaxb-api:2.3.0",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "com.puppycrawl.tools:checkstyle:8.18",
+        "dependencyTree": [
+          {
+            "key": "info.picocli:picocli:3.9.5",
+            "dependencyTree": []
+          },
+          {
+            "key": "antlr:antlr:2.7.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.antlr:antlr4-runtime:4.7.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "commons-beanutils:commons-beanutils:1.9.3",
+            "dependencyTree": [
+              {
+                "key": "commons-logging:commons-logging:1.2",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.google.guava:guava:27.0.1-jre",
+            "dependencyTree": [
+              {
+                "key": "com.google.guava:failureaccess:1.0.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.google.code.findbugs:jsr305:3.0.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.checkerframework:checker-qual:2.5.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.google.errorprone:error_prone_annotations:2.2.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.google.j2objc:j2objc-annotations:1.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.codehaus.mojo:animal-sniffer-annotations:1.17",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "net.sf.saxon:Saxon-HE:9.9.1-1",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.checkstyle:checkstyle-config-plugin:1.7",
+        "dependencyTree": []
+      },
+      {
+        "key": "ru.hh.checkstyle:checks:1.7",
+        "dependencyTree": []
+      },
+      {
+        "key": "ru.hh.checkstyle:checkstyle-config-compilation-maven-plugin:1.7",
+        "dependencyTree": []
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nab-testbase:4.19.6",
+    "name": "nuts'n'bolts test-base",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-testbase",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.nab:nab-starter:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.nab:nab-common:4.19.6",
+            "dependencyTree": []
+          },
+          {
+            "key": "ru.hh.nab:nab-logging:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "ch.qos.logback:logback-classic:1.2.3",
+                "dependencyTree": [
+                  {
+                    "key": "ch.qos.logback:logback-core:1.2.3",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.slf4j:jul-to-slf4j:1.7.25",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+                "dependencyTree": []
+              },
+              {
+                "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.sentry:sentry-logback:1.7.21",
+                "dependencyTree": [
+                  {
+                    "key": "io.sentry:sentry:1.7.21",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.jetbrains:syslog4j:0.9.46",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "ru.hh.nab:nab-metrics:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "com.datadoghq:java-dogstatsd-client:2.7",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jnr-unixsocket:0.18",
+                    "dependencyTree": [
+                      {
+                        "key": "com.github.jnr:jnr-ffi:2.1.4",
+                        "dependencyTree": [
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-commons:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-analysis:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-tree:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-util:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                            "dependencyTree": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-constants:0.9.8",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-enxio:0.16",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-posix:3.0.35",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "javax.inject:javax.inject:1",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.servlet:javax.servlet-api:4.0.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jersey.ext:jersey-spring4:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.inject:jersey-hk2:2.28",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2:hk2-locator:2.5.0",
+                    "dependencyTree": [
+                      {
+                        "key": "org.glassfish.hk2.external:aopalliance-repackaged:2.5.0",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "org.glassfish.hk2:hk2:2.5.0",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2:hk2-utils:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-api:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-core:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-runlevel:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:class-model:2.5.0",
+                    "dependencyTree": [
+                      {
+                        "key": "org.glassfish.hk2.external:asm-repackaged:2.5.0",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "org.glassfish.hk2:spring-bridge:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.ws.rs:jakarta.ws.rs-api:2.1.5",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.containers:jersey-container-servlet-core:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2.external:jakarta.inject:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jersey.core:jersey-common:2.28",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.media:jersey-media-jaxb:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2:osgi-resource-locator:1.0.1",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.media:jersey-media-json-jackson:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.ext:jersey-entity-filtering:2.28",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-core:5.1.6.RELEASE",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-beans:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-context:5.1.6.RELEASE",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-expression:5.1.6.RELEASE",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-web:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-aop:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.eclipse.jetty:jetty-servlet:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-security:9.4.15.v20190215",
+                "dependencyTree": [
+                  {
+                    "key": "org.eclipse.jetty:jetty-server:9.4.15.v20190215",
+                    "dependencyTree": [
+                      {
+                        "key": "org.eclipse.jetty:jetty-http:9.4.15.v20190215",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.eclipse.jetty:jetty-io:9.4.15.v20190215",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.eclipse.jetty:jetty-webapp:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-xml:9.4.15.v20190215",
+                "dependencyTree": [
+                  {
+                    "key": "org.eclipse.jetty:jetty-util:9.4.15.v20190215",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.8",
+            "dependencyTree": [
+              {
+                "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.9.8",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.xml.bind:jaxb-api:2.3.1",
+            "dependencyTree": [
+              {
+                "key": "javax.activation:javax.activation-api:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+            "dependencyTree": [
+              {
+                "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jaxb:txw2:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jvnet.staxex:stax-ex:1.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.caffinitas.ohc:ohc-core-j8:0.6.1",
+            "dependencyTree": [
+              {
+                "key": "org.caffinitas.ohc:ohc-core:0.6.1",
+                "dependencyTree": [
+                  {
+                    "key": "com.google.guava:guava:18.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "net.java.dev.jna:jna:4.1.0",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-hibernate:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.nab:nab-data-source:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-jdbc:5.1.6.RELEASE",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.postgresql:postgresql:42.2.5",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.zaxxer:HikariCP:3.3.1",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.hibernate:hibernate-core:5.2.10.Final",
+            "dependencyTree": [
+              {
+                "key": "org.jboss.logging:jboss-logging:3.3.0.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.javassist:javassist:3.20.0-GA",
+                "dependencyTree": []
+              },
+              {
+                "key": "antlr:antlr:2.7.7",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.1.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jboss:jandex:2.0.3.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.fasterxml:classmate:1.3.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "dom4j:dom4j:1.6.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.hibernate.common:hibernate-commons-annotations:5.0.1.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-orm:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-tx:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.aspectj:aspectjrt:1.9.2",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.aspectj:aspectjweaver:1.9.2",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "com.opentable.components:otj-pg-embedded:0.13.1",
+        "dependencyTree": [
+          {
+            "key": "org.slf4j:slf4j-api:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.commons:commons-lang3:3.8.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.apache.commons:commons-compress:1.18",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.tukaani:xz:1.5",
+            "dependencyTree": []
+          },
+          {
+            "key": "commons-io:commons-io:2.6",
+            "dependencyTree": []
+          },
+          {
+            "key": "commons-codec:commons-codec:1.11",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.github.spotbugs:spotbugs-annotations:3.1.7",
+            "dependencyTree": [
+              {
+                "key": "com.google.code.findbugs:jsr305:3.0.2",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.mockito:mockito-core:2.25.1",
+        "dependencyTree": [
+          {
+            "key": "net.bytebuddy:byte-buddy:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.objenesis:objenesis:2.6",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-test:5.1.6.RELEASE",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.glassfish.jersey.test-framework:jersey-test-framework-core:2.28",
+        "dependencyTree": [
+          {
+            "key": "org.glassfish.jersey.core:jersey-server:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.core:jersey-client:2.28",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.annotation:jakarta.annotation-api:1.3.4",
+                "dependencyTree": []
+              },
+              {
+                "key": "javax.validation:validation-api:2.0.1.Final",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "jakarta.servlet:jakarta.servlet-api:4.0.2",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.apache.commons:commons-text:1.6",
+        "dependencyTree": []
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nuts-and-bolts-parent:4.19.6",
+    "name": "nuts'n'bolts parent module",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "",
+    "lastCommitDateTime": "1970-01-01T03:00:00",
+    "dependencyTree": []
+  },
+  {
+    "key": "ru.hh.nab:nab-jclient:4.19.6",
+    "name": "nuts'n'bolts jclient integration",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-jclient",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.jclient-common:jclient-common:1.3.0",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.jclient-common:jclient-common-utils:1.3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "ru.hh.jclient-common:jclient-common-api:1.3.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.asynchttpclient:async-http-client:2.8.1",
+            "dependencyTree": [
+              {
+                "key": "org.asynchttpclient:async-http-client-netty-utils:2.8.1",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-buffer:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-codec-http:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-common:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-transport:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-codec:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-handler:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-codec-socks:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-handler-proxy:4.1.33.Final",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.netty:netty-transport-native-epoll:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-transport-native-unix-common:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "io.netty:netty-resolver-dns:4.1.33.Final",
+                "dependencyTree": [
+                  {
+                    "key": "io.netty:netty-resolver:4.1.33.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "io.netty:netty-codec-dns:4.1.33.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.reactivestreams:reactive-streams:1.0.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.typesafe.netty:netty-reactive-streams:2.0.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.activation:javax.activation:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.google.protobuf:protobuf-java:3.7.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.datatype:jackson-datatype-jdk8:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.google.guava:guava:18.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:slf4j-api:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.xml.bind:jaxb-api:2.3.1",
+            "dependencyTree": [
+              {
+                "key": "javax.activation:javax.activation-api:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+            "dependencyTree": [
+              {
+                "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jaxb:txw2:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jvnet.staxex:stax-ex:1.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-context:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-aop:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-beans:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-core:5.1.6.RELEASE",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-expression:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.springframework:spring-tx:5.1.6.RELEASE",
+        "dependencyTree": []
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nab-common:4.19.6",
+    "name": "nuts'n'bolts common utils",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-common",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "org.springframework:spring-core:5.1.6.RELEASE",
+        "dependencyTree": [
+          {
+            "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "org.apache.commons:commons-lang3:3.8.1",
+        "dependencyTree": []
+      },
+      {
+        "key": "org.slf4j:slf4j-api:1.7.25",
+        "dependencyTree": []
+      },
+      {
+        "key": "ru.hh.nab:nab-metrics:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "com.datadoghq:java-dogstatsd-client:2.7",
+            "dependencyTree": [
+              {
+                "key": "com.github.jnr:jnr-unixsocket:0.18",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jnr-ffi:2.1.4",
+                    "dependencyTree": [
+                      {
+                        "key": "com.github.jnr:jffi:1.2.15",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jffi:1.2.15",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-commons:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-analysis:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-tree:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.ow2.asm:asm-util:5.0.3",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                        "dependencyTree": []
+                      }
+                    ]
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-constants:0.9.8",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-enxio:0.16",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.github.jnr:jnr-posix:3.0.35",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-logging:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ch.qos.logback:logback-classic:1.2.3",
+            "dependencyTree": [
+              {
+                "key": "ch.qos.logback:logback-core:1.2.3",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:jul-to-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+            "dependencyTree": []
+          },
+          {
+            "key": "io.sentry:sentry-logback:1.7.21",
+            "dependencyTree": [
+              {
+                "key": "io.sentry:sentry:1.7.21",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": [
+              {
+                "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.jetbrains:syslog4j:0.9.46",
+            "dependencyTree": []
+          }
+        ]
+      },
+      {
+        "key": "junit:junit:4.12",
+        "dependencyTree": [
+          {
+            "key": "org.hamcrest:hamcrest-core:2.1",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest:2.1",
+                "dependencyTree": []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "org.mockito:mockito-core:2.25.1",
+        "dependencyTree": [
+          {
+            "key": "net.bytebuddy:byte-buddy:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.objenesis:objenesis:2.6",
+            "dependencyTree": []
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "key": "ru.hh.nab:nab-example:4.19.6",
+    "name": "nuts'n'bolts example",
+    "type": "MAVEN",
+    "orgName": "hhru",
+    "repoName": "nuts-and-bolts",
+    "viewPath": "nab-example",
+    "lastCommitDateTime": "2019-04-08T12:39:56",
+    "dependencyTree": [
+      {
+        "key": "ru.hh.nab:nab-starter:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.nab:nab-common:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "org.apache.commons:commons-lang3:3.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.slf4j:slf4j-api:1.7.25",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "ru.hh.nab:nab-logging:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "ch.qos.logback:logback-classic:1.2.3",
+                "dependencyTree": [
+                  {
+                    "key": "ch.qos.logback:logback-core:1.2.3",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.slf4j:jcl-over-slf4j:1.7.25",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.slf4j:jul-to-slf4j:1.7.25",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.slf4j:log4j-over-slf4j:1.7.25",
+                "dependencyTree": []
+              },
+              {
+                "key": "net.logstash.logback:logstash-logback-encoder:5.3",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.papertrailapp:logback-syslog4j:1.0.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "io.sentry:sentry-logback:1.7.21",
+                "dependencyTree": [
+                  {
+                    "key": "io.sentry:sentry:1.7.21",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.jetbrains:syslog4j:0.9.46",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "ru.hh.nab:nab-metrics:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "com.datadoghq:java-dogstatsd-client:2.7",
+                "dependencyTree": [
+                  {
+                    "key": "com.github.jnr:jnr-unixsocket:0.18",
+                    "dependencyTree": [
+                      {
+                        "key": "com.github.jnr:jnr-ffi:2.1.4",
+                        "dependencyTree": [
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jffi:1.2.15",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-commons:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-analysis:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-tree:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "org.ow2.asm:asm-util:5.0.3",
+                            "dependencyTree": []
+                          },
+                          {
+                            "key": "com.github.jnr:jnr-x86asm:1.0.2",
+                            "dependencyTree": []
+                          }
+                        ]
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-constants:0.9.8",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-enxio:0.16",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "com.github.jnr:jnr-posix:3.0.35",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "javax.inject:javax.inject:1",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.servlet:javax.servlet-api:4.0.1",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jersey.ext:jersey-spring4:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.core:jersey-server:2.28",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.jersey.core:jersey-client:2.28",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "jakarta.annotation:jakarta.annotation-api:1.3.4",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "javax.validation:validation-api:2.0.1.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.glassfish.jersey.inject:jersey-hk2:2.28",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2:hk2-locator:2.5.0",
+                    "dependencyTree": [
+                      {
+                        "key": "org.glassfish.hk2.external:aopalliance-repackaged:2.5.0",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "org.glassfish.hk2:hk2:2.5.0",
+                "dependencyTree": [
+                  {
+                    "key": "org.glassfish.hk2:hk2-utils:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-api:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-core:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:hk2-runlevel:2.5.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.glassfish.hk2:class-model:2.5.0",
+                    "dependencyTree": [
+                      {
+                        "key": "org.glassfish.hk2.external:asm-repackaged:2.5.0",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "key": "org.glassfish.hk2:spring-bridge:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.ws.rs:jakarta.ws.rs-api:2.1.5",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.containers:jersey-container-servlet-core:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2.external:jakarta.inject:2.5.0",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jersey.core:jersey-common:2.28",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.media:jersey-media-jaxb:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.hk2:osgi-resource-locator:1.0.1",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jersey.media:jersey-media-json-jackson:2.28",
+            "dependencyTree": [
+              {
+                "key": "org.glassfish.jersey.ext:jersey-entity-filtering:2.28",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-core:5.1.6.RELEASE",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-jcl:5.1.6.RELEASE",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-beans:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-context:5.1.6.RELEASE",
+            "dependencyTree": [
+              {
+                "key": "org.springframework:spring-expression:5.1.6.RELEASE",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-web:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.springframework:spring-aop:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.eclipse.jetty:jetty-servlet:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-security:9.4.15.v20190215",
+                "dependencyTree": [
+                  {
+                    "key": "org.eclipse.jetty:jetty-server:9.4.15.v20190215",
+                    "dependencyTree": [
+                      {
+                        "key": "org.eclipse.jetty:jetty-http:9.4.15.v20190215",
+                        "dependencyTree": []
+                      },
+                      {
+                        "key": "org.eclipse.jetty:jetty-io:9.4.15.v20190215",
+                        "dependencyTree": []
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.eclipse.jetty:jetty-webapp:9.4.15.v20190215",
+            "dependencyTree": [
+              {
+                "key": "org.eclipse.jetty:jetty-xml:9.4.15.v20190215",
+                "dependencyTree": [
+                  {
+                    "key": "org.eclipse.jetty:jetty-util:9.4.15.v20190215",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-core:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.core:jackson-databind:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-json-provider:2.9.8",
+            "dependencyTree": [
+              {
+                "key": "com.fasterxml.jackson.jaxrs:jackson-jaxrs-base:2.9.8",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:2.9.8",
+            "dependencyTree": []
+          },
+          {
+            "key": "javax.xml.bind:jaxb-api:2.3.1",
+            "dependencyTree": [
+              {
+                "key": "javax.activation:javax.activation-api:1.2.0",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.glassfish.jaxb:jaxb-runtime:2.3.2",
+            "dependencyTree": [
+              {
+                "key": "jakarta.xml.bind:jakarta.xml.bind-api:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.glassfish.jaxb:txw2:2.3.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.istack:istack-commons-runtime:3.0.8",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.jvnet.staxex:stax-ex:1.8.1",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.sun.xml.fastinfoset:FastInfoset:1.2.16",
+                "dependencyTree": []
+              },
+              {
+                "key": "jakarta.activation:jakarta.activation-api:1.2.1",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.caffinitas.ohc:ohc-core-j8:0.6.1",
+            "dependencyTree": [
+              {
+                "key": "org.caffinitas.ohc:ohc-core:0.6.1",
+                "dependencyTree": [
+                  {
+                    "key": "com.google.guava:guava:18.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "net.java.dev.jna:jna:4.1.0",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "key": "ru.hh.nab:nab-testbase:4.19.6",
+        "dependencyTree": [
+          {
+            "key": "ru.hh.nab:nab-hibernate:4.19.6",
+            "dependencyTree": [
+              {
+                "key": "ru.hh.nab:nab-data-source:4.19.6",
+                "dependencyTree": [
+                  {
+                    "key": "org.springframework:spring-jdbc:5.1.6.RELEASE",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.postgresql:postgresql:42.2.5",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.zaxxer:HikariCP:3.3.1",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.hibernate:hibernate-core:5.2.10.Final",
+                "dependencyTree": [
+                  {
+                    "key": "org.jboss.logging:jboss-logging:3.3.0.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.hibernate.javax.persistence:hibernate-jpa-2.1-api:1.0.0.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.javassist:javassist:3.20.0-GA",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "antlr:antlr:2.7.7",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.jboss.spec.javax.transaction:jboss-transaction-api_1.2_spec:1.0.1.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.jboss:jandex:2.0.3.Final",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "com.fasterxml:classmate:1.3.0",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "dom4j:dom4j:1.6.1",
+                    "dependencyTree": []
+                  },
+                  {
+                    "key": "org.hibernate.common:hibernate-commons-annotations:5.0.1.Final",
+                    "dependencyTree": []
+                  }
+                ]
+              },
+              {
+                "key": "org.springframework:spring-orm:5.1.6.RELEASE",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.springframework:spring-tx:5.1.6.RELEASE",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.aspectj:aspectjrt:1.9.2",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.aspectj:aspectjweaver:1.9.2",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "com.opentable.components:otj-pg-embedded:0.13.1",
+            "dependencyTree": [
+              {
+                "key": "org.apache.commons:commons-compress:1.18",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.tukaani:xz:1.5",
+                "dependencyTree": []
+              },
+              {
+                "key": "commons-io:commons-io:2.6",
+                "dependencyTree": []
+              },
+              {
+                "key": "commons-codec:commons-codec:1.11",
+                "dependencyTree": []
+              },
+              {
+                "key": "com.github.spotbugs:spotbugs-annotations:3.1.7",
+                "dependencyTree": [
+                  {
+                    "key": "com.google.code.findbugs:jsr305:3.0.2",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "junit:junit:4.12",
+            "dependencyTree": [
+              {
+                "key": "org.hamcrest:hamcrest-core:2.1",
+                "dependencyTree": [
+                  {
+                    "key": "org.hamcrest:hamcrest:2.1",
+                    "dependencyTree": []
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "key": "org.mockito:mockito-core:2.25.1",
+            "dependencyTree": [
+              {
+                "key": "net.bytebuddy:byte-buddy:1.9.7",
+                "dependencyTree": []
+              },
+              {
+                "key": "net.bytebuddy:byte-buddy-agent:1.9.7",
+                "dependencyTree": []
+              },
+              {
+                "key": "org.objenesis:objenesis:2.6",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.springframework:spring-test:5.1.6.RELEASE",
+            "dependencyTree": []
+          },
+          {
+            "key": "org.glassfish.jersey.test-framework:jersey-test-framework-core:2.28",
+            "dependencyTree": [
+              {
+                "key": "jakarta.servlet:jakarta.servlet-api:4.0.2",
+                "dependencyTree": []
+              }
+            ]
+          },
+          {
+            "key": "org.apache.commons:commons-text:1.6",
+            "dependencyTree": []
+          }
+        ]
+      }
+    ]
+  }
+]

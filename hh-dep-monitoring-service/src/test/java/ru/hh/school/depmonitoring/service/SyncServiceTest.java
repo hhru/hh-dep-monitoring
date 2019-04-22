@@ -32,7 +32,7 @@ public class SyncServiceTest {
                 .thenReturn(Optional.ofNullable(StructCreator.createRepositoryEntity(2L, repositoryDtoList.get(1).getUpdatedAt().plusDays(1L))));
         when(repositoryDao.findOne(3L)).thenReturn(Optional.empty());
 
-        SyncService syncService = new SyncService(githubOrganization, githubLoader, mapper, repositoryDao);
+        SyncService syncService = new SyncService(githubOrganization, githubLoader, mapper, repositoryDao, null);
         syncService.syncGithub();
 
         Mockito.verify(githubLoader, Mockito.times(1)).getReposOfOrganization(githubOrganization);

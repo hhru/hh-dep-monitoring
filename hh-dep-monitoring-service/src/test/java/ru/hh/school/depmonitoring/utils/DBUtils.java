@@ -85,10 +85,14 @@ public class DBUtils {
 
     @Transactional
     public void addItemToRepositoryTable(long id) {
+        addItemToRepositoryTable(StructCreator.createRepositoryDto(id));
+    }
+
+    @Transactional
+    public void addItemToRepositoryTable(RepositoryDto repositoryDto) {
         sessionFactory
                 .getCurrentSession()
-                .persist(repositoryMapper
-                        .toEntity(StructCreator.createRepositoryDto(id)));
+                .persist(repositoryMapper.toEntity(repositoryDto));
     }
 
     @Transactional
