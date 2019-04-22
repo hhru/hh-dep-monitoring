@@ -19,10 +19,14 @@ import ru.hh.school.depmonitoring.dto.RelationDto;
 
 public class StructCreator {
     public static RelationDto createRelationDto(Integer id) {
+        return createRelationDto(id, 1L, 2L);
+    }
+
+    public static RelationDto createRelationDto(Integer id, long from, long to) {
         return RelationDto.builder()
                 .withRelationId(id)
-                .withRepositoryFromId(1L)
-                .withRepositoryToId(2L)
+                .withRepositoryFromId(from)
+                .withRepositoryToId(to)
                 .withPriority(RepositoryRelationPriority.CRITICAL)
                 .withDescription("Test description")
                 .build();

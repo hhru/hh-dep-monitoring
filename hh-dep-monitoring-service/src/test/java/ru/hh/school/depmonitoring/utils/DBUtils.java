@@ -2,6 +2,7 @@ package ru.hh.school.depmonitoring.utils;
 
 import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
+import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
@@ -56,11 +57,20 @@ public class DBUtils {
         }
     }
 
-    @Transactional
-    public Relation addRelation() {
-        Relation result = relationMapper.toEntity(StructCreator.createRelationDto(null));
+    private Relation addRelation(RelationDto relationDto) {
+        Relation result = relationMapper.toEntity(relationDto);
         sessionFactory.getCurrentSession().persist(result);
         return result;
+    }
+
+    @Transactional
+    public Relation addRelation() {
+        return addRelation(StructCreator.createRelationDto(null));
+    }
+
+    @Transactional
+    public Relation addRelation(long from, long to) {
+        return addRelation(StructCreator.createRelationDto(null, from, to));
     }
 
     @Transactional

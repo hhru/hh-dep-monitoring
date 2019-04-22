@@ -148,6 +148,48 @@ public class RelationResourceTest extends DepMonitoringTestBase {
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());
     }
 
+    @Test
+    public void ciclycRelationTest() {
+        RelationDto dto = StructCreator.createRelationDto(null, 1L, 1L);
+        Response response = target("/relations")
+                .request()
+                .post(Entity.json(dto));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+    }
+
+    @Test
+    public void ciclycRelationTest2() {
+        dbUtils.addRelation(1L, 2L);
+        dbUtils.addRelation(2L, 3L);
+        RelationDto dto = StructCreator.createRelationDto(null, 3L, 1L);
+        Response response = target("/relations")
+                .request()
+                .post(Entity.json(dto));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+    }
+
+    @Test
+    public void nonCiclycRelationTest() {
+        dbUtils.addRelation(2L, 3L);
+        dbUtils.addRelation(2L, 4L);
+        dbUtils.addRelation(3L, 4L);
+        RelationDto dto = StructCreator.createRelationDto(null, 1L, 2L);
+        Response response = target("/relations")
+                .request()
+                .post(Entity.json(dto));
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus());
+    }
+
+    @Test
+    public void addExistingRelation() {
+        dbUtils.addRelation(1L, 2L);
+        RelationDto dto = StructCreator.createRelationDto(null, 1L, 2L);
+        Response response = target("/relations")
+                .request()
+                .post(Entity.json(dto));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), response.getStatus());
+    }
+
     private void assertEqualsRelationWithMap(Relation relation, Map<RepositoryRelationPriority, List<RelationDto>> relationDtoMap) {
         assertNotNull(relationDtoMap);
         assertEquals(1, relationDtoMap.size());
