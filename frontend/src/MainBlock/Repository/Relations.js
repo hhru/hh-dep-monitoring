@@ -5,18 +5,19 @@ import { connect } from 'react-redux';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 
-import { fetchRelationsByRepoId } from 'redux/models/Relation/relationsActions';
+import { fetchRelations } from 'redux/models/Relation/relationsActions';
+import { getRelations } from 'redux/models/Relation/relationsSelectors';
 import RelationItem from './RelationItem';
 
-function Relations({ repositoryId, relations, fetchRelationsByRepoId }) {
+function Relations({ repositoryId, relations, fetchRelations }) {
     useEffect(() => {
-        fetchRelationsByRepoId(repositoryId);
+        fetchRelations(repositoryId);
     }, []);
 
     return (
         <Fragment>
             <List>
-                {relations.items && relations.items.map(relation => (
+                {relations && relations.map(relation => (
                     <Fragment key={relation.relationId}>
                         <Divider />
                         <RelationItem relation={relation} />
@@ -32,15 +33,19 @@ Relations.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]).isRequired,
-    relations: PropTypes.object,
-    fetchRelationsByRepoId: PropTypes.func.isRequired,
+    relations: PropTypes.array,
+    fetchRelations: PropTypes.func.isRequired,
 };
 
 Relations.defaultProps = {
-    relations: {},
+    relations: [],
 };
 
 export default connect(
-    (state, ownProps) => ({ relations: state.relations.relationsByRepoId[ownProps.repositoryId] }),
-    { fetchRelationsByRepoId },
+    (state, ownProps) => ({
+        relations: getRelations(state, ownProps.repositoryId),
+    }),
+    {
+        fetchRelations,
+    },
 )(Relations);

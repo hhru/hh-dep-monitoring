@@ -1,5 +1,5 @@
 export const archivedRepositoryColor = '#6c6c6c';
-const activeRepositoryColor = '#3f51b5';
+const mainThemeColor = '#3f51b5';
 export const secondaryItemColor = '#646464';
 
 export const secondaryItem = {
@@ -11,6 +11,7 @@ export const dateListItem = {
     ...secondaryItem,
     fontSize: 12,
     margin: '3px 0',
+    display: 'block',
 };
 
 export const dateFullItem = {
@@ -31,7 +32,7 @@ export const repositoryItemTitle = {
     fontSize: 18,
     fontWeight: 600,
     margin: '3px 0',
-    color: activeRepositoryColor,
+    color: mainThemeColor,
     '&:hover': {
         textDecoration: 'underline',
     },
@@ -52,6 +53,16 @@ export const archiveIconBig = {
     width: '30px',
     height: '30px',
     margin: '-2px 7px',
+};
+
+export const relationsHeader = {
+    display: 'flex',
+    height: '36px',
+};
+
+export const relationsTitle = {
+    flexGrow: 1,
+    lineHeight: '1.6',
 };
 
 export const buttonLink = {
@@ -77,4 +88,62 @@ export const nestedBlock = {
     paddingLeft: 27,
     marginLeft: 27,
     borderLeft: '1px solid #D0D0D0',
+};
+
+export const errorText = {
+    color: '#ff0000',
+};
+
+export const selectComponentsStyles = theme => ({
+    input: {
+        display: 'flex',
+        padding: 0,
+    },
+    valueContainer: {
+        display: 'flex',
+        flexWrap: 'wrap',
+        flex: 1,
+        alignItems: 'center',
+        overflow: 'hidden',
+    },
+    noOptionsMessage: {
+        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+    },
+    placeholder: {
+        position: 'absolute',
+        left: 2,
+        fontSize: 16,
+    },
+    divider: {
+        height: theme.spacing.unit * 2,
+    },
+    errorText,
+});
+
+export const formButton = {
+    color: mainThemeColor,
+};
+
+export const addRelationIcon = {
+    margin: '0px 13px',
+    color: '#fff',
+    width: '36px',
+    maxHeight: '36px',
+    backgroundColor: secondaryItemColor,
+    '&:hover': {
+        backgroundColor: mainThemeColor,
+    },
+};
+
+export const relationControlIcon = {
+    margin: '0px 3px',
+    color: secondaryItemColor,
+    '&:hover': {
+        color: mainThemeColor,
+    },
+};
+
+export const relationFormPaper = {
+    minHeight: '540px',
+    maxWidth: '450px',
 };

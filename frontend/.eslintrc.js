@@ -25,13 +25,28 @@ module.exports = {
             checkChildContextTypes: true,
         }],
         "no-underscore-dangle": ["error", { "allow": ["__REDUX_DEVTOOLS_EXTENSION_COMPOSE__"] }],
-        "no-unused-expressions": [2, { allowTernary: true }],
+        "no-unused-expressions": ["error", {
+            allowTernary: true,
+            allowShortCircuit: true,
+        }],
         "object-curly-newline": [
             "error", {
                 "ObjectPattern": {"multiline": false}
             }
         ],
         "import/no-cycle": "off",
+        "no-plusplus": [
+            "error",
+            {
+                allowForLoopAfterthoughts: true
+            }
+        ],
+        "react/require-default-props": "off",
+        'max-len': [
+            'error',
+            120,
+            { "ignoreStrings": true },
+        ],
     },
     "env":{
         "browser":true,
