@@ -29,7 +29,7 @@ function RepositoryItem({ classes, repository }) {
                     />
                 )}
                 secondary={
-                    <ListItemInfo descr={repository.description} date={repository.updatedAt} />}
+                    <ListItemInfo descr={repository.description === null ? '' : repository.description} date={repository.updatedAt} />}
             />
             <div className={classes.repoIconsContainer}>
                 <RepositoryLinks repositoryId={repository.repositoryId} size={30} />

@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 import { withStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const styles = theme => ({
     root: {
-        backgroundColor: fade(theme.palette.common.black, 0.4),
+        backgroundColor: '#fff',
         width: theme.spacing.unit * 9,
         height: theme.spacing.unit * 9,
         display: 'flex',
@@ -16,14 +16,16 @@ const styles = theme => ({
         margin: theme.spacing.unit,
         flexShrink: 0,
         fontSize: theme.spacing.unit * 5,
+        color: theme.palette.primary.main,
+        textDecoration: 'none',
     },
 });
 
 function MainIcon({ classes }) {
     return (
-        <div className={classes.root}>
+        <Link className={classes.root} to="/">
             dm
-        </div>
+        </Link>
     );
 }
 
