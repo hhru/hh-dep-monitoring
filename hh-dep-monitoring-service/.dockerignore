@@ -1,0 +1,5 @@
+/target
+/src
+!/target/hh-dep-monitoring-service.jar
+*.iml
+*.xml

@@ -1,0 +1,32 @@
+version: '3'
+services:
+  db:
+    image: "postgres:11-alpine"
+    container_name: postgres-monitoring
+    environment:
+      - POSTGRES_USER=monitoring
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=monitoring
+    volumes:
+      - "~/pgdata:/var/lib/postgresql/data"
+
+
+  service:
+    image: "service-monitoring"
+    container_name: service-monitoring
+    volumes:
+      - "./hh-dep-monitoring-service/src/etc:/backend/configs"
+    depends_on:
+      - db
+    command: ["wait-for-it", "db:5432", "--", "java", "-jar", "-DsettingsDir=/backend/configs", "-Xms256m", "-Xmx512m", "/backend/hh-dep-monitoring-service.jar"]
+
+  frontend:
+    image: "nginx:1.15.11-alpine"
+    container_name: nginx-monitoring
+    volumes:
+      - "./frontend/nginx.conf:/etc/nginx/nginx.conf:ro"
+      - "./frontend/build:/frontend"
+    ports:
+      - "80:80"
+    depends_on:
+      - service
