@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -8,15 +8,21 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
+import Form from 'CommonComponents/Form';
 import { addRelation, editRelation } from 'redux/models/Relation/relationsActions';
 import Validator from 'Utils/Validator';
-import { formButton } from 'Utils/commonStyles';
+import { formButton, dialogContent } from 'Utils/commonStyles';
 import SelectRepository from './SelectRepository';
 import SelectPriority from './SelectPriority';
 import DescriptionInput from './DescriptionInput';
 
 const styles = () => ({
     formButton,
+    dialogContent,
+    addDialogContent: {
+        ...dialogContent,
+        height: '400px',
+    },
 });
 
 function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelation, formResult,
@@ -44,15 +50,8 @@ function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelati
     const [priority, setPriority] = useState(Validator.generateAttribute(values.priority));
     const [description, setDescription] = useState(Validator.generateAttribute(values.description));
 
-    const clearForm = () => {
-        setRepositoryTo(Validator.generateAttribute('', { label: '' }));
-        setPriority(Validator.generateAttribute(''));
-        setDescription(Validator.generateAttribute(''));
-    };
-
     const handleClose = () => {
         setOpen(false);
-        clearForm();
     };
 
     useEffect(() => {
@@ -60,7 +59,7 @@ function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelati
     }, [formResult]);
 
     const validationRules = {
-        repository: [
+        repositoryTo: [
             { rule: 'required', message: 'Repository is required to be selected' },
         ],
         priority: [
@@ -69,26 +68,27 @@ function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelati
     };
 
     const handleSubmit = () => {
-        const { valid, attributes } = Validator.validateForm({
-            repository: repositoryTo, priority,
-        }, validationRules);
-        if (valid) {
-            isNewRelation
-                ? addRelation(repositoryId, repositoryTo.value, priority.value, description.value)
-                : editRelation(relation.relationId, relation.repositoryFromId, repositoryTo.value,
-                    priority.value, description.value);
-        } else {
-            setRepositoryTo({
-                label: repositoryTo.label,
-                ...attributes.repository,
-            });
-            setPriority(attributes.priority);
-        }
+        isNewRelation
+            ? addRelation(repositoryId, repositoryTo.value, priority.value, description.value)
+            : editRelation(relation.relationId, relation.repositoryFromId, repositoryTo.value,
+                priority.value, description.value);
+    };
+
+    const showErrors = (attributes) => {
+        setRepositoryTo({
+            label: repositoryTo.label,
+            ...attributes.repository,
+        });
+        setPriority(attributes.priority);
     };
 
     return (
-        <Fragment>
-            <DialogContent>
+        <Form
+            onSubmit={handleSubmit}
+            onErrors={showErrors}
+            validation={{ fields: { repositoryTo, priority }, rules: validationRules }}
+        >
+            <DialogContent classes={{ root: isNewRelation ? classes.addDialogContent : classes.dialogContent }}>
                 {isNewRelation && (
                     <DialogContentText paragraph>
                         To add new relation, please enter following fields.
@@ -118,11 +118,11 @@ function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelati
                 <Button onClick={handleClose} className={classes.formButton}>
                     Cancel
                 </Button>
-                <Button onClick={handleSubmit} variant="contained" color="primary">
+                <Button type="submit" variant="contained" color="primary">
                     Submit
                 </Button>
             </DialogActions>
-        </Fragment>
+        </Form>
     );
 }
 
@@ -146,7 +146,7 @@ FormContent.defaultProps = {
 };
 
 export default connect(
-    state => ({ formResult: state.relations.formResult }),
+    state => ({ formResult: state.notifications.formResult }),
     {
         addRelation,
         editRelation,

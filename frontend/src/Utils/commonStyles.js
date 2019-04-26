@@ -124,18 +124,32 @@ export const formButton = {
     color: mainThemeColor,
 };
 
-export const addRelationIcon = {
-    margin: '0px 13px',
-    color: '#fff',
-    width: '36px',
-    maxHeight: '36px',
+export const openFormButton = {
     backgroundColor: secondaryItemColor,
     '&:hover': {
         backgroundColor: mainThemeColor,
     },
 };
 
-export const relationControlIcon = {
+export const addIcon = {
+    ...openFormButton,
+    color: '#fff',
+    width: '30px',
+    minHeight: '30px',
+    maxHeight: '30px',
+};
+
+export const addRelationIcon = {
+    ...addIcon,
+    margin: '0px 16px',
+};
+
+export const addLinkIcon = {
+    ...addIcon,
+    margin: 'auto 6px',
+};
+
+export const controlIcon = {
     margin: '0px 3px',
     color: secondaryItemColor,
     '&:hover': {
@@ -144,16 +158,17 @@ export const relationControlIcon = {
 };
 
 export const relationFormPaper = {
-    minHeight: '540px',
     maxWidth: '450px',
 };
 
-export const repoLinkIconWrapper = size => ({
-    width: `${size}px`,
-    height: `${size}px`,
-    padding: '0px',
+export const linkFormPaper = {
+    maxWidth: '600px',
+};
+
+export const repoLinkIconWrapper = {
+    padding: '4px',
     fontSize: 'unset',
-});
+};
 
 export const repoLinkIcon = size => ({
     width: `${0.8 * size}px`,
@@ -164,11 +179,36 @@ export const repoLinkIcon = size => ({
 export const relatedRepositoryIcon = {
     fill: secondaryItemColor,
     marginTop: '7px',
-    marginRight: '12px',
+    marginRight: '3px',
 };
 
 export const repoIconsContainer = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-end',
+};
+
+export const capitalize = {
+    display: 'block',
+    textTransform: 'lowercase',
+    '&:first-letter': {
+        textTransform: 'uppercase',
+    },
+};
+
+export const linkControlIcon = {
+    width: '13px',
+};
+
+export const linkFormHeader = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingRight: '20px',
+};
+
+export const dialogContent = {
+    '&:first-child': {
+        paddingTop: '0px',
+    },
 };

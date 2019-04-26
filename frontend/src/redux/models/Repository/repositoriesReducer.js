@@ -1,11 +1,11 @@
 import createReducer from 'redux/createReducer';
-import { FETCH_REPOSITORIES, FETCH_REPOSITORY, FETCH_LINK_TYPES, FETCH_REPOSITORY_LINKS } from './repositoriesActions';
+import { FETCH_REPOSITORIES, FETCH_REPOSITORY, FETCH_LINK_TYPES,
+    ADD_LINK, EDIT_LINK, DELETE_LINK } from './repositoriesActions';
 
 export const initialState = {
     list: {},
     repositoryById: {},
-    linkTypes: {},
-    links: {},
+    linkTypes: undefined,
 };
 
 export const repositoriesReducer = createReducer(initialState, {
@@ -27,14 +27,26 @@ export const repositoriesReducer = createReducer(initialState, {
             linkTypes,
         };
     },
-    [FETCH_REPOSITORY_LINKS]: (state, action) => {
-        const { repositoryId, links } = action.payload;
-        return {
-            ...state,
-            links: {
-                ...state.links,
-                [repositoryId]: links,
-            },
-        };
+    [ADD_LINK]: (state, action) => {
+        const { repositoryId, newLink } = action.payload;
+        const newState = Object.assign({}, state);
+        newState.repositoryById[repositoryId].linkUrls = [].concat(
+            newState.repositoryById[repositoryId].linkUrls || [], newLink,
+        );
+        return newState;
+    },
+    [EDIT_LINK]: (state, action) => {
+        const { repositoryId, link } = action.payload;
+        const newState = Object.assign({}, state);
+        newState.repositoryById[repositoryId].linkUrls = newState.repositoryById[repositoryId]
+            .linkUrls.map(item => (item.repositoryLinkId === link.repositoryLinkId ? link : item));
+        return newState;
+    },
+    [DELETE_LINK]: (state, action) => {
+        const { repositoryId, linkId } = action.payload;
+        const newState = Object.assign({}, state);
+        newState.repositoryById[repositoryId].linkUrls = newState.repositoryById[repositoryId]
+            .linkUrls.filter(item => (item.repositoryLinkId !== linkId));
+        return newState;
     },
 });

@@ -9,7 +9,7 @@ import LinkOffIcon from '@material-ui/icons/LinkOff';
 import Tooltip from '@material-ui/core/Tooltip';
 
 import { relatedRepositoryIcon, repoIconsContainer } from 'Utils/commonStyles';
-import RepositoryLinks from 'CommonComponents/RepositoryLinks';
+import RepositoryLinks from 'MainBlock/RepositoryLinks/RepositoryLinks';
 import ListItemInfo from './ListItemInfo';
 import ListItemTitle from './ListItemTitle';
 
@@ -40,11 +40,15 @@ function RepositoryItem({ classes, repository }) {
                         archived={repository.archived}
                     />
                 )}
-                secondary={
-                    <ListItemInfo descr={repository.description === null ? '' : repository.description} date={repository.updatedAt} />}
+                secondary={(
+                    <ListItemInfo
+                        descr={repository.description === null ? '' : repository.description}
+                        date={repository.updatedAt}
+                    />
+                )}
             />
             <div className={classes.repoIconsContainer}>
-                <RepositoryLinks repositoryId={repository.repositoryId} size={30} />
+                <RepositoryLinks repositoryId={repository.repositoryId} size="small" />
                 {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}
             </div>
         </ListItem>

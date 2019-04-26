@@ -13,12 +13,12 @@ import Tooltip from '@material-ui/core/Tooltip';
 import { fetchRepositories } from 'redux/models/Repository/repositoriesActions';
 import { fetchPriorityTypes } from 'redux/models/Relation/relationsActions';
 import { getRelation } from 'redux/models/Relation/relationsSelectors';
-import { addRelationIcon, relationFormPaper, relationControlIcon } from 'Utils/commonStyles';
+import { addRelationIcon, relationFormPaper, controlIcon } from 'Utils/commonStyles';
 import FormContent from './FormContent';
 
 const styles = () => ({
     addRelationIcon,
-    relationControlIcon,
+    controlIcon,
     relationFormPaper,
 });
 
@@ -45,7 +45,7 @@ function OpenFormButton({ classes, repositoryId, repositoryName, fetchRepositori
     return (
         <Fragment>
             {relation
-                ? <EditIcon className={classes.relationControlIcon} onClick={handleClickOpen} />
+                ? <EditIcon className={classes.controlIcon} onClick={handleClickOpen} />
                 : (
                     <Tooltip title="Add new relation" placement="left" enterDelay={300}>
                         <Fab onClick={handleClickOpen} className={classes.addRelationIcon}>

@@ -62,10 +62,7 @@ function ValueContainer({ selectProps, children }) {
 NoOptionsMessage.propTypes = {
     selectProps: PropTypes.object.isRequired,
     innerProps: PropTypes.object,
-    children: PropTypes.oneOfType([
-        PropTypes.string,
-        PropTypes.array,
-    ]).isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 NoOptionsMessage.defaultProps = {
@@ -86,12 +83,12 @@ Option.propTypes = {
     innerRef: PropTypes.func,
     isFocused: PropTypes.bool.isRequired,
     innerProps: PropTypes.object.isRequired,
-    children: PropTypes.string.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 ValueContainer.propTypes = {
     selectProps: PropTypes.object.isRequired,
-    children: PropTypes.array.isRequired,
+    children: PropTypes.node.isRequired,
 };
 
 export default {

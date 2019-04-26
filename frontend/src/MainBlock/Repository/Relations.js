@@ -42,10 +42,6 @@ Relations.defaultProps = {
 };
 
 export default connect(
-    (state, ownProps) => ({
-        relations: getRelations(state, ownProps.repositoryId),
-    }),
-    {
-        fetchRelations,
-    },
+    (state, ownProps) => ({ relations: getRelations(state, ownProps.repositoryId) }),
+    { fetchRelations },
 )(Relations);

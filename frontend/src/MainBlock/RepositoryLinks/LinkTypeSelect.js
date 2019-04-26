@@ -19,34 +19,37 @@ const styles = theme => ({
     capitalize,
 });
 
-function SelectPriority({ classes, priority, setPriority, priorityTypes }) {
+function LinkTypeSelect({ classes, type, setType, linkTypes }) {
     const handleChange = (event) => {
-        setPriority({ ...priority, value: event.target.value });
+        setType({ ...type, value: event.target.value });
     };
 
     return (
         <FormControl className={classes.formControl}>
-            <InputLabel>Priority</InputLabel>
-            <Select value={priority.value} onChange={handleChange}>
-                {priorityTypes && priorityTypes.map(item => (
+            <InputLabel>Link type</InputLabel>
+            <Select value={type.value} onChange={handleChange}>
+                {linkTypes && linkTypes.map(item => (
                     <MenuItem key={item} value={item}>
                         <span className={classes.capitalize}>{item}</span>
                     </MenuItem>
                 ))}
             </Select>
-            {priority.error
-            && <FormHelperText className={classes.errorText}>{priority.error}</FormHelperText>}
+            {type.error && (
+                <FormHelperText className={classes.errorText}>
+                    {type.error}
+                </FormHelperText>
+            )}
         </FormControl>
     );
 }
 
-SelectPriority.propTypes = {
+LinkTypeSelect.propTypes = {
     classes: PropTypes.object.isRequired,
-    priority: PropTypes.object.isRequired,
-    setPriority: PropTypes.func.isRequired,
-    priorityTypes: PropTypes.array.isRequired,
+    type: PropTypes.object.isRequired,
+    setType: PropTypes.func.isRequired,
+    linkTypes: PropTypes.array.isRequired,
 };
 
 export default connect(
-    state => ({ priorityTypes: state.relations.priorityTypes }),
-)(withStyles(styles)(SelectPriority));
+    state => ({ linkTypes: state.repositories.linkTypes }),
+)(withStyles(styles)(LinkTypeSelect));

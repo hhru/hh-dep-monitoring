@@ -8,13 +8,13 @@ import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
 
 import { fetchRepository } from 'redux/models/Repository/repositoriesActions';
-import { resetFormResult } from 'redux/models/Relation/relationsActions';
-import { addMessage } from 'redux/models/Notification/notificationsActions';
+import { resetFormResult, addMessage } from 'redux/models/Notification/notificationsActions';
 import { descriptionListItem, relationsHeader, relationsTitle } from 'Utils/commonStyles';
-import RepositoryLinks from 'CommonComponents/RepositoryLinks';
+import RepositoryLinks from 'MainBlock/RepositoryLinks/RepositoryLinks';
 import AddRelationButton from './RelationForm/OpenFormButton';
 import Relations from './Relations';
 import RepositoryHeader from './RepositoryHeader';
+import AddLinkButton from '../RepositoryLinks/OpenFormButton';
 
 const styles = theme => ({
     root: {
@@ -24,6 +24,9 @@ const styles = theme => ({
     descriptionListItem,
     relationsHeader,
     relationsTitle,
+    linkIconsContainer: {
+        display: 'flex',
+    },
 });
 
 function Repository({ classes, match, adminMode, repository, fetchRepository,
@@ -39,7 +42,7 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
             return;
         }
         if (formResult.success) {
-            addMessage(`Relation was successfully ${formResult.action}`, 'success');
+            addMessage(`${formResult.entity} was successfully ${formResult.action}`, 'success');
         } else {
             addMessage('Something went wrong', 'error');
         }
@@ -54,7 +57,10 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
                     <div className={classes.descriptionListItem}>
                         {repository.description}
                     </div>
-                    <RepositoryLinks repositoryId={repositoryId} size={40} />
+                    <div className={classes.linkIconsContainer}>
+                        <RepositoryLinks repositoryId={repositoryId} size="big" />
+                        {adminMode && <AddLinkButton repositoryId={repositoryId} repositoryName={repository.name} />}
+                    </div>
                     <div className={classes.relationsHeader}>
                         <Typography variant="h5" className={classes.relationsTitle}>Relations</Typography>
                         {adminMode && (
@@ -87,7 +93,7 @@ export default connect(
     (state, ownProps) => ({
         adminMode: state.tools.adminMode,
         repository: state.repositories.repositoryById[ownProps.match.params.repositoryId],
-        formResult: state.relations.formResult,
+        formResult: state.notifications.formResult,
     }),
     {
         fetchRepository,
