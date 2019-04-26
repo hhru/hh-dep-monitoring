@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addMessageAction } from 'redux/models/Notification/notificationsActions';
-import { DEFAULT_PER_PAGE, REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
+import { REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
 
 export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES ';
 export const FETCH_REPOSITORY = 'FETCH_REPOSITORY ';
@@ -35,9 +35,9 @@ export const fetchRepositoryLinksAction = (repositoryId, links) => ({
 
 export function fetchRepositories() {
     return (dispatch) => {
-        axios.get(`${REPOSITORY_URL}/page?perPage=${DEFAULT_PER_PAGE}`)
-            .then((result) => {
-                dispatch(fetchRepositoriesAction(result.data));
+        axios.get(REPOSITORY_URL)
+            .then((response) => {
+                dispatch(fetchRepositoriesAction({items: response.data}));
             })
             .catch(() => {
                 dispatch(addMessageAction('Error in fetching repositories', 'warning'));
@@ -48,8 +48,8 @@ export function fetchRepositories() {
 export function fetchRepository(id) {
     return (dispatch) => {
         axios.get(`${REPOSITORY_URL}/${id}`)
-            .then((result) => {
-                dispatch(fetchRepositoryAction(id, result.data));
+            .then((response) => {
+                dispatch(fetchRepositoryAction(id, response.data));
             })
             .catch(() => {
                 dispatch(addMessageAction('Error in fetching repository data', 'warning'));
