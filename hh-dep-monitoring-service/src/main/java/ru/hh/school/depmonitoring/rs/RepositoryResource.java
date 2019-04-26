@@ -20,6 +20,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.Optional;
 
 @Named
@@ -28,11 +29,19 @@ import java.util.Optional;
 @Produces(MediaType.APPLICATION_JSON)
 @Path("/repository")
 public class RepositoryResource {
-    private RepositoryService service;
+    private RepositoryService repositoryService;
 
-    public RepositoryResource(RepositoryService service) {
-        this.service = service;
+    public RepositoryResource(RepositoryService repositoryService) {
+        this.repositoryService = repositoryService;
     }
+
+    @GET
+    @Path("/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<RepositoryDto> getAllRepositories() {
+        return repositoryService.getFullList();
+    }
+
 
     @GET
     @Path("/page")
@@ -42,13 +51,13 @@ public class RepositoryResource {
                 .withPage(page)
                 .withPerPage(perPage)
                 .build();
-        return service.getRepositoryPage(requestDto);
+        return repositoryService.getRepositoryPage(requestDto);
     }
 
     @GET
     @Path("/{repositoryId}")
     public Response getRepositoryById(@PathParam("repositoryId") long id) {
-        Optional<RepositoryDto> optionalDto = service.getOneItem(id);
+        Optional<RepositoryDto> optionalDto = repositoryService.getOneItem(id);
         if (optionalDto.isPresent()) {
             return Response.ok(optionalDto.get()).build();
         }
@@ -59,7 +68,7 @@ public class RepositoryResource {
     @Path("/{repositoryId}")
     public Response updateRepositoryById(@Nonnull RepositoryDto dto, @PathParam("repositoryId") long id) {
         if (id == dto.getRepositoryId()) {
-            return Response.status(Response.Status.OK).entity(service.update(dto)).build();
+            return Response.status(Response.Status.OK).entity(repositoryService.update(dto)).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
