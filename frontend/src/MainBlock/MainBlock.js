@@ -17,43 +17,43 @@ const styles = theme => ({
 
 export const routing = [
     {
-        path: '/Feed',
+        path: '/feed',
         label: 'Feed',
         // component: Feed
     },
     {
-        path: '/Search',
+        path: '/search',
         label: 'Search',
         // component: Search
     },
     {
-        path: '/Repositories',
+        path: '/repositories',
         label: 'Repositories',
         component: Repositories,
         inner: [
             {
-                path: '/Repositories/:repositoryId',
+                path: '/repositories/:repositoryId',
                 component: Repository,
             },
         ],
     },
     {
-        path: '/Ratings',
+        path: '/ratings',
         label: 'Ratings',
         // component: Ratings
     },
     {
-        path: '/Users',
+        path: '/users',
         label: 'Users',
         // component: Users
     },
     {
-        path: '/Troubles',
+        path: '/troubles',
         label: 'Troubles',
         // component: Troubles
     },
     {
-        path: '/About',
+        path: '/about',
         label: 'About',
         // component: About
     },

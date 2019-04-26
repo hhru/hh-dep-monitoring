@@ -25,7 +25,6 @@ export const descriptionListItem = {
     ...secondaryItem,
     fontSize: 18,
     margin: '5px 0',
-    paddingBottom: '20px',
 };
 
 export const repositoryItemTitle = {
@@ -58,6 +57,7 @@ export const archiveIconBig = {
 export const relationsHeader = {
     display: 'flex',
     height: '36px',
+    paddingTop: '20px',
 };
 
 export const relationsTitle = {
@@ -146,4 +146,29 @@ export const relationControlIcon = {
 export const relationFormPaper = {
     minHeight: '540px',
     maxWidth: '450px',
+};
+
+export const repoLinkIconWrapper = size => ({
+    width: `${size}px`,
+    height: `${size}px`,
+    padding: '0px',
+    fontSize: 'unset',
+});
+
+export const repoLinkIcon = size => ({
+    width: `${0.8 * size}px`,
+    height: `${0.8 * size}px`,
+    verticalAlign: 'middle',
+});
+
+export const relatedRepositoryIcon = {
+    fill: secondaryItemColor,
+    marginTop: '7px',
+    marginRight: '2px',
+};
+
+export const repoIconsContainer = {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
 };
