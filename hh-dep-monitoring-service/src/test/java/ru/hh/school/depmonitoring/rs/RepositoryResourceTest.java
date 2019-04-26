@@ -27,6 +27,18 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         dbUtils.fillRepositoryTable();
     }
 
+
+    @Test
+    public void getAllRepositoriesTest() {
+        List<RepositoryDto> controlDtoList = StructCreator.createRepositoryDtoList();
+        List<RepositoryDto> resultDtosList = target("/repository/")
+                .request()
+                .get()
+                .readEntity(new GenericType<List<RepositoryDto>>() {
+                });
+        assertRepositoryDtoListIsEqual(controlDtoList, resultDtosList);
+    }
+
     @Test
     public void getItemByIdTest() {
         RepositoryDto repositoryDto = target("/repository/1")
