@@ -14,7 +14,7 @@ const menuSelectHeight = 250;
 
 const styles = selectComponentsStyles;
 
-function SelectRepository({ classes, repository, setRepository, repositoryFor, direction, repositories }) {
+function SelectRepository({ classes, repository, setRepository, repositoryFor, direction, repositories, disabled }) {
     const handleChange = (selected) => {
         setRepository({
             ...selected,
@@ -40,7 +40,7 @@ function SelectRepository({ classes, repository, setRepository, repositoryFor, d
                 placeholder="Search a repository"
                 maxMenuHeight={menuSelectHeight}
                 isClearable
-                isDisabled={String(repositoryFor) === String(repository.value)}
+                isDisabled={(String(repositoryFor) === String(repository.value)) || disabled}
             />
             {repository.error
             && <FormHelperText className={classes.errorText}>{repository.error}</FormHelperText>}
@@ -59,6 +59,7 @@ SelectRepository.propTypes = {
     ]).isRequired,
     direction: PropTypes.string.isRequired,
     repositories: PropTypes.array.isRequired,
+    disabled: PropTypes.bool.isRequired,
 };
 
 export default connect(
