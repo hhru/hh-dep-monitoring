@@ -33,4 +33,12 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
                 .list();
     }
 
+    @Override
+    public int count(PageRequestDto pageRequestDto) {
+        String searchString = pageRequestDto.getSearchString() + "%";
+        return getSession()
+                .createQuery("select count(*) from " + Repository.class.getName() + " where name like :searchString", Long.class)
+                .setParameter("searchString", searchString)
+                .uniqueResult().intValue();
+    }
 }

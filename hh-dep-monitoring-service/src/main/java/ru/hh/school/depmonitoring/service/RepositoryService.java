@@ -62,7 +62,7 @@ public class RepositoryService {
                 .map(repositoryMapper::toDto)
                 .collect(Collectors.toList());
         builder = builder.withItems(repositoryDtos);
-        int found = repositoryDao.count();
+        int found = repositoryDao.count(pageRequestDto);
         int pages = (int) Math.ceil((double) found / pageRequestDto.getPerPage());
         return builder.withFound(found)
                 .withPage(pageRequestDto.getPage())
