@@ -1,14 +1,20 @@
 package ru.hh.school.depmonitoring.dto;
 
-import java.io.Serializable;
+
 import javax.ws.rs.DefaultValue;
+import java.io.Serializable;
 
 public class PageRequestDto implements Serializable {
 
-    @DefaultValue("20")
+    @DefaultValue("100")
     private int perPage;
 
     private int page;
+
+    @DefaultValue("")
+    private String searchString;
+
+    private boolean ascending;
 
     private PageRequestDto() {
         this(builder());
@@ -17,6 +23,8 @@ public class PageRequestDto implements Serializable {
     private PageRequestDto(PageRequestDtoBuilder builder) {
         this.perPage = builder.perPage;
         this.page = builder.page;
+        this.searchString = builder.searchString;
+        this.ascending = builder.ascending;
     }
 
     public static PageRequestDtoBuilder builder() {
@@ -31,10 +39,19 @@ public class PageRequestDto implements Serializable {
         return page;
     }
 
+    public String getSearchString() {
+        return searchString;
+    }
+
+    public boolean isAscending() {
+        return ascending;
+    }
 
     public static final class PageRequestDtoBuilder {
         private int perPage;
         private int page;
+        private String searchString;
+        private boolean ascending;
 
         private PageRequestDtoBuilder() {
         }
@@ -46,6 +63,16 @@ public class PageRequestDto implements Serializable {
 
         public PageRequestDtoBuilder withPage(int page) {
             this.page = page;
+            return this;
+        }
+
+        public PageRequestDtoBuilder withSearchString(String searchString) {
+            this.searchString = searchString;
+            return this;
+        }
+
+        public PageRequestDtoBuilder withAscending(boolean ascending) {
+            this.ascending = ascending;
             return this;
         }
 
