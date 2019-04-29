@@ -99,12 +99,14 @@ function FormContent({ classes, setOpen, repositoryId, repositoryName, addRelati
                     setRepository={setRepositoryFrom}
                     repositoryFor={repositoryId}
                     direction="From"
+                    disabled={!!relation}
                 />
                 <SelectRepository
                     repository={repositoryTo}
                     setRepository={setRepositoryTo}
                     repositoryFor={repositoryId}
                     direction="To"
+                    disabled={!!relation}
                 />
                 <SelectPriority priority={priority} setPriority={setPriority} />
                 <DescriptionInput

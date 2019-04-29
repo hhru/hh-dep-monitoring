@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { addMessageAction } from 'redux/models/Notification/notificationsActions';
-import { DEFAULT_PER_PAGE, REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
+import { REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
 
 export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES ';
 export const FETCH_REPOSITORY = 'FETCH_REPOSITORY ';
@@ -35,12 +35,12 @@ export const fetchRepositoryLinksAction = (repositoryId, links) => ({
 
 export function fetchRepositories() {
     return (dispatch) => {
-        axios.get(`${REPOSITORY_URL}/page?perPage=${DEFAULT_PER_PAGE}`)
-            .then((result) => {
-                dispatch(fetchRepositoriesAction(result.data));
+        axios.get(REPOSITORY_URL)
+            .then((response) => {
+                dispatch(fetchRepositoriesAction({ items: response.data }));
             })
             .catch(() => {
-                dispatch(addMessageAction('Error in fetching repositories', 'warning'));
+                dispatch(addMessageAction('Error in fetching repositories', 'error'));
             });
     };
 }
@@ -48,11 +48,11 @@ export function fetchRepositories() {
 export function fetchRepository(id) {
     return (dispatch) => {
         axios.get(`${REPOSITORY_URL}/${id}`)
-            .then((result) => {
-                dispatch(fetchRepositoryAction(id, result.data));
+            .then((response) => {
+                dispatch(fetchRepositoryAction(id, response.data));
             })
             .catch(() => {
-                dispatch(addMessageAction('Error in fetching repository data', 'warning'));
+                dispatch(addMessageAction('Error in fetching repository data', 'error'));
             });
     };
 }
@@ -64,7 +64,7 @@ export function fetchLinkTypes() {
                 dispatch(fetchLinkTypesAction(response.data));
             })
             .catch(() => {
-                dispatch(addMessageAction('Can\'t get link types for relations', 'warning'));
+                dispatch(addMessageAction('Can\'t get link types for relations', 'error'));
             });
     };
 }
@@ -76,7 +76,7 @@ export function fetchRepositoryLinks(repositoryId) {
                 dispatch(fetchRepositoryLinksAction(repositoryId, response.data));
             })
             .catch(() => {
-                dispatch(addMessageAction('Can\'t get links for repository', 'warning'));
+                dispatch(addMessageAction('Can\'t get links for repository', 'error'));
             });
     };
 }
