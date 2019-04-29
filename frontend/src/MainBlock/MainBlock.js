@@ -17,16 +17,6 @@ const styles = theme => ({
 
 export const routing = [
     {
-        path: '/feed',
-        label: 'Feed',
-        // component: Feed
-    },
-    {
-        path: '/search',
-        label: 'Search',
-        // component: Search
-    },
-    {
         path: '/repositories',
         label: 'Repositories',
         component: Repositories,
@@ -36,21 +26,6 @@ export const routing = [
                 component: Repository,
             },
         ],
-    },
-    {
-        path: '/ratings',
-        label: 'Ratings',
-        // component: Ratings
-    },
-    {
-        path: '/users',
-        label: 'Users',
-        // component: Users
-    },
-    {
-        path: '/troubles',
-        label: 'Troubles',
-        // component: Troubles
     },
     {
         path: '/about',

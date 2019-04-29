@@ -1,5 +1,5 @@
 export const archivedRepositoryColor = '#6c6c6c';
-const mainThemeColor = '#3f51b5';
+const mainThemeColor = '#c30019';
 export const secondaryItemColor = '#646464';
 
 export const secondaryItem = {
