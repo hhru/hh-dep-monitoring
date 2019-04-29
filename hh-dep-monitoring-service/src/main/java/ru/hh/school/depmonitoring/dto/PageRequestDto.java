@@ -1,17 +1,16 @@
 package ru.hh.school.depmonitoring.dto;
 
 
-import javax.ws.rs.DefaultValue;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 public class PageRequestDto implements Serializable {
 
-    @DefaultValue("100")
     private int perPage;
 
     private int page;
 
-    @DefaultValue("")
+    @NotNull
     private String searchString;
 
     private boolean ascending;

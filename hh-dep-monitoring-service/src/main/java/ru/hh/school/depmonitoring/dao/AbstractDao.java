@@ -70,15 +70,18 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
     public int count() {
         return getSession()
                 .createQuery("select count(*) from " + clazz.getName(), Long.class)
-                .uniqueResult().intValue();
+                .uniqueResult()
+                .intValue();
     }
 
-    protected static String stringToRegExp(String str) {
-        return "%" + str + "%";
+    protected static String getContainsString(String str) {
+        if (str == null || str.isEmpty()) {
+            return "%";
+        }
+        return String.format("%%%s%%", str);
     }
 
     protected final Session getSession() {
         return sessionFactory.getCurrentSession();
     }
-
 }

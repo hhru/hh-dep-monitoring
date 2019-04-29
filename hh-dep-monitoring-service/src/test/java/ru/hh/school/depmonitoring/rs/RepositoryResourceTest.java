@@ -122,7 +122,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(1)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "Name0", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "nAme0", true);
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
