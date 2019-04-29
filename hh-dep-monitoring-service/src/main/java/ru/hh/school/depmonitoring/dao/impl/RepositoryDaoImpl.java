@@ -23,7 +23,7 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
     public List<Repository> findPage(@Nonnull PageRequestDto pageRequestDto) {
         int perPage = pageRequestDto.getPerPage();
         int offsetIndex = pageRequestDto.getPage() * perPage;
-        String searchString = pageRequestDto.getSearchString() + "%";
+        String searchString = stringToRegExp(pageRequestDto.getSearchString());
         String orderString = pageRequestDto.isAscending() ? "asc" : "desc";
         return getSession()
                 .createQuery("from " + Repository.class.getName() + " where name like :searchString order by name " + orderString, Repository.class)
@@ -35,7 +35,7 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
 
     @Override
     public int count(PageRequestDto pageRequestDto) {
-        String searchString = pageRequestDto.getSearchString() + "%";
+        String searchString = stringToRegExp(pageRequestDto.getSearchString());
         return getSession()
                 .createQuery("select count(*) from " + Repository.class.getName() + " where name like :searchString", Long.class)
                 .setParameter("searchString", searchString)

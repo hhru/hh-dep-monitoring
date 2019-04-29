@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
 import javax.annotation.Nonnull;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.hh.school.depmonitoring.dto.PageRequestDto;
@@ -70,6 +71,10 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
         return getSession()
                 .createQuery("select count(*) from " + clazz.getName(), Long.class)
                 .uniqueResult().intValue();
+    }
+
+    protected static String stringToRegExp(String str) {
+        return "%" + str + "%";
     }
 
     protected final Session getSession() {
