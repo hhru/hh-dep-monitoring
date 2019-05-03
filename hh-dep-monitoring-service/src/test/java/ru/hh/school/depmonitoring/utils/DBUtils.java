@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
@@ -71,6 +72,15 @@ public class DBUtils {
     @Transactional
     public Relation addRelation(long from, long to) {
         return addRelation(StructCreator.createRelationDto(null, from, to));
+    }
+
+    @Transactional
+    public Event addEvent() {
+        Event newEvent = StructCreator.createEventEntity();
+        sessionFactory
+                .getCurrentSession()
+                .persist(newEvent);
+        return newEvent;
     }
 
     @Transactional
