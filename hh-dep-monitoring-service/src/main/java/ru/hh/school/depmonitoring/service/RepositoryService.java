@@ -54,17 +54,17 @@ public class RepositoryService {
 
     @Transactional(readOnly = true)
     public PageDto<RepositoryDto> getRepositoryPage(@Nonnull PageRequestDto pageRequestDto) {
-        PageDto.PageDtoBuilder<RepositoryDto> builder = PageDto.builder();
         if (pageRequestDto.getPerPage() <= 0 || pageRequestDto.getPage() < 0) {
             throw new IllegalArgumentException("Illegal pageRequestDto parameters");
         }
         List<RepositoryDto> repositoryDtos = repositoryDao.findPage(pageRequestDto).stream()
                 .map(repositoryMapper::toDto)
                 .collect(Collectors.toList());
-        builder = builder.withItems(repositoryDtos);
-        int found = repositoryDao.count();
+        int found = repositoryDao.count(pageRequestDto);
         int pages = (int) Math.ceil((double) found / pageRequestDto.getPerPage());
+        PageDto.PageDtoBuilder<RepositoryDto> builder = PageDto.builder();
         return builder.withFound(found)
+                .withItems(repositoryDtos)
                 .withPage(pageRequestDto.getPage())
                 .withPerPage(pageRequestDto.getPerPage())
                 .withPages(pages)

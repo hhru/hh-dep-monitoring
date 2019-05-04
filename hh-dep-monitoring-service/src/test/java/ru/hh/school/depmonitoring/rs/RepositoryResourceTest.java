@@ -13,6 +13,7 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
@@ -63,7 +64,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(2)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 5);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 5, "", true);
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -77,7 +78,51 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(3)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(2, 4);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(2, 4, "", true);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getFullPageAscendingTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList())
+                .withFound(10)
+                .withPage(0)
+                .withPerPage(10)
+                .withPages(1)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "", true);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getFullPageDescendingTest() {
+        List<RepositoryDto> reverseList = StructCreator.createRepositoryDtoList();
+        Collections.reverse(reverseList);
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(reverseList)
+                .withFound(10)
+                .withPage(0)
+                .withPerPage(10)
+                .withPages(1)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "", false);
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getFilteredPageTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList().subList(0, 9))
+                .withFound(9)
+                .withPage(0)
+                .withPerPage(10)
+                .withPages(1)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "nAme0", true);
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -99,7 +144,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPerPage(2)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(100, 2);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(100, 2, "", true);
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -158,10 +203,12 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         }
     }
 
-    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage) {
+    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage, String searchString, boolean ascending) {
         return target("/repository/page")
                 .queryParam("page", page)
                 .queryParam("perPage", perPage)
+                .queryParam("searchString", searchString)
+                .queryParam("ascending", ascending)
                 .request()
                 .get()
                 .readEntity(new GenericType<PageDto<RepositoryDto>>() {

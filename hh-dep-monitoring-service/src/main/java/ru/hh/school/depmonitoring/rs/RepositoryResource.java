@@ -46,10 +46,14 @@ public class RepositoryResource {
     @GET
     @Path("/page")
     public PageDto<RepositoryDto> getRepositriesPage(@DefaultValue("0") @QueryParam("page") int page,
-                                                     @DefaultValue("10") @QueryParam("perPage") int perPage) {
+                                                     @DefaultValue("100") @QueryParam("perPage") int perPage,
+                                                     @DefaultValue("") @QueryParam("searchString") String searchString,
+                                                     @DefaultValue("true") @QueryParam("ascending") boolean ascending) {
         PageRequestDto requestDto = PageRequestDto.builder()
                 .withPage(page)
                 .withPerPage(perPage)
+                .withSearchString(searchString)
+                .withAscending(ascending)
                 .build();
         return repositoryService.getRepositoryPage(requestDto);
     }
