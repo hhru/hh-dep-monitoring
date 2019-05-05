@@ -164,7 +164,7 @@ export const repoLinkIcon = size => ({
 export const relatedRepositoryIcon = {
     fill: secondaryItemColor,
     marginTop: '7px',
-    marginRight: '2px',
+    marginRight: '12px',
 };
 
 export const repoIconsContainer = {
