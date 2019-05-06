@@ -8,6 +8,8 @@ import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.entities.RepositoryType;
 import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
+import ru.hh.school.depmonitoring.entities.Event;
+import ru.hh.school.depmonitoring.entities.EventType;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -111,5 +113,14 @@ public class StructCreator {
         repositoryLinkDto.setRepositoryId(repId);
         repositoryLinkDto.setLinkUrl("127.0.0.1:8080");
         return repositoryLinkDto;
+    }
+
+    public static Event createEventEntity() {
+        Event event = new Event();
+        event.setDescription("Description");
+        event.setType(EventType.CONFLICT);
+        event.setCreatedAt(LocalDateTime.now());
+
+        return event;
     }
 }
