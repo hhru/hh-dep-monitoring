@@ -6,6 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import LinkIcon from '@material-ui/icons/Link';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { relatedRepositoryIcon, repoIconsContainer } from 'Utils/commonStyles';
 import RepositoryLinks from 'CommonComponents/RepositoryLinks';
@@ -18,6 +19,17 @@ const styles = () => ({
 });
 
 function RepositoryItem({ classes, repository }) {
+    const renderIconWithTooltip = (hasFunctionalRelations) => {
+        const title = hasFunctionalRelations ? 'Have functional relations' : 'No functional relations';
+        const IconComponent = hasFunctionalRelations ? LinkIcon : LinkOffIcon;
+
+        return (
+            <Tooltip title={title} placement="left">
+                <IconComponent className={classes.relatedRepositoryIcon} />
+            </Tooltip>
+        );
+    };
+
     return (
         <ListItem>
             <ListItemText
@@ -33,10 +45,7 @@ function RepositoryItem({ classes, repository }) {
             />
             <div className={classes.repoIconsContainer}>
                 <RepositoryLinks repositoryId={repository.repositoryId} size={30} />
-                {(repository.hasRelatedFrom || repository.hasRelatedTo)
-                    ? <LinkIcon className={classes.relatedRepositoryIcon} />
-                    : <LinkOffIcon className={classes.relatedRepositoryIcon} />
-                }
+                {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}
             </div>
         </ListItem>
     );
