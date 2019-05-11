@@ -14,8 +14,10 @@ import static org.junit.Assert.assertNull;
 
 public class RepositoryMapperTest {
 
-    //private final RepositoryMapper repositoryMapper = new RepositoryMapper();
-    private final RepositoryMapper repositoryMapper = new RepositoryMapper(Mockito.mock(RepositoryLinkMapper.class));
+    private final RepositoryMapper repositoryMapper = new RepositoryMapper(
+            Mockito.mock(RepositoryLinkMapper.class),
+            Mockito.mock(ArtifactMapper.class)
+    );
 
     @Test
     public void toEntityNull() {

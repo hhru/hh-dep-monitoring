@@ -7,9 +7,11 @@ import ru.hh.school.depmonitoring.entities.Repository;
 public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
 
     private final RepositoryLinkMapper repositoryLinkMapper;
+    private final ArtifactMapper artifactMapper;
 
-    public RepositoryMapper(RepositoryLinkMapper repositoryLinkMapper) {
+    public RepositoryMapper(RepositoryLinkMapper repositoryLinkMapper, ArtifactMapper artifactMapper) {
         this.repositoryLinkMapper = repositoryLinkMapper;
+        this.artifactMapper = artifactMapper;
     }
 
     public Repository toEntity(RepositoryDto dto) {
@@ -48,12 +50,11 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
         dto.setRepositoryType(entity.getRepositoryType());
 
         dto.setLinkUrls(repositoryLinkMapper.toDto(entity.getLinkUrls()));
+        dto.setArtifacts(artifactMapper.toDto(entity.getArtifacts()));
 
         dto.setHasRelatedTo(entity.getRelatedTo() != null && !entity.getRelatedTo().isEmpty());
         dto.setHasRelatedFrom(entity.getRelatedFrom() != null && !entity.getRelatedFrom().isEmpty());
 
         return dto;
     }
-
-
 }
