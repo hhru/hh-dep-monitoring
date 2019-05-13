@@ -14,7 +14,7 @@
 
     <properties>
         <jdk.version>11</jdk.version>
-        <nab.version>4.12.4</nab.version>
+        <nab.version>4.17.3</nab.version>
         <github.version>1.95</github.version>
         <jackson.version>2.9.8</jackson.version>
         <jersey.version>2.28</jersey.version>
