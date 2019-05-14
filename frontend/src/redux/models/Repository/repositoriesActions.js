@@ -2,8 +2,10 @@ import axios from 'axios';
 import { addMessageAction, setFormResultAction } from 'redux/models/Notification/notificationsActions';
 import { REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
 
-export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES ';
-export const FETCH_REPOSITORY = 'FETCH_REPOSITORY ';
+export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES';
+export const FETCH_REPOSITORIES_PAGE = 'FETCH_REPOSITORIES_PAGE';
+export const CLEAR_REPOSITORIES_PAGES = 'CLEAR_REPOSITORIES_PAGES';
+export const FETCH_REPOSITORY = 'FETCH_REPOSITORY';
 export const FETCH_LINK_TYPES = 'FETCH_LINK_TYPES';
 export const ADD_LINK = 'ADD_LINK';
 export const EDIT_LINK = 'EDIT_LINK';
@@ -13,6 +15,19 @@ export const SET_FORM_RESULT = 'SET_FORM_RESULT';
 export const fetchRepositoriesAction = repositories => ({
     type: FETCH_REPOSITORIES,
     payload: repositories,
+});
+
+export const fetchRepositoriesPageAction = (page, repositories) => ({
+    type: FETCH_REPOSITORIES_PAGE,
+    payload: {
+        page,
+        repositories,
+    },
+});
+
+export const clearRepositoriesPagesAction = () => ({
+    type: CLEAR_REPOSITORIES_PAGES,
+    payload: {},
 });
 
 export const fetchRepositoryAction = (repositoryId, repositoryData) => ({
@@ -63,6 +78,24 @@ export function fetchRepositories() {
             .catch(() => {
                 dispatch(addMessageAction('Error in fetching repositories', 'error'));
             });
+    };
+}
+
+export function fetchRepositoriesPage(page = 0, perPage) {
+    return (dispatch) => {
+        axios.get(`${REPOSITORY_URL}/page?page=${page}&perPage=${perPage}`)
+            .then((response) => {
+                dispatch(fetchRepositoriesPageAction(page, response.data));
+            })
+            .catch(() => {
+                dispatch(addMessageAction('Error in fetching repositories', 'error'));
+            });
+    };
+}
+
+export function clearRepositoriesPages() {
+    return (dispatch) => {
+        dispatch(clearRepositoriesPagesAction());
     };
 }
 
