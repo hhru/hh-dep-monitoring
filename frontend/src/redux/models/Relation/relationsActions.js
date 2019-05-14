@@ -1,14 +1,12 @@
 import axios from 'axios';
 import { RELATION_URL } from 'Utils/constants';
-import { addMessageAction } from 'redux/models/Notification/notificationsActions';
+import { addMessageAction, setFormResultAction } from 'redux/models/Notification/notificationsActions';
 
 export const FETCH_PRIORITY_TYPES = 'FETCH_PRIORITY_TYPES ';
 export const FETCH_RELATIONS = 'FETCH_RELATIONS ';
 export const ADD_RELATION = 'ADD_RELATION ';
 export const EDIT_RELATION = 'EDIT_RELATION ';
 export const DELETE_RELATION = 'DELETE_RELATION';
-export const SET_FORM_RESULT = 'SET_FORM_RESULT';
-export const RESET_FORM_RESULT = 'RESET_FORM_RESULT';
 
 export const fetchPriorityTypesAction = priorityList => ({
     type: FETCH_PRIORITY_TYPES,
@@ -49,18 +47,6 @@ export const deleteRelationAction = (repositoryId, relationId) => ({
     },
 });
 
-export const setFormResultAction = (result, action) => ({
-    type: SET_FORM_RESULT,
-    payload: {
-        saveResult: result,
-        actionType: action,
-    },
-});
-
-export const resetFormResultAction = () => ({
-    type: RESET_FORM_RESULT,
-});
-
 export function fetchPriorityTypes() {
     return (dispatch) => {
         axios.get(`${RELATION_URL}types`)
@@ -97,7 +83,7 @@ export function addRelation(repositoryFromId, repositoryToId, priority, descript
         axios.post(RELATION_URL, newRelation)
             .then((response) => {
                 dispatch(addRelationAction(repositoryFromId, response.data));
-                dispatch(setFormResultAction(true, 'added'));
+                dispatch(setFormResultAction(true, 'Relation', 'added'));
             })
             .catch(() => dispatch(setFormResultAction(false)));
     };
@@ -114,7 +100,7 @@ export function editRelation(relationId, repositoryFromId, repositoryToId, prior
         axios.put(RELATION_URL + relationId, editedRelation)
             .then((response) => {
                 dispatch(editRelationAction(repositoryFromId, response.data));
-                dispatch(setFormResultAction(true, 'updated'));
+                dispatch(setFormResultAction(true, 'Relation', 'updated'));
             })
             .catch(() => dispatch(setFormResultAction(false)));
     };
@@ -125,14 +111,8 @@ export function deleteRelation(relationId, repositoryId) {
         axios.delete(RELATION_URL + relationId)
             .then(() => {
                 dispatch(deleteRelationAction(repositoryId, relationId));
-                dispatch(setFormResultAction(true, 'deleted'));
+                dispatch(setFormResultAction(true, 'Relation', 'deleted'));
             })
             .catch(() => dispatch(setFormResultAction(false)));
-    };
-}
-
-export function resetFormResult() {
-    return (dispatch) => {
-        dispatch(resetFormResultAction());
     };
 }

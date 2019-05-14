@@ -16,6 +16,6 @@ function Notifier({ notifications, removeMessage, enqueueSnackbar }) {
 }
 
 export default connect(
-    ({ notifications }) => ({ notifications }),
+    ({ notifications }) => ({ notifications: notifications.messages }),
     { removeMessage },
 )(withSnackbar(Notifier));

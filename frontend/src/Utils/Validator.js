@@ -10,6 +10,10 @@ const CoreValidators = {
             || (value.length && value.length === 0)
         );
     },
+    url(value) {
+        const regURL = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/]))?/;
+        return regURL.test(value);
+    },
 };
 
 const Validator = {
@@ -29,11 +33,12 @@ const Validator = {
             value,
             error: undefined,
         };
-        rules[name] && rules[name].forEach((rule) => {
+        rules[name] && rules[name].some((rule) => {
             if (!Validator.validate(rule.rule, value)) {
                 attributeResult.error = rule.message || `Invalid value of field ${name}`;
+                return true;
             }
-            return rule;
+            return false;
         });
         return attributeResult;
     },

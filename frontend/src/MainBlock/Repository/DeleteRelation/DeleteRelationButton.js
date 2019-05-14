@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 
-import { relationControlIcon } from 'Utils/commonStyles';
+import { controlIcon } from 'Utils/commonStyles';
 import DeleteRelationDialog from './DeleteRelationDialog';
 
 const styles = () => ({
-    relationControlIcon,
+    controlIcon,
 });
 
 function DeleteRelationButton({ classes, relationId, repositoryId }) {
@@ -20,7 +20,7 @@ function DeleteRelationButton({ classes, relationId, repositoryId }) {
 
     return (
         <Fragment>
-            <DeleteIcon className={classes.relationControlIcon} onClick={handleClickOpen} />
+            <DeleteIcon className={classes.controlIcon} onClick={handleClickOpen} />
             {dialogOpen && (
                 <DeleteRelationDialog
                     open={dialogOpen}

@@ -3,14 +3,11 @@ import { FETCH_PRIORITY_TYPES,
     FETCH_RELATIONS,
     ADD_RELATION,
     EDIT_RELATION,
-    DELETE_RELATION,
-    SET_FORM_RESULT,
-    RESET_FORM_RESULT } from './relationsActions';
+    DELETE_RELATION } from './relationsActions';
 
 export const initialState = {
     relationsByRepoId: {},
     priorityTypes: undefined,
-    formResult: undefined,
 };
 
 const getRelation = (relations, relationId) => {
@@ -74,18 +71,4 @@ export const relationsReducer = createReducer(initialState, {
             .filter(item => item.relationId !== relationId);
         return newState;
     },
-    [SET_FORM_RESULT]: (state, action) => {
-        const { saveResult, actionType } = action.payload;
-        return {
-            ...state,
-            formResult: {
-                success: saveResult,
-                action: actionType,
-            },
-        };
-    },
-    [RESET_FORM_RESULT]: state => ({
-        ...state,
-        formResult: undefined,
-    }),
 });

@@ -8,6 +8,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import DialogActions from '@material-ui/core/DialogActions';
 import Button from '@material-ui/core/Button';
 
+import Form from 'CommonComponents/Form';
 import { deleteRelation } from 'redux/models/Relation/relationsActions';
 import { formButton } from 'Utils/commonStyles';
 
@@ -27,15 +28,17 @@ function DeleteRelationDialog({ classes, open, setOpen, relationId, repositoryId
 
     return (
         <Dialog open={open} onClose={handleClose}>
-            <DialogTitle>Are you sure, that you want to delete this relation?</DialogTitle>
-            <DialogActions>
-                <Button onClick={handleClose} className={classes.formButton}>
-                    No
-                </Button>
-                <Button onClick={handleSubmit} variant="contained" color="primary">
-                    Yes
-                </Button>
-            </DialogActions>
+            <Form onSubmit={handleSubmit}>
+                <DialogTitle>Are you sure that you want to delete this relation?</DialogTitle>
+                <DialogActions>
+                    <Button onClick={handleClose} className={classes.formButton}>
+                        No
+                    </Button>
+                    <Button type="submit" variant="contained" color="primary">
+                        Yes
+                    </Button>
+                </DialogActions>
+            </Form>
         </Dialog>
     );
 }

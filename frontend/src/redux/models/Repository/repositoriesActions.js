@@ -1,11 +1,14 @@
 import axios from 'axios';
-import { addMessageAction } from 'redux/models/Notification/notificationsActions';
+import { addMessageAction, setFormResultAction } from 'redux/models/Notification/notificationsActions';
 import { REPOSITORY_URL, REPOSITORY_LINK_URL } from 'Utils/constants';
 
 export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES ';
 export const FETCH_REPOSITORY = 'FETCH_REPOSITORY ';
 export const FETCH_LINK_TYPES = 'FETCH_LINK_TYPES';
-export const FETCH_REPOSITORY_LINKS = 'FETCH_REPOSITORY_LINKS';
+export const ADD_LINK = 'ADD_LINK';
+export const EDIT_LINK = 'EDIT_LINK';
+export const DELETE_LINK = 'DELETE_LINK';
+export const SET_FORM_RESULT = 'SET_FORM_RESULT';
 
 export const fetchRepositoriesAction = repositories => ({
     type: FETCH_REPOSITORIES,
@@ -22,14 +25,32 @@ export const fetchRepositoryAction = (repositoryId, repositoryData) => ({
 
 export const fetchLinkTypesAction = linkTypes => ({
     type: FETCH_LINK_TYPES,
-    payload: linkTypes,
+    payload: {
+        linkTypes,
+    },
 });
 
-export const fetchRepositoryLinksAction = (repositoryId, links) => ({
-    type: FETCH_REPOSITORY_LINKS,
+export const addLinkAction = (repositoryId, newLink) => ({
+    type: ADD_LINK,
     payload: {
         repositoryId,
-        links,
+        newLink,
+    },
+});
+
+export const editLinkAction = (repositoryId, link) => ({
+    type: EDIT_LINK,
+    payload: {
+        repositoryId,
+        link,
+    },
+});
+
+export const deleteLinkAction = (repositoryId, linkId) => ({
+    type: DELETE_LINK,
+    payload: {
+        repositoryId,
+        linkId,
     },
 });
 
@@ -69,14 +90,46 @@ export function fetchLinkTypes() {
     };
 }
 
-export function fetchRepositoryLinks(repositoryId) {
+export function addLink(repositoryId, linkType, linkUrl) {
     return (dispatch) => {
-        axios.get(`${REPOSITORY_LINK_URL}for-repository/${repositoryId}`)
+        const newLink = {
+            linkType,
+            linkUrl,
+            repositoryId,
+        };
+        axios.post(REPOSITORY_LINK_URL, newLink)
             .then((response) => {
-                dispatch(fetchRepositoryLinksAction(repositoryId, response.data));
+                dispatch(addLinkAction(repositoryId, response.data));
+                dispatch(setFormResultAction(true, 'Link', 'added'));
             })
-            .catch(() => {
-                dispatch(addMessageAction('Can\'t get links for repository', 'error'));
-            });
+            .catch(() => dispatch(setFormResultAction(false)));
+    };
+}
+
+export function editLink(repositoryId, repositoryLinkId, linkType, linkUrl) {
+    return (dispatch) => {
+        const editedLink = {
+            repositoryLinkId,
+            linkType,
+            linkUrl,
+            repositoryId,
+        };
+        axios.put(REPOSITORY_LINK_URL + repositoryLinkId, editedLink)
+            .then((response) => {
+                dispatch(editLinkAction(repositoryId, response.data));
+                dispatch(setFormResultAction(true, 'Link', 'edited'));
+            })
+            .catch(() => dispatch(setFormResultAction(false)));
+    };
+}
+
+export function deleteLink(repositoryLinkId, repositoryId) {
+    return (dispatch) => {
+        axios.delete(REPOSITORY_LINK_URL + repositoryLinkId)
+            .then(() => {
+                dispatch(deleteLinkAction(repositoryId, repositoryLinkId));
+                dispatch(setFormResultAction(true, 'Link', 'deleted'));
+            })
+            .catch(() => dispatch(setFormResultAction(false)));
     };
 }
