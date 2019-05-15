@@ -3,6 +3,7 @@ package ru.hh.school.depmonitoring.rs;
 
 import ru.hh.school.depmonitoring.dto.PageDto;
 import ru.hh.school.depmonitoring.dto.PageRequestDto;
+import ru.hh.school.depmonitoring.dto.PageRequestDto.PageSort;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.RepositoryType;
 import ru.hh.school.depmonitoring.service.RepositoryService;
@@ -22,6 +23,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Named
 @Singleton
@@ -42,18 +44,21 @@ public class RepositoryResource {
         return repositoryService.getFullList();
     }
 
-
+    /**
+     * request like host/repository/page?order=name,asc&order=createdAt,desc&perPage=10
+     */
     @GET
     @Path("/page")
     public PageDto<RepositoryDto> getRepositriesPage(@DefaultValue("0") @QueryParam("page") int page,
                                                      @DefaultValue("100") @QueryParam("perPage") int perPage,
                                                      @DefaultValue("") @QueryParam("searchString") String searchString,
-                                                     @DefaultValue("true") @QueryParam("ascending") boolean ascending) {
+                                                     @QueryParam("order") List<String> pageSortsStrings) {
+        List<PageSort> pageSorts = pageSortsStrings.stream().map(PageSort::valueOf).collect(Collectors.toList());
         PageRequestDto requestDto = PageRequestDto.builder()
                 .withPage(page)
                 .withPerPage(perPage)
                 .withSearchString(searchString)
-                .withAscending(ascending)
+                .withOrderPointsList(pageSorts)
                 .build();
         return repositoryService.getRepositoryPage(requestDto);
     }

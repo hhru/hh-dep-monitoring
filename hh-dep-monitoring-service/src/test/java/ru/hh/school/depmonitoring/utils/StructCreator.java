@@ -1,24 +1,26 @@
 package ru.hh.school.depmonitoring.utils;
 
+import ru.hh.school.depmonitoring.dto.PageRequestDto.PageSort;
+import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.dto.RepositoryLinkDto;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.entities.Relation;
-import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
-import ru.hh.school.depmonitoring.entities.Repository;
-import ru.hh.school.depmonitoring.entities.RepositoryType;
-import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
+import ru.hh.school.depmonitoring.entities.Artifact;
 import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.EventType;
-import ru.hh.school.depmonitoring.entities.Artifact;
+import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
+import ru.hh.school.depmonitoring.entities.RepositoryType;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.LongStream;
-
-import ru.hh.school.depmonitoring.dto.RelationDto;
 
 public class StructCreator {
     public static RelationDto createRelationDto(Integer id) {
@@ -94,7 +96,7 @@ public class StructCreator {
         repositoryDto.setDescription("Description");
         repositoryDto.setArchived(true);
         repositoryDto.setActive(false);
-        repositoryDto.setCreatedAt(LocalDateTime.of(2019, 3, 12, 14, 51));
+        repositoryDto.setCreatedAt(LocalDateTime.of(2019, 3, 12, 14, (int)id%60));
         repositoryDto.setUpdatedAt(LocalDateTime.of(2019, 4, 12, 13, 22));
         repositoryDto.setRepositoryType(RepositoryType.APPLICATION);
 
@@ -129,6 +131,8 @@ public class StructCreator {
         return event;
     }
 
+
+
     public static Artifact createArtifactEntity() {
         Artifact entity = new Artifact();
 
@@ -137,6 +141,11 @@ public class StructCreator {
         entity.setGroupName("group name ");
 
         return entity;
+    }
+
+
+    public static String getEncodedString(PageSort pageSort) throws UnsupportedEncodingException {
+        return URLEncoder.encode(pageSort.getProperty() + "," + (pageSort.isAscending() ? "asc" : "desc"), "UTF-8");
     }
 
 }

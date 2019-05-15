@@ -4,14 +4,17 @@ import org.junit.Before;
 import org.junit.Test;
 import ru.hh.school.depmonitoring.DepMonitoringTestBase;
 import ru.hh.school.depmonitoring.dto.PageDto;
+import ru.hh.school.depmonitoring.dto.PageRequestDto.PageSort;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
 import javax.inject.Inject;
 import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -50,7 +53,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
 
     @Test
     public void getItemByIdWithArtifactTest() {
-        Integer controlArtifactId =  dbUtils.addItemToArtifactTable(1L);
+        Integer controlArtifactId = dbUtils.addItemToArtifactTable(1L);
 
         RepositoryDto repositoryDto = target("/repository/1")
                 .request()
@@ -76,7 +79,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(2)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 5, "", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 5, "");
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -90,12 +93,12 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(3)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(2, 4, "", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(2, 4, "");
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
     @Test
-    public void getFullPageAscendingTest() {
+    public void getFullPageAscendingTest() throws UnsupportedEncodingException {
         PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
                 .withItems(StructCreator.createRepositoryDtoList())
                 .withFound(10)
@@ -104,12 +107,12 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(1)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, PageSort.createOrderPoint("name", true));
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
     @Test
-    public void getFullPageDescendingTest() {
+    public void getFullPageDescendingTest() throws UnsupportedEncodingException {
         List<RepositoryDto> reverseList = StructCreator.createRepositoryDtoList();
         Collections.reverse(reverseList);
         PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
@@ -120,7 +123,21 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(1)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "", false);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, PageSort.createOrderPoint("name", false));
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getFullPageNotExistingFieldTest() throws UnsupportedEncodingException {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList())
+                .withFound(10)
+                .withPage(0)
+                .withPerPage(10)
+                .withPages(1)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, PageSort.createOrderPoint("notexistingfield", false));
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -134,7 +151,21 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPages(1)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "nAme0", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "nAme0");
+        assertRepositoryPageDtoIsEquals(controlPage, resultPage);
+    }
+
+    @Test
+    public void getFilteredPageWithEmptySearchStringTest() {
+        PageDto<RepositoryDto> controlPage = PageDto.<RepositoryDto>builder()
+                .withItems(StructCreator.createRepositoryDtoList())
+                .withFound(10)
+                .withPage(0)
+                .withPerPage(10)
+                .withPages(1)
+                .build();
+
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(0, 10, "");
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -143,6 +174,9 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, 0));
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, -1));
         assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(-1, 4));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, 1, "name,qwerty"));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, 1, ",asc"));
+        assertEquals(Response.Status.BAD_REQUEST.getStatusCode(), getPageRequestStatus(0, 1, ""));
     }
 
 
@@ -156,7 +190,7 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
                 .withPerPage(2)
                 .build();
 
-        PageDto<RepositoryDto> resultPage = getPageRequestContent(100, 2, "", true);
+        PageDto<RepositoryDto> resultPage = getPageRequestContent(100, 2, "");
         assertRepositoryPageDtoIsEquals(controlPage, resultPage);
     }
 
@@ -215,13 +249,25 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         }
     }
 
-    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage, String searchString, boolean ascending) {
+    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage, String searchString) {
         return target("/repository/page")
                 .queryParam("page", page)
                 .queryParam("perPage", perPage)
                 .queryParam("searchString", searchString)
-                .queryParam("ascending", ascending)
                 .request()
+                .get()
+                .readEntity(new GenericType<PageDto<RepositoryDto>>() {
+                });
+    }
+
+    public PageDto<RepositoryDto> getPageRequestContent(int page, int perPage, PageSort... pageSorts) throws UnsupportedEncodingException {
+        WebTarget target = target("/repository/page")
+                .queryParam("page", page)
+                .queryParam("perPage", perPage);
+        for (PageSort pageSort : pageSorts) {
+            target = target.queryParam("order", StructCreator.getEncodedString(pageSort));
+        }
+        return target.request()
                 .get()
                 .readEntity(new GenericType<PageDto<RepositoryDto>>() {
                 });
@@ -231,6 +277,16 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
         return target("/repository/page")
                 .queryParam("page", page)
                 .queryParam("perPage", perPage)
+                .request()
+                .get().getStatus();
+    }
+
+    public int getPageRequestStatus(int page, int perPage, String invaligPageSortString) {
+
+        return target("/repository/page")
+                .queryParam("page", page)
+                .queryParam("perPage", perPage)
+                .queryParam("order", invaligPageSortString)
                 .request()
                 .get().getStatus();
     }

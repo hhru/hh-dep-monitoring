@@ -10,4 +10,9 @@ public class EventDaoImpl extends AbstractDao<Event, Integer> implements EventDa
         super(sessionFactory, Event.class);
     }
 
+    @Override
+    public String getDefaultFilterField() {
+        return "description";
+    }
+
 }
