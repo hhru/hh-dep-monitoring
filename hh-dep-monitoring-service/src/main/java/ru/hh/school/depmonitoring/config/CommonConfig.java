@@ -10,6 +10,9 @@ import ru.hh.nab.datasource.DataSourceType;
 import ru.hh.nab.hibernate.MappingConfig;
 import ru.hh.nab.hibernate.NabHibernateCommonConfig;
 import ru.hh.nab.hibernate.datasource.RoutingDataSource;
+import ru.hh.school.depmonitoring.dao.ArtifactDao;
+import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
+import ru.hh.school.depmonitoring.dao.DependencyDao;
 import ru.hh.school.depmonitoring.dao.impl.EventDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
@@ -23,6 +26,7 @@ import ru.hh.school.depmonitoring.service.RelationService;
 import ru.hh.school.depmonitoring.service.RepositoryLinkService;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.service.SyncService;
+import ru.hh.school.depmonitoring.service.loaders.DependencyLoader;
 import ru.hh.school.depmonitoring.service.EventService;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
@@ -31,19 +35,22 @@ import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.EventMapper;
 
 import javax.sql.DataSource;
-import java.util.Optional;
 
 @Configuration
 @Import({
         MigrationConfig.class,
         NabHibernateCommonConfig.class,
 
+        ArtifactDao.class,
+        ArtifactVersionDao.class,
+        DependencyDao.class,
         RepositoryDaoImpl.class,
         RepositoryLinkDaoImpl.class,
         RelationDaoImpl.class,
         RepositoryDaoImpl.class,
         EventDaoImpl.class,
 
+        DependencyLoader.class,
         RelationService.class,
         RepositoryService.class,
         SyncService.class,
@@ -77,17 +84,5 @@ public class CommonConfig {
     @Primary
     protected DataSource dataSource(DataSourceFactory dataSourceFactory, FileSettings fileSettings) {
         return new RoutingDataSource(dataSourceFactory.create(DataSourceType.MASTER, false, fileSettings));
-    }
-
-    @Bean
-    protected String oauthToken(FileSettings fileSettings) {
-        return Optional.ofNullable(System.getProperty("github.oauth"))
-                .orElseGet(() -> fileSettings.getString("github.oauth"));
-    }
-
-    @Bean
-    protected String githubOrganization(FileSettings fileSettings) {
-        return Optional.ofNullable(fileSettings.getString("github.organization"))
-                .orElseThrow(() -> new IllegalArgumentException("Error in getting github.organization from service.properties"));
     }
 }

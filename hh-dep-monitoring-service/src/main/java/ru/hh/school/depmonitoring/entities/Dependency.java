@@ -29,6 +29,14 @@ public class Dependency {
     @JoinColumn(name = "artifact_version_id")
     private ArtifactVersion artifactVersion;
 
+    public Dependency() {
+    }
+
+    public Dependency(Repository repository, ArtifactVersion artifactVersion) {
+        this.repository = repository;
+        this.artifactVersion = artifactVersion;
+    }
+
     public Integer getDependencyId() {
         return dependencyId;
     }

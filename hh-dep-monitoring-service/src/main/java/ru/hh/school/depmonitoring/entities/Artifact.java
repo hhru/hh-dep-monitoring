@@ -31,6 +31,15 @@ public class Artifact {
     @JoinColumn(name = "repository_id")
     private Repository repository;
 
+    public Artifact() {
+    }
+
+    public Artifact(String artifactName, String groupName, Repository repository) {
+        this.artifactName = artifactName;
+        this.groupName = groupName;
+        this.repository = repository;
+    }
+
     public Integer getArtifactId() {
         return artifactId;
     }

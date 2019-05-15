@@ -14,6 +14,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "artifact_version")
+
 public class ArtifactVersion {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "artifact_version_artifact_version_id_seq")
@@ -40,6 +41,17 @@ public class ArtifactVersion {
 
     @Column(name = "version")
     private String version;
+
+    public ArtifactVersion() {
+    }
+
+    public ArtifactVersion(Artifact artifact, Integer versionMajor, Integer versionMinor, Integer versionMicro, String version) {
+        this.artifact = artifact;
+        this.versionMajor = versionMajor;
+        this.versionMinor = versionMinor;
+        this.versionMicro = versionMicro;
+        this.version = version;
+    }
 
     public Integer getArtifactVersionId() {
         return artifactVersionId;

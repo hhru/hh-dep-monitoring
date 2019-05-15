@@ -10,6 +10,7 @@ import javax.annotation.Nonnull;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 @Singleton
@@ -17,6 +18,16 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
 
     public RepositoryDaoImpl(SessionFactory sessionFactory) {
         super(sessionFactory, Repository.class);
+    }
+
+    @Override
+    public Optional<Repository> findRepositoryByName(String repositoryName) {
+        return getSession()
+                .createQuery("from Repository where name = :repositoryName", Repository.class)
+                .setParameter("repositoryName", repositoryName)
+                .getResultList()
+                .stream()
+                .findFirst();
     }
 
     @Override
