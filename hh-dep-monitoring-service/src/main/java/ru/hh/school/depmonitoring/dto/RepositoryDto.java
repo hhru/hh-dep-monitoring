@@ -45,6 +45,9 @@ public class RepositoryDto implements Serializable {
 
     private boolean hasRelatedFrom;
 
+    @Nullable
+    private LocalDateTime lastEvent;
+
     @NotNull
     private List<RepositoryLinkDto> linkUrls;
 
@@ -73,6 +76,14 @@ public class RepositoryDto implements Serializable {
 
     public void setHasRelatedFrom(boolean hasRelatedFrom) {
         this.hasRelatedFrom = hasRelatedFrom;
+    }
+
+    public LocalDateTime getLastEvent() {
+        return lastEvent;
+    }
+
+    public void setLastEvent(LocalDateTime lastEvent) {
+        this.lastEvent = lastEvent;
     }
 
     public Long getRepositoryId() {

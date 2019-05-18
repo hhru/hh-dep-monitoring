@@ -1,16 +1,18 @@
 package ru.hh.school.depmonitoring.service.mapper;
 
+import ru.hh.school.depmonitoring.dao.EventDao;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
-
 
 public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
 
     private final RepositoryLinkMapper repositoryLinkMapper;
+    private final EventDao eventDao;
     private final ArtifactMapper artifactMapper;
 
-    public RepositoryMapper(RepositoryLinkMapper repositoryLinkMapper, ArtifactMapper artifactMapper) {
+    public RepositoryMapper(RepositoryLinkMapper repositoryLinkMapper, EventDao eventDao, ArtifactMapper artifactMapper) {
         this.repositoryLinkMapper = repositoryLinkMapper;
+        this.eventDao = eventDao;
         this.artifactMapper = artifactMapper;
     }
 
@@ -51,6 +53,7 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
 
         dto.setLinkUrls(repositoryLinkMapper.toDto(entity.getLinkUrls()));
         dto.setArtifacts(artifactMapper.toDto(entity.getArtifacts()));
+        dto.setLastEvent(eventDao.getLastEventForRepository(entity.getRepositoryId()).orElse(null));
 
         dto.setHasRelatedTo(entity.getRelatedTo() != null && !entity.getRelatedTo().isEmpty());
         dto.setHasRelatedFrom(entity.getRelatedFrom() != null && !entity.getRelatedFrom().isEmpty());
