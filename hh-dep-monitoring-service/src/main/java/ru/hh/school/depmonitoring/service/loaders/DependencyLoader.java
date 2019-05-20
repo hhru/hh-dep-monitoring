@@ -7,19 +7,24 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
 import ru.hh.school.depmonitoring.dao.DependencyDao;
+import ru.hh.school.depmonitoring.dao.EventDao;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.bamboo.BambooArtifactDto;
 import ru.hh.school.depmonitoring.entities.Artifact;
 import ru.hh.school.depmonitoring.entities.ArtifactVersion;
 import ru.hh.school.depmonitoring.entities.Dependency;
+import ru.hh.school.depmonitoring.entities.Event;
+import ru.hh.school.depmonitoring.entities.EventType;
 import ru.hh.school.depmonitoring.entities.Repository;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -31,6 +36,7 @@ public class DependencyLoader {
     private final ArtifactDao artifactDao;
     private final ArtifactVersionDao artifactVersionDao;
     private final DependencyDao dependencyDao;
+    private final EventDao eventDao;
 
     private static final Logger log = LoggerFactory.getLogger(DependencyLoader.class);
 
@@ -39,13 +45,15 @@ public class DependencyLoader {
             RepositoryDao repositoryDao,
             ArtifactDao artifactDao,
             ArtifactVersionDao artifactVersionDao,
-            DependencyDao dependencyDao
+            DependencyDao dependencyDao,
+            EventDao eventDao
     ) {
         this.bambooLink = bambooLink;
         this.repositoryDao = repositoryDao;
         this.artifactDao = artifactDao;
         this.artifactVersionDao = artifactVersionDao;
         this.dependencyDao = dependencyDao;
+        this.eventDao = eventDao;
     }
 
     private List<BambooArtifactDto> getDataFromBamboo() {
@@ -118,6 +126,11 @@ public class DependencyLoader {
                 if (artifactVersionOptional.isPresent() && artifactVersionOptional.get().equals(dependencyOptional.get().getArtifactVersion())) {
                     needCreate = false;
                 } else {
+                    artifactVersionOptional.ifPresent(newArtifactVersion -> createEvent(
+                            parentRepository.getRepositoryId(),
+                            dependencyOptional.get().getArtifactVersion(),
+                            newArtifactVersion)
+                    );
                     dependencyDao.delete(dependencyOptional.get());
                 }
             }
@@ -143,5 +156,23 @@ public class DependencyLoader {
         ArtifactVersion artifactVersion = new ArtifactVersion(artifact, versionMajor, versionMinor, versionMicro, version);
         artifactVersionDao.create(artifactVersion);
         return artifactVersion;
+    }
+
+    private void createEvent(Long repositoryId, ArtifactVersion oldArtifactVersion, ArtifactVersion newArtifactVersion) {
+        var event = new Event();
+        event.setCreatedAt(LocalDateTime.now());
+        event.setRepositoryId(repositoryId);
+        event.setArtifactId(oldArtifactVersion.getArtifact().getArtifactId());
+        if (!Objects.equals(oldArtifactVersion.getVersionMajor(), newArtifactVersion.getVersionMajor())) {
+            event.setType(EventType.VERSION_MAJOR_CHANGE);
+        } else if (!Objects.equals(oldArtifactVersion.getVersionMinor(), newArtifactVersion.getVersionMinor())) {
+            event.setType(EventType.VERSION_MINOR_CHANGE);
+        } else if (!Objects.equals(oldArtifactVersion.getVersionMicro(), newArtifactVersion.getVersionMicro())) {
+            event.setType(EventType.VERSION_MICRO_CHANGE);
+        } else {
+            event.setType(EventType.VERSION_CHANGE);
+        }
+        event.setDescription("Version changed from" + oldArtifactVersion.getVersion() + " to " + newArtifactVersion.getVersion());
+        eventDao.create(event);
     }
 }
