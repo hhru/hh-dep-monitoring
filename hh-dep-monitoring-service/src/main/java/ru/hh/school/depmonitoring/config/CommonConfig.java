@@ -33,6 +33,7 @@ import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.EventMapper;
+import ru.hh.school.depmonitoring.service.mapper.ArtifactMapper;
 
 import javax.sql.DataSource;
 
@@ -47,7 +48,6 @@ import javax.sql.DataSource;
         RepositoryDaoImpl.class,
         RepositoryLinkDaoImpl.class,
         RelationDaoImpl.class,
-        RepositoryDaoImpl.class,
         EventDaoImpl.class,
 
         DependencyLoader.class,
@@ -63,6 +63,7 @@ import javax.sql.DataSource;
         RepositoryMapper.class,
         RepositoryLinkMapper.class,
         EventMapper.class,
+        ArtifactMapper.class,
 
         GithubResource.class,
         RelationResource.class,

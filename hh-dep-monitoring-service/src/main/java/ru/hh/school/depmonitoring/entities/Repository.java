@@ -76,6 +76,9 @@ public class Repository {
     @OneToMany(mappedBy = "repositoryId", fetch = FetchType.LAZY)
     private Set<RepositoryLink> linkUrls;
 
+    @OneToMany(mappedBy = "repository", fetch = FetchType.LAZY)
+    private Set<Artifact> artifacts;
+
     public Long getRepositoryId() {
         return repositoryId;
     }
@@ -118,6 +121,10 @@ public class Repository {
 
     public Set<RepositoryLink> getLinkUrls() {
         return linkUrls;
+    }
+
+    public Set<Artifact> getArtifacts() {
+        return artifacts;
     }
 
     public void setRepositoryType(RepositoryType repositoryType) {

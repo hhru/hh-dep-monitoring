@@ -48,6 +48,8 @@ public class RepositoryDto implements Serializable {
     @NotNull
     private List<RepositoryLinkDto> linkUrls;
 
+    private List<ArtifactDto> artifacts;
+
     @Nonnull
     public List<RepositoryLinkDto> getLinkUrls() {
         return Optional.ofNullable(linkUrls).orElseGet(List::of);
@@ -143,6 +145,14 @@ public class RepositoryDto implements Serializable {
 
     public void setRepositoryType(RepositoryType repositoryType) {
         this.repositoryType = repositoryType;
+    }
+
+    public List<ArtifactDto> getArtifacts() {
+        return artifacts;
+    }
+
+    public void setArtifacts(List<ArtifactDto> artifacts) {
+        this.artifacts = artifacts;
     }
 
     @Override

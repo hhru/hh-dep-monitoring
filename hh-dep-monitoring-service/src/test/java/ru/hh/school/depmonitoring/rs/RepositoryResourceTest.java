@@ -49,6 +49,18 @@ public class RepositoryResourceTest extends DepMonitoringTestBase {
     }
 
     @Test
+    public void getItemByIdWithArtifactTest() {
+        Integer controlArtifactId =  dbUtils.addItemToArtifactTable(1L);
+
+        RepositoryDto repositoryDto = target("/repository/1")
+                .request()
+                .get(RepositoryDto.class);
+        assertRepositoryDtoIsEquals(StructCreator.createRepositoryDto(), repositoryDto);
+        assertEquals(1, repositoryDto.getArtifacts().size());
+        assertEquals(controlArtifactId, repositoryDto.getArtifacts().get(0).getArtifactId());
+    }
+
+    @Test
     public void getNonExistingItemTest() {
         Response response = this.createRequest("/repository/99").get();
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), response.getStatus());

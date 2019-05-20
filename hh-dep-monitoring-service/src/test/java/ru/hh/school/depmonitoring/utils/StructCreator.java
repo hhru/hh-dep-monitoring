@@ -3,13 +3,14 @@ package ru.hh.school.depmonitoring.utils;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.dto.RepositoryLinkDto;
 import ru.hh.school.depmonitoring.dto.github.GHRepositoryDto;
-import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.entities.RepositoryType;
 import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
 import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.EventType;
+import ru.hh.school.depmonitoring.entities.Artifact;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -127,4 +128,15 @@ public class StructCreator {
 
         return event;
     }
+
+    public static Artifact createArtifactEntity() {
+        Artifact entity = new Artifact();
+
+        entity.setArtifactId(null);
+        entity.setArtifactName("artifact name");
+        entity.setGroupName("group name ");
+
+        return entity;
+    }
+
 }

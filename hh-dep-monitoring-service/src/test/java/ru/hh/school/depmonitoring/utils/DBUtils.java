@@ -4,8 +4,10 @@ import org.hibernate.SessionFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
+import ru.hh.school.depmonitoring.entities.Artifact;
 import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.Relation;
+import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
@@ -115,6 +117,22 @@ public class DBUtils {
             return Optional.empty();
         }
         return Optional.of(resultList.get(0).getRepositoryLinkId());
+    }
+
+    @Transactional
+    public Integer addItemToArtifactTable(Long repositoryId) {
+        Artifact entity = StructCreator.createArtifactEntity();
+        if (repositoryId != 0) {
+            Repository repository = sessionFactory
+                    .getCurrentSession()
+                    .get(Repository.class, repositoryId);
+            entity.setRepository(repository);
+        }
+        sessionFactory
+                .getCurrentSession()
+                .save(entity);
+
+        return entity.getArtifactId();
     }
 
     @Transactional
