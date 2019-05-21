@@ -12,14 +12,10 @@ import { fetchRepositoriesPage, clearRepositoriesPages } from 'redux/models/Repo
 import { getRepositoriesPages } from 'redux/models/Repository/repositoriesSelectors';
 import { PER_PAGE_VARIANTS, DEFAULT_PER_PAGE_VARIANT } from 'Utils/constants';
 import PaginationWidget from 'MainBlock/Pagination/PaginationWidget';
+import { genericPaper } from 'Utils/commonStyles';
 import RepositoryItem from './RepositoryItem';
 
-const styles = theme => ({
-    root: {
-        padding: theme.spacing.unit * 2,
-        width: theme.spacing.unit * 100,
-    },
-});
+const styles = genericPaper;
 
 function Repositories({ classes, repositories, pageCount, fetchRepositoriesPage, clearRepositoriesPages }) {
     const [page, setPage] = useState(0);

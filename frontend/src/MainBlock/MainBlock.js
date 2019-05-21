@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom';
 
-import Repositories from './Repositories/Repositories';
 import Repository from './Repository/Repository';
+import Artifacts from './Artifacts/Artifacts';
+import Repositories from './Repositories/Repositories';
 
 const styles = theme => ({
     root: {
@@ -26,6 +27,11 @@ export const routing = [
                 component: Repository,
             },
         ],
+    },
+    {
+        path: '/artifacts',
+        label: 'Artifacts',
+        component: Artifacts,
     },
     {
         path: '/about',
