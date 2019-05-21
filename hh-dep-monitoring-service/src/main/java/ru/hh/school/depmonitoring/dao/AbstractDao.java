@@ -1,13 +1,22 @@
 package ru.hh.school.depmonitoring.dao;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Optional;
-import javax.annotation.Nonnull;
-
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import ru.hh.school.depmonitoring.dto.PageRequestDto;
+
+import javax.annotation.Nonnull;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import java.io.Serializable;
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import static org.apache.commons.lang3.StringUtils.isBlank;
 
 /**
  * @inheritDoc
@@ -38,11 +47,27 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
     public List<T> findPage(@Nonnull PageRequestDto pageRequestDto) {
         int perPage = pageRequestDto.getPerPage();
         int offsetIndex = pageRequestDto.getPage() * perPage;
-        return getSession()
-                .createQuery("from " + clazz.getName(), clazz)
+        CriteriaBuilder cb = getSession().getCriteriaBuilder();
+        CriteriaQuery<T> cq = cb.createQuery(clazz);
+        Root<T> root = cq.from(clazz);
+
+        if (!isBlank(pageRequestDto.getSearchString())) {
+            String searchString = getContainsString(pageRequestDto.getSearchString());
+            cq.where(cb.like(cb.lower(root.get(getDefaultFilterField())), searchString.toLowerCase()));
+        }
+
+        for (PageRequestDto.PageSort pageSort : pageRequestDto.getPageSortList()) {
+            if (getFieldNames().contains(pageSort.getProperty())) {
+                var orderExpression = root.get(pageSort.getProperty());
+                cq.orderBy(pageSort.isAscending() ?
+                        cb.asc(orderExpression) :
+                        cb.desc(orderExpression));
+            }
+        }
+        return getSession().createQuery(cq)
                 .setFirstResult(offsetIndex)
                 .setMaxResults(perPage)
-                .list();
+                .getResultList();
     }
 
     @Override
@@ -83,5 +108,13 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
 
     protected final Session getSession() {
         return sessionFactory.getCurrentSession();
+    }
+
+    protected Set<String> getFieldNames() {
+        return Arrays.stream(this.clazz.getDeclaredFields()).map(Field::getName).collect(Collectors.toSet());
+    }
+
+    protected String getDefaultFilterField() {
+        return null;
     }
 }
