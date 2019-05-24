@@ -1,6 +1,5 @@
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 
 import { withStyles } from '@material-ui/core/styles';
 import EditIcon from '@material-ui/icons/Edit';
@@ -10,7 +9,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { fetchLinkTypes } from 'redux/models/Repository/repositoriesActions';
 import { addLinkIcon, linkFormPaper, linkControlIcon, linkFormHeader } from 'Utils/commonStyles';
 import FormContent from './FormContent';
 import DeleteLinkButton from './DeleteLinkButton';
@@ -22,11 +20,7 @@ const styles = () => ({
     linkFormHeader,
 });
 
-function OpenFormButton({ classes, repositoryId, fetchLinkTypes, linkTypes, link }) {
-    useEffect(() => {
-        !linkTypes && fetchLinkTypes();
-    }, []);
-
+function OpenFormButton({ classes, repositoryId, link }) {
     const [dialogOpen, setDialogOpen] = useState(false);
 
     const handleClickOpen = () => {
@@ -85,12 +79,7 @@ OpenFormButton.propTypes = {
         PropTypes.string,
         PropTypes.number,
     ]).isRequired,
-    fetchLinkTypes: PropTypes.func.isRequired,
-    linkTypes: PropTypes.array,
     link: PropTypes.object,
 };
 
-export default connect(
-    state => ({ linkTypes: state.repositories.linkTypes }),
-    { fetchLinkTypes },
-)(withStyles(styles)(OpenFormButton));
+export default withStyles(styles)(OpenFormButton);

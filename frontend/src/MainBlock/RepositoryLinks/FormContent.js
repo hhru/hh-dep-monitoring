@@ -9,7 +9,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 
 import Form from 'CommonComponents/Form';
-import { addLink, editLink } from 'redux/models/Repository/repositoriesActions';
+import { addLink, editLink, fetchLinkTypes } from 'redux/models/Repository/repositoriesActions';
 import Validator from 'Utils/Validator';
 import { formButton, dialogContent } from 'Utils/commonStyles';
 import LinkTypeSelect from './LinkTypeSelect';
@@ -20,7 +20,12 @@ const styles = () => ({
     dialogContent,
 });
 
-function FormContent({ classes, setOpen, repositoryId, addLink, editLink, formResult, link }) {
+function FormContent({ classes, setOpen, repositoryId, addLink, editLink, formResult, link,
+    fetchLinkTypes, linkTypes }) {
+    useEffect(() => {
+        !linkTypes && fetchLinkTypes();
+    }, []);
+
     const isNewLink = !link;
 
     const values = {
@@ -95,6 +100,8 @@ FormContent.propTypes = {
     editLink: PropTypes.func.isRequired,
     formResult: PropTypes.object,
     link: PropTypes.object,
+    fetchLinkTypes: PropTypes.func.isRequired,
+    linkTypes: PropTypes.array,
 };
 
 FormContent.defaultProps = {
@@ -102,8 +109,12 @@ FormContent.defaultProps = {
 };
 
 export default connect(
-    state => ({ formResult: state.notifications.formResult }),
+    state => ({
+        linkTypes: state.repositories.linkTypes,
+        formResult: state.notifications.formResult,
+    }),
     {
+        fetchLinkTypes,
         addLink,
         editLink,
     },

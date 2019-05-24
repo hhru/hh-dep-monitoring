@@ -47,7 +47,7 @@ LinkTypeSelect.propTypes = {
     classes: PropTypes.object.isRequired,
     type: PropTypes.object.isRequired,
     setType: PropTypes.func.isRequired,
-    linkTypes: PropTypes.array.isRequired,
+    linkTypes: PropTypes.array,
 };
 
 export default connect(
