@@ -7,9 +7,17 @@ export const getReposForSearch = (store, repositoryFor) => store.repositories.li
 
 export const getRepositories = store => store.repositories.list;
 
+export const getRepositoriesPages = store => store.repositories.pages;
+
 export const getRepositoryLinks = (store, repositoryId) => {
-    const repository = store.repositories.repositoryById[repositoryId]
-        || store.repositories.list.items.find(item => Number(repositoryId) === item.repositoryId);
+    let repository = store.repositories.repositoryById[repositoryId];
+    if (repository === undefined) {
+        const { pages } = store.repositories;
+        Object.keys(pages).some((page) => {
+            repository = pages[page].items.find(item => item.repositoryId === repositoryId);
+            return !!repository;
+        });
+    }
     const mainLink = {
         linkType: 'GITHUB',
         linkUrl: repository.htmlUrl,

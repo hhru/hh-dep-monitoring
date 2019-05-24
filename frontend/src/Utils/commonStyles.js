@@ -212,3 +212,10 @@ export const dialogContent = {
         paddingTop: '0px',
     },
 };
+
+export const pageButton = {
+    width: '40px',
+    height: '40px',
+    padding: '0px',
+    fontSize: '1.1rem',
+};
