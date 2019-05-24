@@ -7,7 +7,7 @@ import ru.hh.school.depmonitoring.entities.Repository;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
-import java.util.Optional;
+import java.util.List;
 
 @Named
 @Singleton
@@ -16,13 +16,18 @@ public class DependencyDao extends AbstractDao<Dependency, Integer> {
         super(sessionFactory, Dependency.class);
     }
 
-    public Optional<Dependency> findByRepositoryAndArtifact(Repository repository, Artifact artifact) {
+    public List<Dependency> findByRepositoryAndArtifact(Repository repository, Artifact artifact) {
         return getSession()
                 .createQuery("from Dependency where repository = :repository and artifactVersion.artifact = :artifact", Dependency.class)
                 .setParameter("repository", repository)
                 .setParameter("artifact", artifact)
-                .getResultList()
-                .stream()
-                .findFirst();
+                .getResultList();
+    }
+
+    public List<Dependency> findByParentDependency(Dependency dependency) {
+        return getSession()
+                .createQuery("from Dependency where parentDependency = :parentDependency", Dependency.class)
+                .setParameter("parentDependency", dependency)
+                .getResultList();
     }
 }

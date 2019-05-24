@@ -29,12 +29,17 @@ public class Dependency {
     @JoinColumn(name = "artifact_version_id")
     private ArtifactVersion artifactVersion;
 
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_dependency_id")
+    private Dependency parentDependency;
+
     public Dependency() {
     }
 
-    public Dependency(Repository repository, ArtifactVersion artifactVersion) {
+    public Dependency(Repository repository, ArtifactVersion artifactVersion, Dependency parentDependency) {
         this.repository = repository;
         this.artifactVersion = artifactVersion;
+        this.parentDependency = parentDependency;
     }
 
     public Integer getDependencyId() {
@@ -59,6 +64,14 @@ public class Dependency {
 
     public void setArtifactVersion(ArtifactVersion artifactVersion) {
         this.artifactVersion = artifactVersion;
+    }
+
+    public Dependency getParentDependency() {
+        return parentDependency;
+    }
+
+    public void setParentDependency(Dependency parentDependency) {
+        this.parentDependency = parentDependency;
     }
 
     @Override
