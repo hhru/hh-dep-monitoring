@@ -11,6 +11,7 @@ export const ADD_LINK = 'ADD_LINK';
 export const EDIT_LINK = 'EDIT_LINK';
 export const DELETE_LINK = 'DELETE_LINK';
 export const SET_FORM_RESULT = 'SET_FORM_RESULT';
+export const SET_SEARCH_STRING = 'SET_SEARCH_STRING';
 
 export const fetchRepositoriesAction = repositories => ({
     type: FETCH_REPOSITORIES,
@@ -69,6 +70,11 @@ export const deleteLinkAction = (repositoryId, linkId) => ({
     },
 });
 
+export const setSearchStringAction = searchString => ({
+    type: SET_SEARCH_STRING,
+    payload: searchString,
+});
+
 export function fetchRepositories() {
     return (dispatch) => {
         axios.get(REPOSITORY_URL)
@@ -81,9 +87,14 @@ export function fetchRepositories() {
     };
 }
 
-export function fetchRepositoriesPage(page = 0, perPage) {
+export function fetchRepositoriesPage(perPage, searchString, orderAttributes, page = 0) {
     return (dispatch) => {
-        axios.get(`${REPOSITORY_URL}/page?page=${page}&perPage=${perPage}`)
+        const searchParam = searchString === '' ? searchString : `&searchString=${searchString}`;
+        let orderParams = '';
+        orderAttributes.forEach((attribute) => {
+            orderParams += `&order=${attribute.name},${attribute.state}`;
+        });
+        axios.get(`${REPOSITORY_URL}/page?page=${page}&perPage=${perPage}${searchParam}${orderParams}`)
             .then((response) => {
                 dispatch(fetchRepositoriesPageAction(page, response.data));
             })
@@ -164,5 +175,11 @@ export function deleteLink(repositoryLinkId, repositoryId) {
                 dispatch(setFormResultAction(true, 'Link', 'deleted'));
             })
             .catch(() => dispatch(setFormResultAction(false)));
+    };
+}
+
+export function setSearchString(searchString) {
+    return (dispatch) => {
+        dispatch(setSearchStringAction(searchString));
     };
 }

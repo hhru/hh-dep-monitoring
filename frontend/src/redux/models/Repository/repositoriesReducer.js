@@ -1,11 +1,12 @@
 import createReducer from 'redux/createReducer';
 import { FETCH_REPOSITORIES, FETCH_REPOSITORIES_PAGE, CLEAR_REPOSITORIES_PAGES, FETCH_REPOSITORY,
-    FETCH_LINK_TYPES, ADD_LINK, EDIT_LINK, DELETE_LINK } from './repositoriesActions';
+    FETCH_LINK_TYPES, ADD_LINK, EDIT_LINK, DELETE_LINK, SET_SEARCH_STRING } from './repositoriesActions';
 
 export const initialState = {
     list: {},
     pages: {},
     pageCount: undefined,
+    searchString: '',
     repositoryById: {},
     linkTypes: undefined,
 };
@@ -63,4 +64,5 @@ export const repositoriesReducer = createReducer(initialState, {
             .linkUrls.filter(item => (item.repositoryLinkId !== linkId));
         return newState;
     },
+    [SET_SEARCH_STRING]: (state, action) => ({ ...state, searchString: action.payload }),
 });

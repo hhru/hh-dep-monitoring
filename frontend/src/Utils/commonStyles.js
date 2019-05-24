@@ -188,6 +188,12 @@ export const repoIconsContainer = {
     alignItems: 'flex-end',
 };
 
+export const flexInlineContainer = {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+};
+
 export const capitalize = {
     display: 'block',
     textTransform: 'lowercase',
@@ -201,9 +207,7 @@ export const linkControlIcon = {
 };
 
 export const linkFormHeader = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    ...flexInlineContainer,
     paddingRight: '20px',
 };
 
@@ -224,9 +228,7 @@ export const listItemWithoutIcon = {
     marginLeft: '60px',
 };
 
-export const genericPaper = theme => ({
-    root: {
-        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
-        width: `${theme.spacing.unit * 100}px`,
-    },
-});
+export const genericPaper = {
+    padding: '16px',
+    width: '800px',
+};
