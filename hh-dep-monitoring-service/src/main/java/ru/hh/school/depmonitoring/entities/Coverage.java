@@ -29,13 +29,24 @@ public class Coverage {
     @Enumerated(EnumType.STRING)
     @Column(name = "source_type")
     @NotNull
-    private EventType sourceType;
+    private CoverageSourceType sourceType;
 
     @Column(name = "repository_id")
     private Long repositoryId;
 
     @Column(name = "coverage")
     private Float coverage;
+
+    public Coverage(LocalDateTime analizeTime, CoverageSourceType sourceType, Long repositoryId, Float coverage) {
+        this.coverageId = coverageId;
+        this.analizeTime = analizeTime;
+        this.sourceType = sourceType;
+        this.repositoryId = repositoryId;
+        this.coverage = coverage;
+    }
+
+    private Coverage() {
+    }
 
     public Integer getCoverageId() {
         return coverageId;
@@ -53,11 +64,11 @@ public class Coverage {
         this.analizeTime = buildTime;
     }
 
-    public EventType getSourceType() {
+    public CoverageSourceType getSourceType() {
         return sourceType;
     }
 
-    public void setSourceType(EventType sourceType) {
+    public void setSourceType(CoverageSourceType sourceType) {
         this.sourceType = sourceType;
     }
 

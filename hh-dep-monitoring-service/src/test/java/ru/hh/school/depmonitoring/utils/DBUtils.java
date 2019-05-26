@@ -5,11 +5,12 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dto.RelationDto;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Artifact;
+import ru.hh.school.depmonitoring.entities.Coverage;
 import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
-import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
+import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 
@@ -100,11 +101,25 @@ public class DBUtils {
     }
 
     @Transactional
+    public void addItemToRepositoryTable(Repository repository) {
+        sessionFactory
+                .getCurrentSession()
+                .persist(repository);
+    }
+
+    @Transactional
     public void addItemToRepositoryLinkTable(long repId) {
         sessionFactory
                 .getCurrentSession()
                 .save(repositoryLinkMapper
                         .toEntity(StructCreator.createRepositoryLinkDto(repId)));
+    }
+
+    @Transactional
+    public void addItemToRepositoryLinkTable(RepositoryLink repositoryLink) {
+        sessionFactory
+                .getCurrentSession()
+                .save(repositoryLink);
     }
 
     @Transactional
@@ -140,6 +155,14 @@ public class DBUtils {
     @Transactional
     public <T> T doInTransaction(Supplier<T> supplier) {
         return supplier.get();
+    }
+
+    @Transactional(readOnly = true)
+    public int getCoveragesCount() {
+        return sessionFactory.getCurrentSession()
+                .createQuery("select count(*) from " + Coverage.class.getName(), Long.class)
+                .uniqueResult()
+                .intValue();
     }
 
     @Transactional

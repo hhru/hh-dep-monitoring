@@ -10,6 +10,7 @@ import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.EventType;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryLink;
 import ru.hh.school.depmonitoring.entities.RepositoryLinkType;
 import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 import ru.hh.school.depmonitoring.entities.RepositoryType;
@@ -120,6 +121,15 @@ public class StructCreator {
         repositoryLinkDto.setRepositoryId(repId);
         repositoryLinkDto.setLinkUrl("127.0.0.1:8080");
         return repositoryLinkDto;
+    }
+
+    public static RepositoryLink createRepositoryLinkEntity(long id, String url, RepositoryLinkType type) {
+        RepositoryLink repositoryLink = new RepositoryLink();
+        repositoryLink.setRepositoryLinkId(null);
+        repositoryLink.setLinkType(type);
+        repositoryLink.setRepositoryId(id);
+        repositoryLink.setLinkUrl(url);
+        return repositoryLink;
     }
 
     public static Event createEventEntity() {

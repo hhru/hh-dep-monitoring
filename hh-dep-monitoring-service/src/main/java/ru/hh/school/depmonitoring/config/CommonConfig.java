@@ -13,6 +13,7 @@ import ru.hh.nab.hibernate.datasource.RoutingDataSource;
 import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
 import ru.hh.school.depmonitoring.dao.DependencyDao;
+import ru.hh.school.depmonitoring.dao.impl.CoverageDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.EventDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
@@ -26,8 +27,10 @@ import ru.hh.school.depmonitoring.service.RelationService;
 import ru.hh.school.depmonitoring.service.RepositoryLinkService;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.service.SyncService;
+import ru.hh.school.depmonitoring.service.loaders.CoverageLoader;
 import ru.hh.school.depmonitoring.service.loaders.DependencyLoader;
 import ru.hh.school.depmonitoring.service.EventService;
+import ru.hh.school.depmonitoring.service.loaders.coveragesourceimpl.SonarCloudCoverageSource;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
@@ -49,14 +52,17 @@ import javax.sql.DataSource;
         RepositoryLinkDaoImpl.class,
         RelationDaoImpl.class,
         EventDaoImpl.class,
+        CoverageDaoImpl.class,
 
         DependencyLoader.class,
+        CoverageLoader.class,
         RelationService.class,
         RepositoryService.class,
         SyncService.class,
         RepositoryService.class,
         RepositoryLinkService.class,
         EventService.class,
+        SonarCloudCoverageSource.class,
 
         GHRepositoryMapper.class,
         RelationMapper.class,
