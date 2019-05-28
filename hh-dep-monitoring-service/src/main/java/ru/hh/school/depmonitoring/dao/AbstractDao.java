@@ -7,9 +7,11 @@ import ru.hh.school.depmonitoring.dto.PageRequestDto;
 import javax.annotation.Nonnull;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -56,14 +58,16 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
             cq.where(cb.like(cb.lower(root.get(getDefaultFilterField())), searchString.toLowerCase()));
         }
 
+        List<Order> orders = new ArrayList<>();
         for (PageRequestDto.PageSort pageSort : pageRequestDto.getPageSortList()) {
             if (getFieldNames().contains(pageSort.getProperty())) {
                 var orderExpression = root.get(pageSort.getProperty());
-                cq.orderBy(pageSort.isAscending() ?
+                orders.add(pageSort.isAscending() ?
                         cb.asc(orderExpression) :
                         cb.desc(orderExpression));
             }
         }
+        cq.orderBy(orders);
         return getSession().createQuery(cq)
                 .setFirstResult(offsetIndex)
                 .setMaxResults(perPage)
