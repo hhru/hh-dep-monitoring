@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import LinkIcon from '@material-ui/icons/Link';
 import LinkOffIcon from '@material-ui/icons/LinkOff';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { relatedRepositoryIcon, repoIconsContainer } from 'Utils/commonStyles';
+import { relatedRepositoryIcon, repoIconsContainer,
+    flexVerticalContainer, flexInlineContainer } from 'Utils/commonStyles';
 import RepositoryLinks from 'MainBlock/RepositoryLinks/RepositoryLinks';
 import ListItemInfo from './ListItemInfo';
 import ListItemTitle from './ListItemTitle';
@@ -16,6 +16,11 @@ import ListItemTitle from './ListItemTitle';
 const styles = () => ({
     relatedRepositoryIcon,
     repoIconsContainer,
+    repoInfoContainer: {
+        ...flexVerticalContainer,
+        justifyContent: 'space-between',
+    },
+    flexInlineContainer,
 });
 
 function RepositoryItem({ classes, repository }) {
@@ -31,23 +36,20 @@ function RepositoryItem({ classes, repository }) {
     };
 
     return (
-        <ListItem>
-            <ListItemText
-                primary={(
-                    <ListItemTitle
-                        repositoryId={repository.repositoryId}
-                        name={repository.name}
-                        archived={repository.archived}
-                    />
-                )}
-                secondary={(
-                    <ListItemInfo
-                        descr={repository.description === null ? '' : repository.description}
-                        dateUpdate={repository.updatedAt}
-                        dateEvent={repository.lastEvent}
-                    />
-                )}
-            />
+        <ListItem className={classes.flexInlineContainer}>
+            <div className={classes.repoInfoContainer}>
+                <ListItemTitle
+                    repositoryId={repository.repositoryId}
+                    name={repository.name}
+                    archived={repository.archived}
+                />
+                <ListItemInfo
+                    description={repository.description === null ? '' : repository.description}
+                    dateUpdate={repository.updatedAt}
+                    dateEvent={repository.lastEvent}
+                    type={repository.repositoryType}
+                />
+            </div>
             <div className={classes.repoIconsContainer}>
                 <RepositoryLinks repositoryId={repository.repositoryId} size="small" />
                 {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}

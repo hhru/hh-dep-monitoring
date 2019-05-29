@@ -9,14 +9,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { addLinkIcon, linkFormPaper, linkControlIcon, linkFormHeader } from 'Utils/commonStyles';
+import { addLinkIcon, linkFormPaper, adminBadgeIcon, linkFormHeader } from 'Utils/commonStyles';
 import FormContent from './FormContent';
 import DeleteLinkButton from './DeleteLinkButton';
 
 const styles = () => ({
     addLinkIcon,
     linkFormPaper,
-    linkControlIcon,
+    adminBadgeIcon,
     linkFormHeader,
 });
 
@@ -34,7 +34,7 @@ function OpenFormButton({ classes, repositoryId, link }) {
     return (
         <Fragment>
             {link
-                ? <EditIcon className={classes.linkControlIcon} onClick={handleClickOpen} />
+                ? <EditIcon className={classes.adminBadgeIcon} onClick={handleClickOpen} />
                 : (
                     <Tooltip title="Add new link" placement="right" enterDelay={300}>
                         <Fab onClick={handleClickOpen} className={classes.addLinkIcon}>
