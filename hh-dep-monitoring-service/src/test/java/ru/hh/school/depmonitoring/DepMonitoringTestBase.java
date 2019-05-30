@@ -5,6 +5,9 @@ import org.springframework.test.context.ContextConfiguration;
 import ru.hh.nab.starter.NabApplication;
 import ru.hh.nab.testbase.NabTestBase;
 import ru.hh.school.depmonitoring.config.TestConfig;
+import ru.hh.school.depmonitoring.entities.Artifact;
+import ru.hh.school.depmonitoring.entities.ArtifactVersion;
+import ru.hh.school.depmonitoring.entities.Dependency;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
@@ -35,6 +38,9 @@ public class DepMonitoringTestBase extends NabTestBase {
         dbUtils.cleanTable(RepositoryLink.class);
         dbUtils.cleanTable(Relation.class);
         dbUtils.cleanTable(Repository.class);
+        dbUtils.cleanTable(Artifact.class);
+        dbUtils.cleanTable(ArtifactVersion.class);
+        dbUtils.cleanTable(Dependency.class);
     }
 
     @Override

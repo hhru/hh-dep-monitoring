@@ -68,10 +68,10 @@ public class DependencyLoader {
 
     @Transactional
     public void saveDependencyData() {
-        saveDependencyData(getDataFromBamboo(), null);
+        saveDependencyData(getDataFromBamboo(), null, null);
     }
 
-    private void saveDependencyData(List<BambooArtifactDto> artifactDtoList, Repository parentRepository) {
+    private void saveDependencyData(List<BambooArtifactDto> artifactDtoList, Repository parentRepository, Dependency parentDependency) {
         for (var bambooArtifactDto: artifactDtoList) {
             String repoName = bambooArtifactDto.getRepoName();
             Optional<Repository> repositoryOptional = (repoName == null || repoName.isEmpty()) ?
@@ -90,10 +90,9 @@ public class DependencyLoader {
                 String groupName = keyList[0];
                 String artifactName = keyList[1];
                 String version = keyList[2];
-
-                saveArtifact(groupName, artifactName, version, repositoryOfArtifact, parentRepository);
-
-                saveDependencyData(bambooArtifactDto.getDependencyTree(), parentRepository == null ? repositoryOfArtifact : parentRepository);
+                var repository = (parentRepository == null ? repositoryOfArtifact : parentRepository);
+                var dependency = saveArtifact(groupName, artifactName, version, repositoryOfArtifact, repository, parentDependency);
+                saveDependencyData(bambooArtifactDto.getDependencyTree(), repository, dependency);
             }
         }
     }
@@ -105,7 +104,14 @@ public class DependencyLoader {
                 .collect(Collectors.toList());
     }
 
-    private void saveArtifact(String groupName, String artifactName, String version, Repository repository, Repository parentRepository) {
+    private Dependency saveArtifact(
+            String groupName,
+            String artifactName,
+            String version,
+            Repository repository,
+            Repository parentRepository,
+            Dependency parentDependency
+    ) {
         var artifactOptional = artifactDao.findByName(groupName, artifactName);
         var artifact = artifactOptional.orElseGet(() -> createArtifact(artifactName, groupName, repository));
         if (repository != null &&
@@ -119,26 +125,45 @@ public class DependencyLoader {
                 Optional.empty();
         var artifactVersion = artifactVersionOptional.orElseGet(() -> createArtifactVersion(artifact, version));
 
-        if (parentRepository != null) {
-            var dependencyOptional = dependencyDao.findByRepositoryAndArtifact(parentRepository, artifact);
-            boolean needCreate = true;
-            if (dependencyOptional.isPresent()) {
-                if (artifactVersionOptional.isPresent() && artifactVersionOptional.get().equals(dependencyOptional.get().getArtifactVersion())) {
-                    needCreate = false;
-                } else {
-                    artifactVersionOptional.ifPresent(newArtifactVersion -> createEvent(
-                            parentRepository.getRepositoryId(),
-                            dependencyOptional.get().getArtifactVersion(),
-                            newArtifactVersion)
-                    );
-                    dependencyDao.delete(dependencyOptional.get());
-                }
+        Optional<Dependency> dependencyOptional = getDependency(parentRepository, artifact, parentDependency);
+        if (dependencyOptional.isPresent()) {
+            Dependency dependency = dependencyOptional.get();
+            if (artifactVersionOptional.isPresent() && artifactVersionOptional.get().equals(dependency.getArtifactVersion())) {
+                return dependency;
             }
-            if (needCreate) {
-                Dependency dependency = new Dependency(parentRepository, artifactVersion);
-                dependencyDao.create(dependency);
+            createEvent(parentRepository.getRepositoryId(), dependency.getArtifactVersion(), artifactVersion);
+            deleteDependency(dependency);
+        }
+        Dependency dependency = new Dependency(parentRepository, artifactVersion, parentDependency);
+        dependencyDao.create(dependency);
+        return dependency;
+    }
+
+    private Optional<Dependency> getDependency(Repository parentRepository, Artifact artifact, Dependency parentDependency) {
+        var dependencyList = dependencyDao.findByRepositoryAndArtifact(parentRepository, artifact);
+        for (var dependencyItem : dependencyList) {
+            if (parentDependency == null && dependencyItem.getParentDependency() == null ||
+                    parentDependency != null && getHeadDependency(parentDependency).equals(getHeadDependency(dependencyItem))) {
+                return Optional.of(dependencyItem);
             }
         }
+        return Optional.empty();
+    }
+
+    private Dependency getHeadDependency(Dependency dependency) {
+        Dependency headDependency = dependency;
+        while (headDependency.getParentDependency() != null) {
+            headDependency = headDependency.getParentDependency();
+        }
+        return headDependency;
+    }
+
+    private void deleteDependency(Dependency dependency) {
+        var dependencyList = dependencyDao.findByParentDependency(dependency);
+        for (var dependencyItem : dependencyList) {
+            deleteDependency(dependencyItem);
+        }
+        dependencyDao.delete(dependency);
     }
 
     private Artifact createArtifact(String artifactName, String groupName, Repository repository) {

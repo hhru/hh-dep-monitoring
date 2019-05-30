@@ -91,10 +91,12 @@ public class DBUtils {
     }
 
     @Transactional
-    public void addItemToRepositoryTable(RepositoryDto repositoryDto) {
+    public Repository addItemToRepositoryTable(RepositoryDto repositoryDto) {
+        var repository = repositoryMapper.toEntity(repositoryDto);
         sessionFactory
                 .getCurrentSession()
-                .persist(repositoryMapper.toEntity(repositoryDto));
+                .persist(repository);
+        return repository;
     }
 
     @Transactional
@@ -138,5 +140,13 @@ public class DBUtils {
     @Transactional
     public <T> T doInTransaction(Supplier<T> supplier) {
         return supplier.get();
+    }
+
+    @Transactional
+    public void doInTransaction(Runnable runnable) {
+        doInTransaction(() -> {
+            runnable.run();
+            return null;
+        });
     }
 }
