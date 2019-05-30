@@ -219,3 +219,14 @@ export const pageButton = {
     padding: '0px',
     fontSize: '1.1rem',
 };
+
+export const listItemWithoutIcon = {
+    marginLeft: '60px',
+};
+
+export const genericPaper = theme => ({
+    root: {
+        padding: `${theme.spacing.unit}px ${theme.spacing.unit * 2}px`,
+        width: `${theme.spacing.unit * 100}px`,
+    },
+});

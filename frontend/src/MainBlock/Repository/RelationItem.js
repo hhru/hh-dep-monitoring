@@ -12,7 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 
-import { genericLink, nestedBlock, secondaryItemColor } from 'Utils/commonStyles';
+import { genericLink, nestedBlock, secondaryItemColor, listItemWithoutIcon } from 'Utils/commonStyles';
 import PriorityLabel from './PriorityLabel';
 import Relations from './Relations';
 import EditRelationButton from './RelationForm/OpenFormButton';
@@ -21,14 +21,12 @@ import DeleteRelationButton from './DeleteRelation/DeleteRelationButton';
 const styles = () => ({
     nestedBlock,
     genericLink,
+    listItemWithoutIcon,
     icon: {
         fill: secondaryItemColor,
     },
     hidden: {
         visibility: 'hidden',
-    },
-    withoutIcon: {
-        marginLeft: '60px',
     },
 });
 
@@ -50,7 +48,7 @@ function RelationItem({ classes, relation, adminMode }) {
                     </IconButton>
                 )}
                 <ListItemText
-                    className={classNames({ [classes.withoutIcon]: !relation.repositoryToHasRelations })}
+                    className={classNames({ [classes.listItemWithoutIcon]: !relation.repositoryToHasRelations })}
                     primary={(
                         <Fragment>
                             <PriorityLabel priority={relation.priority} />
