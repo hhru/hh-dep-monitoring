@@ -62,6 +62,10 @@ public class SyncService {
         dependencyLoader.saveDependencyData();
     }
 
+    public void syncBamboo(String bambooLink) {
+        dependencyLoader.saveDependencyData(bambooLink);
+    }
+
 
     @Scheduled(initialDelay = 2 * 60 * 1000L, fixedDelay = 15 * 60 * 1000L)
     public void syncCoverage() {
