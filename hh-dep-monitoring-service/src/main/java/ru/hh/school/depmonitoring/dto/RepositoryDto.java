@@ -53,6 +53,9 @@ public class RepositoryDto implements Serializable {
 
     private List<ArtifactDto> artifacts;
 
+    @Nullable
+    private Float coverage;
+
     @Nonnull
     public List<RepositoryLinkDto> getLinkUrls() {
         return Optional.ofNullable(linkUrls).orElseGet(List::of);
@@ -164,6 +167,14 @@ public class RepositoryDto implements Serializable {
 
     public void setArtifacts(List<ArtifactDto> artifacts) {
         this.artifacts = artifacts;
+    }
+
+    public Float getCoverage() {
+        return coverage;
+    }
+
+    public void setCoverage(Float coverage) {
+        this.coverage = coverage;
     }
 
     @Override
