@@ -12,7 +12,9 @@ import { fetchArtifactTree } from 'redux/models/Artifact/artifactsActions';
 import { genericPaper } from 'Utils/commonStyles';
 import ArtifactRepositoryItem from './ArtifactRepositoryItem';
 
-const styles = genericPaper;
+const styles = () => ({
+    genericPaper,
+});
 
 function Artifacts({ classes, artifactTree, fetchArtifactTree }) {
     useEffect(() => {
@@ -20,7 +22,7 @@ function Artifacts({ classes, artifactTree, fetchArtifactTree }) {
     }, []);
 
     return (
-        <Paper className={classes.root}>
+        <Paper className={classes.genericPaper}>
             <Typography variant="h4">
                 Artifacts
                 {!artifactTree && ' not found'}

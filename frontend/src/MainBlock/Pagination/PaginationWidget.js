@@ -6,15 +6,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 
 import { PER_PAGE_VARIANTS } from 'Utils/constants';
-import { secondaryItemColor } from 'Utils/commonStyles';
+import { secondaryItemColor, flexInlineContainer } from 'Utils/commonStyles';
 import PaginationButton from './PaginationButton';
 
 const styles = () => ({
-    widgetContainer: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-    },
+    widgetContainer: flexInlineContainer,
     perPageLabel: {
         padding: '18px',
         color: secondaryItemColor,
