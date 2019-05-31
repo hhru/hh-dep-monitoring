@@ -37,4 +37,11 @@ public class DependencyDao extends AbstractDao<Dependency, Integer> {
                 .setParameter("artifact", artifact)
                 .getResultList();
     }
+
+    public List<Dependency> findRepositoryFirstLevel(Repository repository) {
+        return getSession()
+                .createQuery("from Dependency where repository = :repository and parentDependency is null", Dependency.class)
+                .setParameter("repository", repository)
+                .getResultList();
+    }
 }
