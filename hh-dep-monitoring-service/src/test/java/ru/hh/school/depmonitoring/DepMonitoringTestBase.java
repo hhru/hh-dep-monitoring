@@ -12,6 +12,7 @@ import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.entities.RepositoryLink;
 import ru.hh.school.depmonitoring.rs.BambooTestResource;
+import ru.hh.school.depmonitoring.rs.SonarCloudTestResource;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.ObjectMapperContextResolver;
 
@@ -28,7 +29,7 @@ public class DepMonitoringTestBase extends NabTestBase {
     protected NabApplication getApplication() {
         return NabApplication.builder()
                 .configureJersey()
-                .registerResources(ObjectMapperContextResolver.class, BambooTestResource.class)
+                .registerResources(ObjectMapperContextResolver.class, BambooTestResource.class, SonarCloudTestResource.class)
                 .bindToRoot()
                 .build();
     }

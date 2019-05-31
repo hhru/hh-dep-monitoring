@@ -1,0 +1,15 @@
+{
+  "component": {
+    "id": "id",
+    "key": "key",
+    "name": "name",
+    "qualifier": "TRK",
+    "measures": [
+      {
+        "metric": "coverage",
+        "value": "10.0",
+        "bestValue": false
+      }
+    ]
+  }
+}

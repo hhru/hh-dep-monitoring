@@ -48,4 +48,9 @@ public class TestConfig {
     protected String bambooLink(NabTestContext testContext) {
         return JettyTestContainer.getServerAddress(testContext.getPortHolder().getPort()).toString().concat("/bamboo");
     }
+
+    @Bean
+    protected String sonarCloudLink(NabTestContext testContext) {
+        return JettyTestContainer.getServerAddress(testContext.getPortHolder().getPort()).toString().concat("/sonarCloud");
+    }
 }

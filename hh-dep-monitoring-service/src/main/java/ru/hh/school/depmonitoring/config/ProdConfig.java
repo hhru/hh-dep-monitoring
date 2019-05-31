@@ -43,4 +43,9 @@ public class ProdConfig {
         return oauthOptional
                 .orElseThrow(() -> new IllegalArgumentException("Error in getting " + property + " from service.properties"));
     }
+
+    @Bean
+    protected String sonarCloudLink(FileSettings fileSettings) {
+        return getProperty(fileSettings, "sonarCloud.link");
+    }
 }
