@@ -47,6 +47,7 @@ public class RepositoryService {
         currentRepository.setName(dto.getName());
         currentRepository.setActive(dto.isActive());
         currentRepository.setArchived(dto.isArchived());
+        currentRepository.setRepositoryType(dto.getRepositoryType());
 
         repositoryDao.update(currentRepository);
         return repositoryMapper.toDto(currentRepository);
