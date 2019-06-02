@@ -40,6 +40,7 @@ export const relationsReducer = createReducer(initialState, {
     [ADD_RELATION]: (state, action) => {
         const { repositoryId, newRelation } = action.payload;
         const newState = Object.assign({}, state);
+        !newState.relationsByRepoId[repositoryId] && (newState.relationsByRepoId[repositoryId] = {});
         newState.relationsByRepoId[repositoryId][newRelation.priority] = [].concat(
             newState.relationsByRepoId[repositoryId][newRelation.priority] || [], newRelation,
         );

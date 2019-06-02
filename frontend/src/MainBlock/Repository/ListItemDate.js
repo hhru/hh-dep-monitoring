@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
 import { dateFullItem } from 'Utils/commonStyles';
-import formatDate from 'Utils/date';
+import { formatDate } from 'Utils/date';
 
 const styles = () => ({
     dateFullItem,

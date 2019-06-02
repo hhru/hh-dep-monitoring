@@ -8,7 +8,7 @@ import RemoveIcon from '@material-ui/icons/Remove';
 import Collapse from '@material-ui/core/Collapse';
 import { withStyles } from '@material-ui/core';
 
-import { genericLink, nestedBlock, secondaryItemColor } from 'Utils/commonStyles';
+import { genericLink, nestedBlock, secondaryItemColor, listItem } from 'Utils/commonStyles';
 import DependencyItems from './DependencyItems';
 
 const styles = () => ({
@@ -17,6 +17,7 @@ const styles = () => ({
     icon: {
         fill: secondaryItemColor,
     },
+    listItem,
 });
 
 function ArtfactListItem({ classes, children, nestedItems }) {
@@ -30,7 +31,7 @@ function ArtfactListItem({ classes, children, nestedItems }) {
 
     return (
         <Fragment>
-            <ListItem>
+            <ListItem className={classes.listItem}>
                 {hasAnyChildren && (
                     <IconButton onClick={toggle}>
                         {open

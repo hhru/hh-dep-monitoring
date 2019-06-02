@@ -3,17 +3,13 @@ import PropTypes from 'prop-types';
 
 import { makeStyles } from '@material-ui/styles';
 
-import { dateListItem, secondaryItemColorLighter } from 'Utils/commonStyles';
-import formatDate from 'Utils/date';
+import { dateListItem, descriptionListItem } from 'Utils/commonStyles';
+import { formatDate } from 'Utils/date';
 import RepositoryTypeLabel from 'MainBlock/RepositoryType/RepositoryTypeLabel';
 
 const useStyles = makeStyles({
     dateListItem,
-    description: {
-        color: secondaryItemColorLighter,
-        margin: '5px 0',
-        fontSize: 14,
-    },
+    descriptionListItem,
     repositoryInfo: {
         margin: '3px 0',
     },
@@ -23,7 +19,7 @@ export default function ListItemInfo({ description, dateUpdate, dateEvent, type 
     const classes = useStyles();
     return (
         <Fragment>
-            <div className={classes.description}>
+            <div className={classes.descriptionListItem}>
                 {!!description && description}
             </div>
             <div className={classes.repositoryInfo}>

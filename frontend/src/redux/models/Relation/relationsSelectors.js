@@ -1,8 +1,9 @@
 export function getRelations(store, repositoryId) {
+    const priorityOrder = ['CRITICAL', 'PARTIAL', 'OPTIONAL'];
     const relationsByPriority = store.relations.relationsByRepoId[repositoryId];
     let relations = [];
-    relationsByPriority && Object.keys(relationsByPriority).forEach((priority) => {
-        relations = relations.concat(relationsByPriority[priority]);
+    relationsByPriority && priorityOrder.forEach((priority) => {
+        relationsByPriority[priority] && (relations = relations.concat(relationsByPriority[priority]));
     });
     return relations;
 }
