@@ -29,7 +29,7 @@ public class CoverageLoaderTest extends DepMonitoringTestBase {
         dbUtils.addItemToRepositoryTable(repository);
         RepositoryLink repositoryLink = StructCreator.createRepositoryLinkEntity(1,
                 "http://sonarcloud.io/dashboard?id=key",
-                RepositoryLinkType.SONAR_CLOUD);
+                RepositoryLinkType.SONARCLOUD);
         dbUtils.addItemToRepositoryLinkTable(repositoryLink);
         assertTrue(dbUtils.getCoveragesCount() == 0);
         coverageLoader.loadCoverage();

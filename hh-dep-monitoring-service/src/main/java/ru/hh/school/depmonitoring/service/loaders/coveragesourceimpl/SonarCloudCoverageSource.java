@@ -81,9 +81,9 @@ public class SonarCloudCoverageSource implements CoverageSource {
             log.error(e.getMessage());
             return;
         }
-        Optional<Coverage> coverageOptional = coverageDao.findLastForRepositoryByType(repository.getRepositoryId(), CoverageSourceType.SONAR_CLOUD);
+        Optional<Coverage> coverageOptional = coverageDao.findLastForRepositoryByType(repository.getRepositoryId(), CoverageSourceType.SONARCLOUD);
         if (!coverageOptional.isPresent() || coverageOptional.get().getCoverage() != newCoverage) {
-            Coverage coverage = new Coverage(LocalDateTime.now(), CoverageSourceType.SONAR_CLOUD, repository.getRepositoryId(), newCoverage);
+            Coverage coverage = new Coverage(LocalDateTime.now(), CoverageSourceType.SONARCLOUD, repository.getRepositoryId(), newCoverage);
             coverageDao.create(coverage);
         }
     }

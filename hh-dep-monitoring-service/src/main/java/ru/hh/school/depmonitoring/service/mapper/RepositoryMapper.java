@@ -7,6 +7,7 @@ import ru.hh.school.depmonitoring.entities.Coverage;
 import ru.hh.school.depmonitoring.entities.CoverageSourceType;
 import ru.hh.school.depmonitoring.entities.Repository;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
@@ -61,8 +62,8 @@ public class RepositoryMapper implements Mapper<RepositoryDto, Repository> {
         dto.setLinkUrls(repositoryLinkMapper.toDto(entity.getLinkUrls()));
         dto.setArtifacts(artifactMapper.toDto(entity.getArtifacts()));
         dto.setLastEvent(eventDao.getLastEventForRepository(entity.getRepositoryId()).orElse(null));
-        Optional<Coverage> coverage = coverageDao.findLastForRepositoryByType(entity.getRepositoryId(), CoverageSourceType.SONAR_CLOUD);
-        dto.setCoverage(coverage.map(Coverage::getCoverage).orElse(null));
+        Optional<Coverage> coverageOptional = coverageDao.findLastForRepositoryByType(entity.getRepositoryId(), CoverageSourceType.SONARCLOUD);
+        dto.setCoverage(coverageOptional.map(Coverage::getCoverage).map(BigDecimal::new).orElse(null));
 
         dto.setHasRelatedTo(entity.getRelatedTo() != null && !entity.getRelatedTo().isEmpty());
         dto.setHasRelatedFrom(entity.getRelatedFrom() != null && !entity.getRelatedFrom().isEmpty());
