@@ -43,7 +43,8 @@ function RepositoryItem({ classes, repository }) {
                 secondary={(
                     <ListItemInfo
                         descr={repository.description === null ? '' : repository.description}
-                        date={repository.updatedAt}
+                        dateUpdate={repository.updatedAt}
+                        dateEvent={repository.lastEvent}
                     />
                 )}
             />
