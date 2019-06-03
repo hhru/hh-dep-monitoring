@@ -1,7 +1,7 @@
 package ru.hh.school.depmonitoring.entities;
 
 public enum RepositoryLinkType {
-    SONAR_CLOUD,
+    SONARCLOUD,
     SONAR,
     BAMBOO,
     TRAVIS,

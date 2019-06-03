@@ -6,6 +6,7 @@ import java.io.Serializable;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
@@ -52,6 +53,9 @@ public class RepositoryDto implements Serializable {
     private List<RepositoryLinkDto> linkUrls;
 
     private List<ArtifactDto> artifacts;
+
+    @Nullable
+    private BigDecimal coverage;
 
     @Nonnull
     public List<RepositoryLinkDto> getLinkUrls() {
@@ -164,6 +168,14 @@ public class RepositoryDto implements Serializable {
 
     public void setArtifacts(List<ArtifactDto> artifacts) {
         this.artifacts = artifacts;
+    }
+
+    public BigDecimal getCoverage() {
+        return coverage;
+    }
+
+    public void setCoverage(BigDecimal coverage) {
+        this.coverage = coverage;
     }
 
     @Override

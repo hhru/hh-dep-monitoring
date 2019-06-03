@@ -2,6 +2,7 @@ package ru.hh.school.depmonitoring.service.mapper;
 
 import org.junit.Test;
 import org.mockito.Mockito;
+import ru.hh.school.depmonitoring.dao.CoverageDao;
 import ru.hh.school.depmonitoring.dao.EventDao;
 import ru.hh.school.depmonitoring.dto.RepositoryDto;
 import ru.hh.school.depmonitoring.entities.Repository;
@@ -18,7 +19,8 @@ public class RepositoryMapperTest {
     private final RepositoryMapper repositoryMapper = new RepositoryMapper(
             Mockito.mock(RepositoryLinkMapper.class),
             Mockito.mock(EventDao.class),
-            Mockito.mock(ArtifactMapper.class)
+            Mockito.mock(ArtifactMapper.class),
+            Mockito.mock(CoverageDao.class)
     );
 
     @Test

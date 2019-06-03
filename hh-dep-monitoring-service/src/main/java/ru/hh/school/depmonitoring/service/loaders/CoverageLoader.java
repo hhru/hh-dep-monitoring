@@ -49,7 +49,7 @@ public class CoverageLoader {
 
     public void loadCoverageFromSource(Repository repository, RepositoryLink link) {
         switch (link.getLinkType()) {
-            case SONAR_CLOUD:
+            case SONARCLOUD:
                 sonarCloudCoverageSource.saveCoverageFromSonarCloud(repository, link);
             default:
                 return;
