@@ -18,6 +18,7 @@ import ru.hh.school.depmonitoring.dao.impl.EventDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RelationDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryDaoImpl;
 import ru.hh.school.depmonitoring.dao.impl.RepositoryLinkDaoImpl;
+import ru.hh.school.depmonitoring.rs.BambooResource;
 import ru.hh.school.depmonitoring.rs.GithubResource;
 import ru.hh.school.depmonitoring.rs.RelationResource;
 import ru.hh.school.depmonitoring.rs.RepositoryLinkResource;
@@ -71,6 +72,7 @@ import javax.sql.DataSource;
         EventMapper.class,
         ArtifactMapper.class,
 
+        BambooResource.class,
         GithubResource.class,
         RelationResource.class,
         RepositoryResource.class,

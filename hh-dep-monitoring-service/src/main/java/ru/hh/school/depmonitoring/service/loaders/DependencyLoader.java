@@ -56,7 +56,7 @@ public class DependencyLoader {
         this.eventDao = eventDao;
     }
 
-    private List<BambooArtifactDto> getDataFromBamboo() {
+    private List<BambooArtifactDto> getDataFromBamboo(String bambooLink) {
         return ClientBuilder.newBuilder()
                 .build()
                 .target(bambooLink)
@@ -68,7 +68,12 @@ public class DependencyLoader {
 
     @Transactional
     public void saveDependencyData() {
-        saveDependencyData(getDataFromBamboo(), null, null);
+        saveDependencyData(bambooLink);
+    }
+
+    @Transactional
+    public void saveDependencyData(String bambooLink) {
+        saveDependencyData(getDataFromBamboo(bambooLink), null, null);
     }
 
     private void saveDependencyData(List<BambooArtifactDto> artifactDtoList, Repository parentRepository, Dependency parentDependency) {
