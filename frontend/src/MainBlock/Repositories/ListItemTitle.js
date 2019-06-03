@@ -17,14 +17,14 @@ const useStyles = makeStyles({
 export default function ListItemTitle({ repositoryId, name, archived }) {
     const classes = useStyles();
     return (
-        <Link to={`/repositories/${repositoryId}`} className={classes.genericLink}>
-            <span className={classNames(classes.repositoryItemTitle, { [classes.archiveColored]: archived })}>
-                {`${name}`}
-            </span>
-            {archived && (
-                <Icon iconName="archive" styles={archiveIcon} />
-            )}
-        </Link>
+        <div className={classNames(classes.repositoryItemTitle, { [classes.archiveColored]: archived })}>
+            <Link to={`/repositories/${repositoryId}`} className={classes.genericLink}>
+                {name}
+                {archived && (
+                    <Icon iconName="archive" styles={archiveIcon} />
+                )}
+            </Link>
+        </div>
     );
 }
 

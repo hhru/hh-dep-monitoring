@@ -1,6 +1,6 @@
 import createReducer from 'redux/createReducer';
-import { FETCH_REPOSITORIES, FETCH_REPOSITORIES_PAGE, CLEAR_REPOSITORIES_PAGES, FETCH_REPOSITORY,
-    FETCH_LINK_TYPES, ADD_LINK, EDIT_LINK, DELETE_LINK, SET_SEARCH_STRING } from './repositoriesActions';
+import { FETCH_REPOSITORIES, FETCH_REPOSITORIES_PAGE, CLEAR_REPOSITORIES_PAGES, FETCH_REPOSITORY, EDIT_REPOSITORY,
+    FETCH_REPOSITORY_TYPES, FETCH_LINK_TYPES, ADD_LINK, EDIT_LINK, DELETE_LINK, SET_SEARCH_STRING } from './repositoriesActions';
 
 export const initialState = {
     list: {},
@@ -8,6 +8,7 @@ export const initialState = {
     pageCount: undefined,
     searchString: '',
     repositoryById: {},
+    repositoryTypes: undefined,
     linkTypes: undefined,
 };
 
@@ -33,6 +34,31 @@ export const repositoriesReducer = createReducer(initialState, {
                 ...state.repositoryById,
                 [repositoryId]: repositoryData,
             },
+        };
+    },
+    [EDIT_REPOSITORY]: (state, action) => {
+        const { repositoryId, repositoryData } = action.payload;
+        const newState = Object.assign({}, state);
+        newState.repositoryById[repositoryId] = repositoryData;
+        Object.keys(newState.pages).some((page) => {
+            let result = false;
+            newState.pages[page].items = newState.pages[page].items
+                .map((item) => {
+                    if (item.repositoryId === repositoryId) {
+                        result = true;
+                        return repositoryData;
+                    }
+                    return item;
+                });
+            return result;
+        });
+        return newState;
+    },
+    [FETCH_REPOSITORY_TYPES]: (state, action) => {
+        const { repositoryTypes } = action.payload;
+        return {
+            ...state,
+            repositoryTypes,
         };
     },
     [FETCH_LINK_TYPES]: (state, action) => {

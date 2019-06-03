@@ -9,18 +9,15 @@ import Divider from '@material-ui/core/Divider';
 
 import { fetchRepository } from 'redux/models/Repository/repositoriesActions';
 import { resetFormResult, addMessage } from 'redux/models/Notification/notificationsActions';
-import { descriptionListItem, relationsHeader, relationsTitle } from 'Utils/commonStyles';
+import { genericPaper, descriptionListItem, relationsHeader, relationsTitle } from 'Utils/commonStyles';
 import RepositoryLinks from 'MainBlock/RepositoryLinks/RepositoryLinks';
 import AddRelationButton from './RelationForm/OpenFormButton';
 import Relations from './Relations';
 import RepositoryHeader from './RepositoryHeader';
 import AddLinkButton from '../RepositoryLinks/OpenFormButton';
 
-const styles = theme => ({
-    root: {
-        padding: theme.spacing.unit * 2,
-        width: theme.spacing.unit * 80,
-    },
+const styles = () => ({
+    genericPaper,
     descriptionListItem,
     relationsHeader,
     relationsTitle,
@@ -50,7 +47,7 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
     }, [formResult]);
 
     return (
-        <Paper className={classes.root}>
+        <Paper className={classes.genericPaper}>
             {repository && (
                 <Fragment>
                     <RepositoryHeader repository={repository} />

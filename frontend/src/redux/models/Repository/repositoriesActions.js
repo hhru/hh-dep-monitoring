@@ -6,6 +6,8 @@ export const FETCH_REPOSITORIES = 'FETCH_REPOSITORIES';
 export const FETCH_REPOSITORIES_PAGE = 'FETCH_REPOSITORIES_PAGE';
 export const CLEAR_REPOSITORIES_PAGES = 'CLEAR_REPOSITORIES_PAGES';
 export const FETCH_REPOSITORY = 'FETCH_REPOSITORY';
+export const EDIT_REPOSITORY = 'EDIT_REPOSITORY';
+export const FETCH_REPOSITORY_TYPES = 'FETCH_REPOSITORY_TYPES';
 export const FETCH_LINK_TYPES = 'FETCH_LINK_TYPES';
 export const ADD_LINK = 'ADD_LINK';
 export const EDIT_LINK = 'EDIT_LINK';
@@ -36,6 +38,21 @@ export const fetchRepositoryAction = (repositoryId, repositoryData) => ({
     payload: {
         repositoryId,
         repositoryData,
+    },
+});
+
+export const editRepositoryAction = (repositoryId, repositoryData) => ({
+    type: EDIT_REPOSITORY,
+    payload: {
+        repositoryId,
+        repositoryData,
+    },
+});
+
+export const fetchRepositoryTypesAction = repositoryTypes => ({
+    type: FETCH_REPOSITORY_TYPES,
+    payload: {
+        repositoryTypes,
     },
 });
 
@@ -122,6 +139,31 @@ export function fetchRepository(id) {
     };
 }
 
+export function fetchRepositoryTypes() {
+    return (dispatch) => {
+        axios.get(`${REPOSITORY_URL}/types`)
+            .then((response) => {
+                dispatch(fetchRepositoryTypesAction(response.data));
+            })
+            .catch(() => {
+                dispatch(addMessageAction('Can\'t get repository types', 'error'));
+            });
+    };
+}
+
+export function editRepositoryType(repository) {
+    return (dispatch) => {
+        axios.put(`${REPOSITORY_URL}/${repository.repositoryId}`, repository)
+            .then((response) => {
+                dispatch(editRepositoryAction(repository.repositoryId, response.data));
+                dispatch(setFormResultAction(true, 'Repository type', 'edited'));
+            })
+            .catch(() => {
+                dispatch(addMessageAction('Error in editing repository type', 'error'));
+            });
+    };
+}
+
 export function fetchLinkTypes() {
     return (dispatch) => {
         axios.get(`${REPOSITORY_LINK_URL}types`)
@@ -129,7 +171,7 @@ export function fetchLinkTypes() {
                 dispatch(fetchLinkTypesAction(response.data));
             })
             .catch(() => {
-                dispatch(addMessageAction('Can\'t get link types for relations', 'error'));
+                dispatch(addMessageAction('Can\'t get link types for repositories', 'error'));
             });
     };
 }

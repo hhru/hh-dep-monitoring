@@ -1,6 +1,7 @@
 export const archivedRepositoryColor = '#6c6c6c';
 const mainThemeColor = '#c30019';
 export const secondaryItemColor = '#646464';
+export const secondaryItemColorLighter = '#7d7d7d';
 
 export const secondaryItem = {
     fontWeight: 300,
@@ -10,8 +11,8 @@ export const secondaryItem = {
 export const dateListItem = {
     ...secondaryItem,
     fontSize: 12,
-    margin: '3px 0',
-    display: 'block',
+    marginLeft: '5px',
+    marginRight: '10px',
 };
 
 export const dateFullItem = {
@@ -77,11 +78,15 @@ export const genericLink = {
     },
 };
 
-export const priorityMark = {
-    marginRight: '10px',
+export const chip = {
     height: '22px',
-    color: '#fff',
     fontSize: 11,
+    marginRight: '10px',
+};
+
+export const priorityMark = {
+    ...chip,
+    color: '#fff',
 };
 
 export const nestedBlock = {
@@ -124,7 +129,8 @@ export const formButton = {
     color: mainThemeColor,
 };
 
-export const openFormButton = {
+export const adminBadge = {
+    padding: '0px',
     backgroundColor: secondaryItemColor,
     '&:hover': {
         backgroundColor: mainThemeColor,
@@ -132,7 +138,7 @@ export const openFormButton = {
 };
 
 export const addIcon = {
-    ...openFormButton,
+    ...adminBadge,
     color: '#fff',
     width: '30px',
     minHeight: '30px',
@@ -182,9 +188,13 @@ export const relatedRepositoryIcon = {
     marginRight: '3px',
 };
 
-export const repoIconsContainer = {
+export const flexVerticalContainer = {
     display: 'flex',
     flexDirection: 'column',
+};
+
+export const repoIconsContainer = {
+    ...flexVerticalContainer,
     alignItems: 'flex-end',
 };
 
@@ -202,7 +212,7 @@ export const capitalize = {
     },
 };
 
-export const linkControlIcon = {
+export const adminBadgeIcon = {
     width: '13px',
 };
 
