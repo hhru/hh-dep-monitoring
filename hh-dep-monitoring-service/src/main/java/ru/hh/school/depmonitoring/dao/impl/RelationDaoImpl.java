@@ -9,6 +9,7 @@ import ru.hh.school.depmonitoring.entities.Repository;
 import javax.inject.Named;
 import javax.inject.Singleton;
 import java.util.List;
+import java.util.Optional;
 
 @Named
 @Singleton
@@ -32,5 +33,14 @@ public class RelationDaoImpl extends AbstractDao<Relation, Integer> implements R
                 .createQuery("from Relation where repositoryTo = :repository order by repositoryFrom.name asc", Relation.class)
                 .setParameter("repository", repository)
                 .getResultList();
+    }
+
+    @Override
+    public Optional<Relation> findRelationByMainAndDependentRepository(Repository mainRepository, Repository dependentRepository) {
+        return getSession()
+                .createQuery("from Relation where repositoryFrom = :mainRepository and repositoryTo = :dependentRepository", Relation.class)
+                .setParameter("mainRepository", mainRepository)
+                .setParameter("dependentRepository", dependentRepository)
+                .uniqueResultOptional();
     }
 }

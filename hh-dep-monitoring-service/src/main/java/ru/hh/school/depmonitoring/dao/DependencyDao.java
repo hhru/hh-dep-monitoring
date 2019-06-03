@@ -30,4 +30,11 @@ public class DependencyDao extends AbstractDao<Dependency, Integer> {
                 .setParameter("parentDependency", dependency)
                 .getResultList();
     }
+
+    public List<Dependency> findByArtifact(Artifact artifact) {
+        return getSession()
+                .createQuery("from Dependency where artifactVersion.artifact = :artifact", Dependency.class)
+                .setParameter("artifact", artifact)
+                .getResultList();
+    }
 }
