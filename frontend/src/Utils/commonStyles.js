@@ -186,6 +186,7 @@ export const relatedRepositoryIcon = {
     fill: secondaryItemColor,
     marginTop: '7px',
     marginRight: '3px',
+    marginLeft: '5px',
 };
 
 export const flexVerticalContainer = {

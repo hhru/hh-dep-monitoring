@@ -15,9 +15,6 @@ const styles = () => ({
     coverageBigMark: {
         marginLeft: '12px',
     },
-    chipIcon: {
-        fontSize: 20,
-    },
 });
 
 
