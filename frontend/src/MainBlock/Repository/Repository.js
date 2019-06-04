@@ -24,6 +24,9 @@ const styles = () => ({
     relationsTitle,
     linkIconsContainer: {
         display: 'flex',
+    },
+    infoContainer: {
+        display: 'flex',
         justifyContent: 'space-between',
     },
 });
@@ -56,9 +59,16 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
                     <div className={classes.descriptionListItem}>
                         {repository.description}
                     </div>
-                    <div className={classes.linkIconsContainer}>
-                        <RepositoryLinks repositoryId={repositoryId} size="big" />
-                        {adminMode && <AddLinkButton repositoryId={repositoryId} repositoryName={repository.name} />}
+                    <div className={classes.infoContainer}>
+                        <div className={classes.linkIconsContainer}>
+                            <RepositoryLinks repositoryId={repositoryId} size="big" />
+                            {adminMode && (
+                                <AddLinkButton
+                                    repositoryId={repositoryId}
+                                    repositoryName={repository.name}
+                                />
+                            )}
+                        </div>
                         {repository.coverage && (<CoverageLabel value={repository.coverage} big />)}
                     </div>
                     <div className={classes.relationsHeader}>
