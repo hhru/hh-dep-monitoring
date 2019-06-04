@@ -20,11 +20,10 @@ const styles = () => ({
 });
 
 
-
 function CoverageLabel({ classes, value, big }) {
     return (
         <Chip
-            label={value+'%'}
+            label={`${value}%`}
             className={big ? classes.coverageMark : classes.coverageBigMark}
         />
     );
