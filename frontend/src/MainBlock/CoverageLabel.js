@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 import Chip from '@material-ui/core/Chip';
+import Tooltip from '@material-ui/core/Tooltip';
 
 import { chip } from 'Utils/commonStyles';
 
@@ -22,10 +23,12 @@ const styles = () => ({
 
 function CoverageLabel({ classes, value, big }) {
     return (
-        <Chip
-            label={`${value}%`}
-            className={big ? classes.coverageMark : classes.coverageBigMark}
-        />
+        <Tooltip title="Code coverage" placement="left">
+            <Chip
+                label={`${value}%`}
+                className={big ? classes.coverageMark : classes.coverageBigMark}
+            />
+        </Tooltip>
     );
 }
 
