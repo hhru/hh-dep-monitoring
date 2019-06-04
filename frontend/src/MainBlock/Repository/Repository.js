@@ -59,7 +59,7 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
                     <div className={classes.linkIconsContainer}>
                         <RepositoryLinks repositoryId={repositoryId} size="big" />
                         {adminMode && <AddLinkButton repositoryId={repositoryId} repositoryName={repository.name} />}
-                        {repository.coverage && (<CoverageLabel value={repository.coverage} size="big" />)}
+                        {repository.coverage && (<CoverageLabel value={repository.coverage} big={true} />)}
                     </div>
                     <div className={classes.relationsHeader}>
                         <Typography variant="h5" className={classes.relationsTitle}>Relations</Typography>

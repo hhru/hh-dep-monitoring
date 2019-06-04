@@ -23,7 +23,7 @@ function CoverageLabel({ classes, value, big }) {
         <Tooltip title="Code coverage" placement="left">
             <Chip
                 label={`${value}%`}
-                className={big ? classes.coverageMark : classes.coverageBigMark}
+                className={big ? classes.coverageBigMark : classes.coverageMark}
             />
         </Tooltip>
     );
