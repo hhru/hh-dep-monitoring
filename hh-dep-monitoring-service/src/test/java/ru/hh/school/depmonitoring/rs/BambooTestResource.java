@@ -15,6 +15,6 @@ public class BambooTestResource {
     public Response getDependencies() throws Exception {
         var dependenciesFile = new File(Objects.requireNonNull(getClass().getClassLoader().getResource("dependencies.json")).toURI());
         String dependenciesContent = FileUtils.readFileToString(dependenciesFile);
-        return Response.ok(dependenciesContent).type(MediaType.APPLICATION_JSON).build();
+        return Response.ok(dependenciesContent).type(MediaType.APPLICATION_OCTET_STREAM).build();
     }
 }
