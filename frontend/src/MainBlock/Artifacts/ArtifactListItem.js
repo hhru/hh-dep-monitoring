@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import ListItem from '@material-ui/core/ListItem';
@@ -20,8 +20,12 @@ const styles = () => ({
     listItem,
 });
 
-function ArtfactListItem({ classes, children, nestedItems }) {
-    const [open, setOpen] = useState(false);
+function ArtfactListItem({ classes, children, nestedItems, searchParams }) {
+    const [open, setOpen] = useState(!!searchParams.open);
+
+    useEffect(() => {
+        setOpen(searchParams.open);
+    }, [searchParams.open]);
 
     const hasAnyChildren = Boolean(nestedItems && nestedItems.length);
 
@@ -39,14 +43,12 @@ function ArtfactListItem({ classes, children, nestedItems }) {
                             : <AddIcon className={classes.icon} />}
                     </IconButton>
                 )}
-
                 {children(hasAnyChildren)}
-
             </ListItem>
             {hasAnyChildren && (
                 <Collapse in={open} timeout="auto" unmountOnExit>
                     <div className={classes.nestedBlock}>
-                        <DependencyItems dependencies={nestedItems} />
+                        <DependencyItems dependencies={nestedItems} searchParams={searchParams} />
                     </div>
                 </Collapse>
             )}
@@ -58,6 +60,7 @@ ArtfactListItem.propTypes = {
     classes: PropTypes.object.isRequired,
     children: PropTypes.func.isRequired,
     nestedItems: PropTypes.array,
+    searchParams: PropTypes.object,
 };
 
 ArtfactListItem.defaultProps = {

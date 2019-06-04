@@ -32,6 +32,12 @@ export const routing = [
         path: '/artifacts',
         label: 'Artifacts',
         component: Artifacts,
+        inner: [
+            {
+                path: '/artifacts/:searchingParam/:paramName',
+                component: Artifacts,
+            },
+        ],
     },
     {
         path: '/about',

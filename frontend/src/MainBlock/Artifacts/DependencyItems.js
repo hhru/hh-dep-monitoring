@@ -6,13 +6,21 @@ import Divider from '@material-ui/core/Divider';
 
 import DependencyItem from './DependencyItem';
 
-function DependencyItems({ dependencies }) {
+function DependencyItems({ dependencies, searchParams }) {
+    const { pathToId, level, paramName } = searchParams;
     return (
         <List>
             {dependencies.map(dependency => (
                 <Fragment key={dependency.dependencyId}>
                     <Divider />
-                    <DependencyItem dependency={dependency} />
+                    <DependencyItem
+                        dependency={dependency}
+                        searchParams={{
+                            ...searchParams,
+                            open: pathToId && pathToId[level] === dependency.artifactVersion.artifact[paramName],
+                            level: level + 1,
+                        }}
+                    />
                 </Fragment>
             ))}
         </List>
@@ -21,6 +29,7 @@ function DependencyItems({ dependencies }) {
 
 DependencyItems.propTypes = {
     dependencies: PropTypes.array,
+    searchParams: PropTypes.object,
 };
 
 DependencyItems.defaultProps = {

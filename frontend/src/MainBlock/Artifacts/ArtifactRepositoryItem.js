@@ -12,9 +12,9 @@ const styles = () => ({
     listItemWithoutIcon,
 });
 
-function ArtifactRepositoryItem({ classes, repository }) {
+function ArtifactRepositoryItem({ classes, repository, searchParams }) {
     return (
-        <ArtfactListItem nestedItems={repository.dependencies}>
+        <ArtfactListItem nestedItems={repository.dependencies} searchParams={searchParams}>
             { hasAnyChildren => (
                 <ListItemText
                     className={classNames({ [classes.listItemWithoutIcon]: !hasAnyChildren })}
@@ -29,6 +29,7 @@ function ArtifactRepositoryItem({ classes, repository }) {
 ArtifactRepositoryItem.propTypes = {
     classes: PropTypes.object.isRequired,
     repository: PropTypes.object.isRequired,
+    searchParams: PropTypes.object,
 };
 
 export default withStyles(styles)(ArtifactRepositoryItem);

@@ -10,7 +10,6 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Fab from '@material-ui/core/Fab';
 import Tooltip from '@material-ui/core/Tooltip';
 
-import { fetchRepositories } from 'redux/models/Repository/repositoriesActions';
 import { fetchPriorityTypes } from 'redux/models/Relation/relationsActions';
 import { getRelation } from 'redux/models/Relation/relationsSelectors';
 import { addRelationIcon, relationFormPaper, controlIcon } from 'Utils/commonStyles';
@@ -22,12 +21,7 @@ const styles = () => ({
     relationFormPaper,
 });
 
-function OpenFormButton({ classes, repositoryId, repositoryName, fetchRepositories,
-    fetchPriorityTypes, relation, priorityTypes }) {
-    useEffect(() => {
-        fetchRepositories();
-    }, []);
-
+function OpenFormButton({ classes, repositoryId, repositoryName, fetchPriorityTypes, relation, priorityTypes }) {
     useEffect(() => {
         !priorityTypes && fetchPriorityTypes();
     }, [priorityTypes]);
@@ -81,7 +75,6 @@ OpenFormButton.propTypes = {
         PropTypes.number,
     ]).isRequired,
     repositoryName: PropTypes.string,
-    fetchRepositories: PropTypes.func.isRequired,
     fetchPriorityTypes: PropTypes.func.isRequired,
     relation: PropTypes.object,
     priorityTypes: PropTypes.array,
@@ -96,8 +89,5 @@ export default connect(
         relation: getRelation(state, ownProps.repositoryId, ownProps.relationId),
         priorityTypes: state.relations.priorityTypes,
     }),
-    {
-        fetchRepositories,
-        fetchPriorityTypes,
-    },
+    { fetchPriorityTypes },
 )(withStyles(styles)(OpenFormButton));

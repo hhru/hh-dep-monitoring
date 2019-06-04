@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Select from 'react-select';
 import { connect } from 'react-redux';
@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import FormHelperText from '@material-ui/core/FormHelperText';
 
+import { fetchRepositories } from 'redux/models/Repository/repositoriesActions';
 import { getReposForSearch } from 'redux/models/Repository/repositoriesSelectors';
 import { selectComponentsStyles } from 'Utils/commonStyles';
 import SelectComponents from 'CommonComponents/SelectComponents';
@@ -14,7 +15,12 @@ const menuSelectHeight = 250;
 
 const styles = selectComponentsStyles;
 
-function SelectRepository({ classes, repository, setRepository, repositoryFor, direction, repositories, disabled }) {
+function SelectRepository({ classes, repository, setRepository, repositoryFor, direction, repositories, disabled,
+    fetchRepositories }) {
+    useEffect(() => {
+        !repositories && fetchRepositories();
+    }, []);
+
     const handleChange = (selected) => {
         setRepository({
             ...selected,
@@ -58,10 +64,12 @@ SelectRepository.propTypes = {
         PropTypes.number,
     ]).isRequired,
     direction: PropTypes.string.isRequired,
-    repositories: PropTypes.array.isRequired,
+    repositories: PropTypes.array,
     disabled: PropTypes.bool.isRequired,
+    fetchRepositories: PropTypes.func.isRequired,
 };
 
 export default connect(
     (state, ownProps) => ({ repositories: getReposForSearch(state, ownProps.repositoryFor) }),
+    { fetchRepositories },
 )(withStyles(styles, { withTheme: true })(SelectRepository));
