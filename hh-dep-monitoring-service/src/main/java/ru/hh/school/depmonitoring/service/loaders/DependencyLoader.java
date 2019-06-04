@@ -1,5 +1,6 @@
 package ru.hh.school.depmonitoring.service.loaders;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,12 +19,15 @@ import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.EventType;
 import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.exceptions.LoadExceptionType;
+import ru.hh.school.depmonitoring.exceptions.LoadRuntimeException;
 import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.GenericType;
+import java.io.IOException;
+import java.io.InputStream;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -62,14 +66,16 @@ public class DependencyLoader {
         this.relationDao = relationDao;
     }
 
-    private List<BambooArtifactDto> getDataFromBamboo(String bambooLink) {
-        return ClientBuilder.newBuilder()
+    private List<BambooArtifactDto> getDataFromBamboo(String bambooLink) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        byte[] allBytes = ClientBuilder.newBuilder()
                 .build()
                 .target(bambooLink)
                 .request()
                 .get()
-                .readEntity(new GenericType<List<BambooArtifactDto>>() {
-                });
+                .readEntity(InputStream.class)
+                .readAllBytes();
+        return List.of(mapper.readValue(allBytes, BambooArtifactDto[].class));
     }
 
     @Transactional
@@ -79,8 +85,12 @@ public class DependencyLoader {
 
     @Transactional
     public void saveDependencyData(String bambooLink) {
-        saveDependencyData(getDataFromBamboo(bambooLink), null, null);
-        updateDependencies();
+        try {
+            saveDependencyData(getDataFromBamboo(bambooLink), null, null);
+            updateDependencies();
+        } catch (IOException e) {
+            throw new LoadRuntimeException("Error on getDataFromBamboo", e, LoadExceptionType.CONNECT);
+        }
     }
 
     private void saveDependencyData(List<BambooArtifactDto> artifactDtoList, Repository parentRepository, Dependency parentDependency) {

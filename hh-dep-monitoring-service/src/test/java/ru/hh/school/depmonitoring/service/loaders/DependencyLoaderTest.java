@@ -1,6 +1,8 @@
 package ru.hh.school.depmonitoring.service.loaders;
 
 import org.junit.Test;
+import ru.hh.nab.testbase.JettyTestContainer;
+import ru.hh.nab.testbase.spring.NabTestContext;
 import ru.hh.school.depmonitoring.DepMonitoringTestBase;
 import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
@@ -11,6 +13,7 @@ import ru.hh.school.depmonitoring.entities.ArtifactVersion;
 import ru.hh.school.depmonitoring.entities.Dependency;
 import ru.hh.school.depmonitoring.entities.EventType;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.exceptions.LoadRuntimeException;
 import ru.hh.school.depmonitoring.utils.DBUtils;
 import ru.hh.school.depmonitoring.utils.StructCreator;
 
@@ -39,6 +42,9 @@ public class DependencyLoaderTest extends DepMonitoringTestBase {
 
     @Inject
     private EventDao eventDao;
+
+    @Inject
+    private NabTestContext testContext;
 
     @Test
     public void loadTestWithoutRepo() {
@@ -80,6 +86,13 @@ public class DependencyLoaderTest extends DepMonitoringTestBase {
         assertEquals(repository.getRepositoryId(), event.getRepositoryId());
         assertEquals(artifact.getArtifactId(), event.getArtifactId());
         assertEquals(EventType.VERSION_MINOR_CHANGE, event.getType());
+    }
+
+    @Test(expected = LoadRuntimeException.class)
+    public void loadTestWithBrokenLink() {
+        dependencyLoader.saveDependencyData(
+                JettyTestContainer.getServerAddress(testContext.getPortHolder().getPort()).toString().concat("/relations/types")
+        );
     }
 
     private Repository createRepository() {
