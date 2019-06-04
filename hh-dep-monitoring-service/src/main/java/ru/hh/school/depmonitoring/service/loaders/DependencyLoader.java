@@ -8,6 +8,7 @@ import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
 import ru.hh.school.depmonitoring.dao.DependencyDao;
 import ru.hh.school.depmonitoring.dao.EventDao;
+import ru.hh.school.depmonitoring.dao.RelationDao;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.bamboo.BambooArtifactDto;
 import ru.hh.school.depmonitoring.entities.Artifact;
@@ -15,7 +16,9 @@ import ru.hh.school.depmonitoring.entities.ArtifactVersion;
 import ru.hh.school.depmonitoring.entities.Dependency;
 import ru.hh.school.depmonitoring.entities.Event;
 import ru.hh.school.depmonitoring.entities.EventType;
+import ru.hh.school.depmonitoring.entities.Relation;
 import ru.hh.school.depmonitoring.entities.Repository;
+import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -37,6 +40,7 @@ public class DependencyLoader {
     private final ArtifactVersionDao artifactVersionDao;
     private final DependencyDao dependencyDao;
     private final EventDao eventDao;
+    private final RelationDao relationDao;
 
     private static final Logger log = LoggerFactory.getLogger(DependencyLoader.class);
 
@@ -46,7 +50,8 @@ public class DependencyLoader {
             ArtifactDao artifactDao,
             ArtifactVersionDao artifactVersionDao,
             DependencyDao dependencyDao,
-            EventDao eventDao
+            EventDao eventDao,
+            RelationDao relationDao
     ) {
         this.bambooLink = bambooLink;
         this.repositoryDao = repositoryDao;
@@ -54,6 +59,7 @@ public class DependencyLoader {
         this.artifactVersionDao = artifactVersionDao;
         this.dependencyDao = dependencyDao;
         this.eventDao = eventDao;
+        this.relationDao = relationDao;
     }
 
     private List<BambooArtifactDto> getDataFromBamboo(String bambooLink) {
@@ -74,6 +80,7 @@ public class DependencyLoader {
     @Transactional
     public void saveDependencyData(String bambooLink) {
         saveDependencyData(getDataFromBamboo(bambooLink), null, null);
+        updateDependencies();
     }
 
     private void saveDependencyData(List<BambooArtifactDto> artifactDtoList, Repository parentRepository, Dependency parentDependency) {
@@ -204,5 +211,47 @@ public class DependencyLoader {
         }
         event.setDescription("Version changed from" + oldArtifactVersion.getVersion() + " to " + newArtifactVersion.getVersion());
         eventDao.create(event);
+    }
+
+    private void updateDependencies() {
+        artifactDao.findAll()
+                .stream()
+                .filter(artifact -> artifact.getRepository() != null)
+                .forEach(artifact -> updateDependencies(artifact, artifact.getRepository()));
+    }
+
+    private void updateDependencies(Artifact childArtifact, Repository childRepository) {
+        var artifactList = dependencyDao.findByArtifact(childArtifact)
+                .stream()
+                .map(Dependency::getParentDependency)
+                .filter(Objects::nonNull)
+                .map(dependency -> dependency.getArtifactVersion().getArtifact())
+                .collect(Collectors.toList());
+        for (var artifact : artifactList) {
+            var repository = artifact.getRepository();
+            if (repository != null) {
+                checkAndCreateRelation(childRepository, repository);
+                updateDependencies(artifact, repository);
+            } else {
+                updateDependencies(artifact, childRepository);
+            }
+        }
+    }
+
+    private void checkAndCreateRelation(Repository childRepository, Repository parentRepository) {
+        if (!Objects.equals(childRepository, parentRepository)) {
+            var relationOptional = relationDao.findRelationByMainAndDependentRepository(parentRepository, childRepository);
+            if (relationOptional.isEmpty()) {
+                createRelation(childRepository, parentRepository);
+            }
+        }
+    }
+
+    private void createRelation(Repository childRepository, Repository parentRepository) {
+        Relation relation = new Relation();
+        relation.setRepositoryFrom(parentRepository);
+        relation.setRepositoryTo(childRepository);
+        relation.setPriority(RepositoryRelationPriority.OPTIONAL);
+        relationDao.create(relation);
     }
 }

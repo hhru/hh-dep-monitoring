@@ -49,6 +49,7 @@ public class DependencyLoaderTest extends DepMonitoringTestBase {
 
     @Test
     public void loadTestWithRepo() {
+        createRepository(2L, "jclient-common");
         updateDependencyData(createRepository());
     }
 
@@ -82,7 +83,11 @@ public class DependencyLoaderTest extends DepMonitoringTestBase {
     }
 
     private Repository createRepository() {
-        return dbUtils.addItemToRepositoryTable(StructCreator.createRepositoryDto(1L, "nuts-and-bolts"));
+        return createRepository(1L, "nuts-and-bolts");
+    }
+
+    private Repository createRepository(long repositoryId, String repositoryName) {
+        return dbUtils.addItemToRepositoryTable(StructCreator.createRepositoryDto(repositoryId, repositoryName));
     }
 
     private void updateDependencyData(Repository repositoryOriginal) {
