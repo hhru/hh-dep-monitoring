@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
 
@@ -36,7 +37,7 @@ public class EventResource {
 
     @GET
     @Path("/page/")
-    public PageDto<EventDto> getRepositriesPage(@DefaultValue("0") @QueryParam("page") int page,
+    public PageDto<EventDto> getEventsPage(@DefaultValue("0") @QueryParam("page") int page,
                                                 @DefaultValue("10") @QueryParam("perPage") int perPage) {
         PageRequestDto requestDto = PageRequestDto.builder()
                 .withPage(page)
@@ -45,5 +46,17 @@ public class EventResource {
         return eventService.getEventPage(requestDto);
     }
 
+    @GET
+    @Path("/for-repository/{repositoryId}")
+    public List<EventDto> getForRepository(@PathParam("repositoryId") long repositoryId) {
+        return eventService.getForRepository(repositoryId);
+    }
 
+    @GET
+    @Path("/for-repository/{repositoryId}/last/{eventsCount}")
+    public List<EventDto> getEventsPageForRepository(
+                                                @PathParam("repositoryId") long repositoryId,
+                                                @PathParam("eventsCount") int eventsCount) {
+        return eventService.getLastEventsForRepository(repositoryId, eventsCount);
+    }
 }

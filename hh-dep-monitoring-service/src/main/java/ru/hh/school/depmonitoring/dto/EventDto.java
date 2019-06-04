@@ -11,7 +11,7 @@ public class EventDto implements Serializable {
     private final Integer eventId;
     private final LocalDateTime createdAt;
     private final Long repositoryId;
-    private final Integer artifactId;
+    private final ArtifactDto artifact;
     private final EventType type;
     private final String description;
 
@@ -27,8 +27,8 @@ public class EventDto implements Serializable {
         return repositoryId;
     }
 
-    public Integer getArtifactId() {
-        return artifactId;
+    public ArtifactDto getArtifact() {
+        return artifact;
     }
 
     public EventType getType() {
@@ -47,7 +47,7 @@ public class EventDto implements Serializable {
         this.eventId = builder.eventId;
         this.createdAt = builder.createdAt;
         this.repositoryId = builder.repositoryId;
-        this.artifactId = builder.artifactId;
+        this.artifact = builder.artifact;
         this.type = builder.type;
         this.description = builder.description;
     }
@@ -78,7 +78,7 @@ public class EventDto implements Serializable {
         private Integer eventId;
         private LocalDateTime createdAt;
         private Long repositoryId;
-        private Integer artifactId;
+        private ArtifactDto artifact;
         private EventType type;
         private String description;
 
@@ -100,8 +100,8 @@ public class EventDto implements Serializable {
             return this;
         }
 
-        public EventDtoBuilder withArtifactId(Integer artifactId) {
-            this.artifactId = artifactId;
+        public EventDtoBuilder withArtifact(ArtifactDto artifact) {
+            this.artifact = artifact;
             return this;
         }
 

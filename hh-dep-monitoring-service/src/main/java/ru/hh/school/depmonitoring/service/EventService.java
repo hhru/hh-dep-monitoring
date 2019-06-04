@@ -46,10 +46,22 @@ public class EventService {
                 .build();
     }
 
+    @Transactional(readOnly = true)
+    public List<EventDto> getForRepository(long repositoryId) {
+        return eventMapper.toDto(eventDao.getAllEventsForRepository(repositoryId));
+    }
+
     @Transactional
     public EventDto insertEvent(@Nonnull EventDto eventDto) {
         Event event = eventMapper.toEntity(eventDto);
         eventDao.create(event);
         return eventMapper.toDto(event);
     }
+
+    @Transactional(readOnly = true)
+    public List<EventDto> getLastEventsForRepository(long repositoryId, int eventsCount) {
+        return eventMapper.toDto(eventDao.getLastEventsForRepository(repositoryId, eventsCount));
+    }
+
+
 }
