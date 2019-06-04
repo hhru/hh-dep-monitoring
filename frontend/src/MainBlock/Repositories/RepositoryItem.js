@@ -12,6 +12,7 @@ import { relatedRepositoryIcon, repoIconsContainer,
 import RepositoryLinks from 'MainBlock/RepositoryLinks/RepositoryLinks';
 import ListItemInfo from './ListItemInfo';
 import ListItemTitle from './ListItemTitle';
+import CoverageLabel from '../CoverageLabel';
 
 const styles = () => ({
     relatedRepositoryIcon,
@@ -52,7 +53,10 @@ function RepositoryItem({ classes, repository }) {
             </div>
             <div className={classes.repoIconsContainer}>
                 <RepositoryLinks repositoryId={repository.repositoryId} size="small" />
-                {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}
+                <div className={classes.flexInlineContainer}>
+                    {repository.coverage && (<CoverageLabel value={repository.coverage} />)}
+                    {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}
+                </div>
             </div>
         </ListItem>
     );

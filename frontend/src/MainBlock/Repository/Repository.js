@@ -15,6 +15,7 @@ import AddRelationButton from './RelationForm/OpenFormButton';
 import Relations from './Relations';
 import RepositoryHeader from './RepositoryHeader';
 import AddLinkButton from '../RepositoryLinks/OpenFormButton';
+import CoverageLabel from '../CoverageLabel';
 
 const styles = () => ({
     genericPaper,
@@ -23,6 +24,7 @@ const styles = () => ({
     relationsTitle,
     linkIconsContainer: {
         display: 'flex',
+        justifyContent: 'space-between',
     },
 });
 
@@ -57,6 +59,7 @@ function Repository({ classes, match, adminMode, repository, fetchRepository,
                     <div className={classes.linkIconsContainer}>
                         <RepositoryLinks repositoryId={repositoryId} size="big" />
                         {adminMode && <AddLinkButton repositoryId={repositoryId} repositoryName={repository.name} />}
+                        {repository.coverage && (<CoverageLabel value={repository.coverage} big />)}
                     </div>
                     <div className={classes.relationsHeader}>
                         <Typography variant="h5" className={classes.relationsTitle}>Relations</Typography>
