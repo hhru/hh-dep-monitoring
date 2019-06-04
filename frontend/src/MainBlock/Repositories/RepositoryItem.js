@@ -54,7 +54,7 @@ function RepositoryItem({ classes, repository }) {
             <div className={classes.repoIconsContainer}>
                 <RepositoryLinks repositoryId={repository.repositoryId} size="small" />
                 <div className={classes.flexInlineContainer}>
-                    {repository.coverage && (<CoverageLabel value={repository.coverage} big={false} />)}
+                    {repository.coverage && (<CoverageLabel value={repository.coverage} />)}
                     {renderIconWithTooltip(repository.hasRelatedFrom || repository.hasRelatedTo)}
                 </div>
             </div>
