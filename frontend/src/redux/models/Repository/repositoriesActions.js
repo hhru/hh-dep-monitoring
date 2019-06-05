@@ -111,6 +111,7 @@ export function fetchRepositoriesPage(perPage, searchString, orderAttributes, pa
         orderAttributes.forEach((attribute) => {
             orderParams += `&order=${attribute.name},${attribute.state}`;
         });
+        orderParams === '' && (orderParams = '&order=name,asc');
         axios.get(`${REPOSITORY_URL}/page?page=${page}&perPage=${perPage}${searchParam}${orderParams}`)
             .then((response) => {
                 dispatch(fetchRepositoriesPageAction(page, response.data));

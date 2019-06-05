@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 import Repository from './Repository/Repository';
 import Artifacts from './Artifacts/Artifacts';
 import Repositories from './Repositories/Repositories';
+import About from './About';
 
 const styles = theme => ({
     root: {
@@ -42,7 +43,7 @@ export const routing = [
     {
         path: '/about',
         label: 'About',
-        // component: About
+        component: About,
     },
 ];
 

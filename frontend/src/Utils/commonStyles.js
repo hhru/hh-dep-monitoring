@@ -254,10 +254,19 @@ export const listItemWithoutIcon = {
     marginLeft: '60px',
 };
 
-export const genericPaper = {
+export const genericPaper = theme => ({
     padding: '16px',
     width: '800px',
-};
+    [theme.breakpoints.down('sm')]: {
+        width: '360px',
+    },
+    [theme.breakpoints.up('md')]: {
+        width: '700px',
+    },
+    [theme.breakpoints.up('lg')]: {
+        width: '800px',
+    },
+});
 
 export const noResultMsg = {
     margin: '10px',
@@ -272,4 +281,5 @@ export const descriptionListItem = {
 
 export const listItem = {
     paddingLeft: '5px',
+    overflow: 'hidden',
 };

@@ -17,9 +17,16 @@ import PaginationWidget from 'MainBlock/Pagination/PaginationWidget';
 import RepositoryItem from './RepositoryItem';
 import FetchingParams from './FetchingParams/FetchingParams';
 
-const styles = () => ({
-    genericPaper,
-    repositoriesHeader: flexInlineContainer,
+const styles = theme => ({
+    genericPaper: {
+        ...genericPaper(theme),
+    },
+    repositoriesHeader: {
+        ...flexInlineContainer,
+        [theme.breakpoints.down('sm')]: {
+            display: 'block',
+        },
+    },
     title: {
         flexGrow: 1,
         paddingTop: '10px',
