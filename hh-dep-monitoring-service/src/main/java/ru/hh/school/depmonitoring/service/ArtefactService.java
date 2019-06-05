@@ -31,6 +31,10 @@ public class ArtefactService {
             artefactTreeDto.setRepositoryId(repository.getRepositoryId());
             artefactTreeDto.setName(repository.getName());
             artefactTreeDto.setDescription(repository.getDescription());
+            artefactTreeDto.setHtmlUrl(repository.getHtmlUrl());
+            artefactTreeDto.setArchived(repository.isArchived());
+            artefactTreeDto.setUpdatedAt(repository.getUpdatedAt());
+            artefactTreeDto.setRepositoryType(repository.getRepositoryType());
 
             List<DependencyDto> dependencies = getDependencyTreeForRepository(repository);
 
