@@ -2,33 +2,45 @@ import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
+import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
+import Typography from '@material-ui/core/Typography';
 
 import { fetchRelations } from 'redux/models/Relation/relationsActions';
 import { getRelations } from 'redux/models/Relation/relationsSelectors';
+import { noResultMsg } from 'Utils/commonStyles';
 import RelationItem from './RelationItem';
 
-function Relations({ repositoryId, relations, fetchRelations }) {
+const styles = () => ({
+    noResultMsg,
+});
+
+function Relations({ classes, repositoryId, relations, fetchRelations }) {
     useEffect(() => {
         fetchRelations(repositoryId);
     }, []);
 
-    return (
-        <Fragment>
+    return relations.length === 0
+        ? (
+            <Typography variant="body2" className={classes.noResultMsg}>
+                Repository has no outgoing relations
+            </Typography>
+        )
+        : (
             <List>
-                {relations && relations.map(relation => (
+                {relations.map(relation => (
                     <Fragment key={relation.relationId}>
                         <Divider />
                         <RelationItem relation={relation} />
                     </Fragment>
                 ))}
             </List>
-        </Fragment>
-    );
+        );
 }
 
 Relations.propTypes = {
+    classes: PropTypes.object.isRequired,
     repositoryId: PropTypes.oneOfType([
         PropTypes.string,
         PropTypes.number,
@@ -44,4 +56,4 @@ Relations.defaultProps = {
 export default connect(
     (state, ownProps) => ({ relations: getRelations(state, ownProps.repositoryId) }),
     { fetchRelations },
-)(Relations);
+)(withStyles(styles)(Relations));

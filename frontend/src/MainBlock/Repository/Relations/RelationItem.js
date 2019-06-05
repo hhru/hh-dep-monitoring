@@ -12,7 +12,7 @@ import AddIcon from '@material-ui/icons/Add';
 import RemoveIcon from '@material-ui/icons/Remove';
 import IconButton from '@material-ui/core/IconButton';
 
-import { genericLink, nestedBlock, secondaryItemColor, listItemWithoutIcon } from 'Utils/commonStyles';
+import { genericLink, nestedBlock, secondaryItemColor, listItemWithoutIcon, listItem } from 'Utils/commonStyles';
 import PriorityLabel from './PriorityLabel';
 import Relations from './Relations';
 import EditRelationButton from './RelationForm/OpenFormButton';
@@ -28,6 +28,7 @@ const styles = () => ({
     hidden: {
         visibility: 'hidden',
     },
+    listItem,
 });
 
 function RelationItem({ classes, relation, adminMode }) {
@@ -39,7 +40,7 @@ function RelationItem({ classes, relation, adminMode }) {
 
     return (
         <Fragment>
-            <ListItem>
+            <ListItem className={classes.listItem}>
                 {relation.repositoryToHasRelations && (
                     <IconButton onClick={toggle}>
                         {open

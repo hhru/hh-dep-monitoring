@@ -1,8 +1,10 @@
 export const BASE_URL = '/api/';
 export const REPOSITORY_URL = `${BASE_URL}repository`;
 export const RELATION_URL = `${BASE_URL}relations/`;
+export const EVENT_URL = `${BASE_URL}events/`;
 export const ARTEFACT_TREE_URL = `${BASE_URL}artefact/full-tree/`;
 export const REPOSITORY_LINK_URL = `${BASE_URL}repository-link/`;
 export const PER_PAGE_VARIANTS = [10, 15, 20, 30, 50, 80, 120];
 export const DEFAULT_PER_PAGE_VARIANT = 1;
+export const DEFAULT_EVENTS_COUNT = 20;
 export const SEARCH_REQUEST_THRESHOLD = 400;

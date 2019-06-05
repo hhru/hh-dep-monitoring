@@ -2,7 +2,7 @@ import moment from 'moment';
 
 const MILLISECONDS_IN_DAY = 86400000;
 
-export default function formatDate(date) {
+export function formatDate(date) {
     const countDaysAgo = (new Date() - new Date(date)) / MILLISECONDS_IN_DAY;
     if (countDaysAgo < 30) {
         return moment(date).fromNow();
@@ -11,4 +11,12 @@ export default function formatDate(date) {
         return moment(date).format('Do MMM');
     }
     return moment(date).format('Do MMM YYYY');
+}
+
+export function formatTime(date) {
+    const countDaysAgo = (new Date() - new Date(date)) / MILLISECONDS_IN_DAY;
+    if (countDaysAgo < 1) {
+        return null;
+    }
+    return moment(date).format('HH:mm');
 }

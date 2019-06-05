@@ -22,7 +22,7 @@ export const dateFullItem = {
     textAlign: 'right',
 };
 
-export const descriptionListItem = {
+export const description = {
     ...secondaryItem,
     fontSize: 18,
     margin: '5px 0',
@@ -58,7 +58,7 @@ export const archiveIconBig = {
 export const relationsHeader = {
     display: 'flex',
     height: '36px',
-    paddingTop: '20px',
+    paddingTop: '10px',
 };
 
 export const relationsTitle = {
@@ -241,4 +241,19 @@ export const listItemWithoutIcon = {
 export const genericPaper = {
     padding: '16px',
     width: '800px',
+};
+
+export const noResultMsg = {
+    margin: '10px',
+    color: secondaryItemColor,
+};
+
+export const descriptionListItem = {
+    color: secondaryItemColorLighter,
+    margin: '5px 0',
+    fontSize: 14,
+};
+
+export const listItem = {
+    paddingLeft: '5px',
 };
