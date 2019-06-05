@@ -24,13 +24,15 @@ import ru.hh.school.depmonitoring.rs.RelationResource;
 import ru.hh.school.depmonitoring.rs.RepositoryLinkResource;
 import ru.hh.school.depmonitoring.rs.RepositoryResource;
 import ru.hh.school.depmonitoring.rs.EventResource;
+import ru.hh.school.depmonitoring.rs.ArtefactResource;
 import ru.hh.school.depmonitoring.service.RelationService;
 import ru.hh.school.depmonitoring.service.RepositoryLinkService;
 import ru.hh.school.depmonitoring.service.RepositoryService;
 import ru.hh.school.depmonitoring.service.SyncService;
+import ru.hh.school.depmonitoring.service.EventService;
+import ru.hh.school.depmonitoring.service.ArtefactService;
 import ru.hh.school.depmonitoring.service.loaders.CoverageLoader;
 import ru.hh.school.depmonitoring.service.loaders.DependencyLoader;
-import ru.hh.school.depmonitoring.service.EventService;
 import ru.hh.school.depmonitoring.service.loaders.coveragesourceimpl.SonarCloudCoverageSource;
 import ru.hh.school.depmonitoring.service.mapper.GHRepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.RelationMapper;
@@ -38,6 +40,8 @@ import ru.hh.school.depmonitoring.service.mapper.RepositoryLinkMapper;
 import ru.hh.school.depmonitoring.service.mapper.RepositoryMapper;
 import ru.hh.school.depmonitoring.service.mapper.EventMapper;
 import ru.hh.school.depmonitoring.service.mapper.ArtifactMapper;
+import ru.hh.school.depmonitoring.service.mapper.DependencyMapper;
+import ru.hh.school.depmonitoring.service.mapper.ArtefactVersionMapper;
 
 import javax.sql.DataSource;
 
@@ -64,6 +68,7 @@ import javax.sql.DataSource;
         RepositoryLinkService.class,
         EventService.class,
         SonarCloudCoverageSource.class,
+        ArtefactService.class,
 
         GHRepositoryMapper.class,
         RelationMapper.class,
@@ -71,13 +76,16 @@ import javax.sql.DataSource;
         RepositoryLinkMapper.class,
         EventMapper.class,
         ArtifactMapper.class,
+        DependencyMapper.class,
+        ArtefactVersionMapper.class,
 
         BambooResource.class,
         GithubResource.class,
         RelationResource.class,
         RepositoryResource.class,
         RepositoryLinkResource.class,
-        EventResource.class
+        EventResource.class,
+        ArtefactResource.class
 })
 
 public class CommonConfig {
