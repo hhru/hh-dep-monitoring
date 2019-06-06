@@ -7,6 +7,7 @@ import ru.hh.school.depmonitoring.dto.PageRequestDto;
 import javax.annotation.Nonnull;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import java.io.Serializable;
@@ -61,8 +62,8 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
         List<Order> orders = new ArrayList<>();
         for (PageRequestDto.PageSort pageSort : pageRequestDto.getPageSortList()) {
             if (getFieldNames().contains(pageSort.getProperty())) {
-                var orderExpression = root.get(pageSort.getProperty());
-                orders.add(pageSort.isAscending() ?
+                var orderExpression = changeExpression(cb, root.get(pageSort.getProperty()), pageSort.getProperty());
+                        orders.add(pageSort.isAscending() ?
                         cb.asc(orderExpression) :
                         cb.desc(orderExpression));
             }
@@ -72,6 +73,11 @@ public abstract class AbstractDao<T, I extends Serializable> implements Dao<T, I
                 .setFirstResult(offsetIndex)
                 .setMaxResults(perPage)
                 .getResultList();
+    }
+
+    @Override
+    public Expression<String> changeExpression(CriteriaBuilder cb, Expression<String> expression, String property) {
+        return expression;
     }
 
     @Override

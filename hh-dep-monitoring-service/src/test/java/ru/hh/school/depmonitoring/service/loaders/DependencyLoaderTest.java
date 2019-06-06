@@ -115,6 +115,7 @@ public class DependencyLoaderTest extends DepMonitoringTestBase {
         );
         assertEquals(9, artifactList.size());
         var repository = artifactList.get(0).getRepository();
+        artifactDao.changeExpression(null, null, repository.getName());
         assertEquals(repositoryOriginal.getRepositoryId(), repository.getRepositoryId());
         assertEquals(repositoryOriginal.getName(), repository.getName());
     }

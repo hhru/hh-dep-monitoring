@@ -8,6 +8,8 @@ import ru.hh.school.depmonitoring.entities.Repository;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Expression;
 import java.util.Optional;
 
 
@@ -19,6 +21,13 @@ public class RepositoryDaoImpl extends AbstractDao<Repository, Long> implements 
         super(sessionFactory, Repository.class);
     }
 
+    @Override
+    public Expression<String> changeExpression(CriteriaBuilder cb, Expression<String> expression, String property) {
+        if (property.equals("name")) {
+            return cb.lower(expression);
+        }
+        return expression;
+    }
 
     @Override
     public Optional<Repository> findRepositoryByName(String repositoryName) {

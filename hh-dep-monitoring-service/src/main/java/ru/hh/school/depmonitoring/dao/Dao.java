@@ -3,6 +3,8 @@ package ru.hh.school.depmonitoring.dao;
 import ru.hh.school.depmonitoring.dto.PageRequestDto;
 
 import javax.annotation.Nonnull;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.Expression;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +20,8 @@ public interface Dao<T, I extends Serializable> {
     List<T> findAll();
 
     List<T> findPage(@Nonnull PageRequestDto pageRequestDto);
+
+    Expression<String> changeExpression(CriteriaBuilder cb, Expression<String> expression, String property);
 
     void create(@Nonnull T entity);
 
