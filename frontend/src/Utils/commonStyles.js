@@ -283,3 +283,10 @@ export const listItem = {
     paddingLeft: '5px',
     overflow: 'hidden',
 };
+
+export const githubIcon = {
+    width: '24px',
+    height: '24px',
+    verticalAlign: 'middle',
+    marginRight: '10px',
+};
