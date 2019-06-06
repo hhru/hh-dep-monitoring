@@ -125,6 +125,22 @@ export const selectComponentsStyles = theme => ({
     errorText,
 });
 
+export const selectWithButtonStyles = theme => ({
+    ...selectComponentsStyles(theme),
+    selectWithButton: {
+        display: 'flex',
+        width: '400px',
+        [theme.breakpoints.down('sm')]: {
+            width: '360px',
+        },
+    },
+    select: {
+        flexGrow: 1,
+        marginRight: '10px',
+    },
+    buttonLink,
+});
+
 export const formButton = {
     color: mainThemeColor,
 };

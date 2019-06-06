@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import classNames from 'classnames';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -11,7 +12,8 @@ import Chip from '@material-ui/core/Chip';
 import ListItem from '@material-ui/core/ListItem';
 
 import { fetchEvents } from 'redux/models/Event/eventsActions';
-import { noResultMsg, chip, errorText, descriptionListItem, flexVerticalContainer } from 'Utils/commonStyles';
+import { noResultMsg, chip, errorText, descriptionListItem, flexVerticalContainer,
+    genericLink } from 'Utils/commonStyles';
 import { formatDate, formatTime } from 'Utils/date';
 
 const styles = () => ({
@@ -23,6 +25,7 @@ const styles = () => ({
         ...flexVerticalContainer,
         alignItems: 'flex-start',
     },
+    genericLink,
 });
 
 function Events({ classes, repositoryId, events, fetchEvents }) {
@@ -43,8 +46,13 @@ function Events({ classes, repositoryId, events, fetchEvents }) {
                         <Divider />
                         <ListItem className={classes.listItem}>
                             <div>
-                                {`${event.artifact.groupName}:${event.artifact.artifactName}
-                                was updated ${formatDate(event.createdAt)}`}
+                                <Link
+                                    to={`/artifacts/${event.artifact.artifactId}/artifactId`}
+                                    className={classes.genericLink}
+                                >
+                                    {`${event.artifact.groupName}:${event.artifact.artifactName}`}
+                                </Link>
+                                {` was updated ${formatDate(event.createdAt)}`}
                                 {formatTime(event.createdAt) && (` at ${formatTime(event.createdAt)}`)}
                             </div>
                             <div className={classes.descriptionListItem}>
