@@ -1,26 +1,43 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
-import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 
-import { listItemWithoutIcon } from 'Utils/commonStyles';
+import { flexVerticalContainer, repositoryItemTitle, githubIcon, genericLink,
+    descriptionListItem } from 'Utils/commonStyles';
+import Icon from 'Utils/icons';
 import ArtfactListItem from './ArtifactListItem';
 
 const styles = () => ({
-    listItemWithoutIcon,
+    flexVerticalContainer,
+    repositoryItemTitle: {
+        ...repositoryItemTitle,
+        textDecoration: 'none',
+        '&:hover': {
+            textDecoration: 'underline',
+        },
+    },
+    genericLink,
+    descriptionListItem,
 });
 
 function ArtifactRepositoryItem({ classes, repository, searchParams }) {
     return (
         <ArtfactListItem nestedItems={repository.dependencies} searchParams={searchParams}>
-            { hasAnyChildren => (
-                <ListItemText
-                    className={classNames({ [classes.listItemWithoutIcon]: !hasAnyChildren })}
-                    primary={repository.name}
-                    secondary={repository.description}
-                />
+            { () => (
+                <div className={classes.flexVerticalContainer}>
+                    <Link
+                        to={`/repositories/${repository.repositoryId}`}
+                        className={classes.repositoryItemTitle}
+                    >
+                        <Icon iconName="github" styles={githubIcon} />
+                        {repository.name}
+                    </Link>
+                    <div className={classes.descriptionListItem}>
+                        {!!repository.description && repository.description}
+                    </div>
+                </div>
             )}
         </ArtfactListItem>
     );

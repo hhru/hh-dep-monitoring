@@ -39,11 +39,11 @@ function About({ classes }) {
                 About
             </Typography>
             {Object.keys(developers).map(group => (
-                <div className={classes.group}>
+                <div className={classes.group} key={group}>
                     <Typography variant="h5">{group}</Typography>
                     <div className={classes.developersGroup}>
                         {developers[group].map(developer => (
-                            <Typography variant="subtitle1">{developer}</Typography>))}
+                            <Typography variant="subtitle1" key={developer}>{developer}</Typography>))}
                     </div>
                 </div>
             ))}

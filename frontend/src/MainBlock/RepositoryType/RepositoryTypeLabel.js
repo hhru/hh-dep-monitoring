@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import Library from '@material-ui/icons/LocalLibrary';
 import Config from '@material-ui/icons/Settings';
 import Service from '@material-ui/icons/SettingsApplications';
-import Application from '@material-ui/icons/Work';
+import Application from '@material-ui/icons/PhonelinkSetup';
 import Other from '@material-ui/icons/MoreHoriz';
 
 import { chip } from 'Utils/commonStyles';
