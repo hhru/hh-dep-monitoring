@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.transaction.annotation.Transactional;
 import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.ArtifactVersionDao;
 import ru.hh.school.depmonitoring.dao.DependencyDao;
@@ -22,6 +21,7 @@ import ru.hh.school.depmonitoring.entities.Repository;
 import ru.hh.school.depmonitoring.exceptions.LoadExceptionType;
 import ru.hh.school.depmonitoring.exceptions.LoadRuntimeException;
 import ru.hh.school.depmonitoring.entities.RepositoryRelationPriority;
+import ru.hh.school.depmonitoring.utils.TransactionUtils;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -45,6 +45,7 @@ public class DependencyLoader {
     private final DependencyDao dependencyDao;
     private final EventDao eventDao;
     private final RelationDao relationDao;
+    private final TransactionUtils transactionUtils;
 
     private static final Logger log = LoggerFactory.getLogger(DependencyLoader.class);
 
@@ -55,8 +56,8 @@ public class DependencyLoader {
             ArtifactVersionDao artifactVersionDao,
             DependencyDao dependencyDao,
             EventDao eventDao,
-            RelationDao relationDao
-    ) {
+            RelationDao relationDao,
+            TransactionUtils transactionUtils) {
         this.bambooLink = bambooLink;
         this.repositoryDao = repositoryDao;
         this.artifactDao = artifactDao;
@@ -64,6 +65,7 @@ public class DependencyLoader {
         this.dependencyDao = dependencyDao;
         this.eventDao = eventDao;
         this.relationDao = relationDao;
+        this.transactionUtils = transactionUtils;
     }
 
     private List<BambooArtifactDto> getDataFromBamboo(String bambooLink) throws IOException {
@@ -78,16 +80,14 @@ public class DependencyLoader {
         return List.of(mapper.readValue(allBytes, BambooArtifactDto[].class));
     }
 
-    @Transactional
     public void saveDependencyData() {
         saveDependencyData(bambooLink);
     }
 
-    @Transactional
     public void saveDependencyData(String bambooLink) {
         try {
             saveDependencyData(getDataFromBamboo(bambooLink), null, null);
-            updateDependencies();
+            transactionUtils.doInTransaction((Runnable) this::updateDependencies);
         } catch (IOException e) {
             throw new LoadRuntimeException("Error on getDataFromBamboo", e, LoadExceptionType.CONNECT);
         }
@@ -98,7 +98,7 @@ public class DependencyLoader {
             String repoName = bambooArtifactDto.getRepoName();
             Optional<Repository> repositoryOptional = (repoName == null || repoName.isEmpty()) ?
                     Optional.empty() :
-                    repositoryDao.findRepositoryByName(bambooArtifactDto.getRepoName());
+                    transactionUtils.doInTransaction(() -> repositoryDao.findRepositoryByName(bambooArtifactDto.getRepoName()));
             if (repositoryOptional.isEmpty() && parentRepository == null) {
                 log.error("Can't find repository with name {} in saveBambooDate", bambooArtifactDto.getRepoName());
                 continue;
@@ -113,7 +113,9 @@ public class DependencyLoader {
                 String artifactName = keyList[1];
                 String version = keyList[2];
                 var repository = (parentRepository == null ? repositoryOfArtifact : parentRepository);
-                var dependency = saveArtifact(groupName, artifactName, version, repositoryOfArtifact, repository, parentDependency);
+                var dependency = transactionUtils.doInTransaction(
+                        () -> saveArtifact(groupName, artifactName, version, repositoryOfArtifact, repository, parentDependency)
+                );
                 saveDependencyData(bambooArtifactDto.getDependencyTree(), repository, dependency);
             }
         }
@@ -233,11 +235,11 @@ public class DependencyLoader {
 
     private void updateDependencies(Artifact childArtifact, Repository childRepository) {
         var artifactList = dependencyDao.findByArtifact(childArtifact)
-                .stream()
-                .map(Dependency::getParentDependency)
-                .filter(Objects::nonNull)
-                .map(dependency -> dependency.getArtifactVersion().getArtifact())
-                .collect(Collectors.toList());
+                    .stream()
+                    .map(Dependency::getParentDependency)
+                    .filter(Objects::nonNull)
+                    .map(dependency -> dependency.getArtifactVersion().getArtifact())
+                    .collect(Collectors.toList());
         for (var artifact : artifactList) {
             var repository = artifact.getRepository();
             if (repository != null) {

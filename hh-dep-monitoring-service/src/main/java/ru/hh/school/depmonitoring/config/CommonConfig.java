@@ -42,6 +42,7 @@ import ru.hh.school.depmonitoring.service.mapper.EventMapper;
 import ru.hh.school.depmonitoring.service.mapper.ArtifactMapper;
 import ru.hh.school.depmonitoring.service.mapper.DependencyMapper;
 import ru.hh.school.depmonitoring.service.mapper.ArtefactVersionMapper;
+import ru.hh.school.depmonitoring.utils.TransactionUtils;
 
 import javax.sql.DataSource;
 
@@ -85,7 +86,9 @@ import javax.sql.DataSource;
         RepositoryResource.class,
         RepositoryLinkResource.class,
         EventResource.class,
-        ArtefactResource.class
+        ArtefactResource.class,
+
+        TransactionUtils.class
 })
 
 public class CommonConfig {
