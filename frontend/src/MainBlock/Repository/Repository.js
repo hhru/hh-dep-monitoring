@@ -22,8 +22,10 @@ import AddLinkButton from '../RepositoryLinks/OpenFormButton';
 import Events from './Events';
 import CoverageLabel from '../CoverageLabel';
 
-const styles = () => ({
-    genericPaper,
+const styles = theme => ({
+    genericPaper: {
+        ...genericPaper(theme),
+    },
     description,
     relationsHeader,
     relationsTitle,

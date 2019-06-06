@@ -14,7 +14,9 @@ import ArtifactRepositoryItem from './ArtifactRepositoryItem';
 import ArtifactsSelect from './ArtifactsSelect';
 
 const styles = theme => ({
-    genericPaper,
+    genericPaper: {
+        ...genericPaper(theme),
+    },
     artifactsHeader: {
         ...flexInlineContainer,
         [theme.breakpoints.down('sm')]: {

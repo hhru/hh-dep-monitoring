@@ -9,11 +9,14 @@ import { PER_PAGE_VARIANTS } from 'Utils/constants';
 import { secondaryItemColor, flexInlineContainer } from 'Utils/commonStyles';
 import PaginationButton from './PaginationButton';
 
-const styles = () => ({
+const styles = theme => ({
     widgetContainer: flexInlineContainer,
     perPageLabel: {
         padding: '18px',
         color: secondaryItemColor,
+        [theme.breakpoints.down('sm')]: {
+            padding: '0px 10px 0px 0px',
+        },
     },
     perPageSelect: {
         color: secondaryItemColor,
