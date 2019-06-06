@@ -219,7 +219,7 @@ public class DependencyLoader {
         } else {
             event.setType(EventType.VERSION_CHANGE);
         }
-        event.setDescription("Version changed from" + oldArtifactVersion.getVersion() + " to " + newArtifactVersion.getVersion());
+        event.setDescription("Version changed from " + oldArtifactVersion.getVersion() + " to " + newArtifactVersion.getVersion());
         eventDao.create(event);
     }
 
