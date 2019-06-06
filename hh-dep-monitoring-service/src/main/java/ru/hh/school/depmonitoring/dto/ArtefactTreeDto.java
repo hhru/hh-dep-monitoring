@@ -4,6 +4,7 @@ import ru.hh.school.depmonitoring.entities.RepositoryType;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class ArtefactTreeDto {
@@ -18,6 +19,15 @@ public class ArtefactTreeDto {
 
     @NotNull
     private RepositoryType repositoryType;
+
+    @NotNull
+    private String htmlUrl;
+
+    @NotNull
+    private boolean archived;
+
+    @Nullable
+    private LocalDateTime updatedAt;
 
     @Nullable
     private List<DependencyDto> dependencies;
@@ -62,5 +72,30 @@ public class ArtefactTreeDto {
 
     public void setDependencies(@Nullable List<DependencyDto> dependencies) {
         this.dependencies = dependencies;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    public boolean isArchived() {
+        return archived;
+    }
+
+    public void setArchived(boolean archived) {
+        this.archived = archived;
+    }
+
+    @Nullable
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(@Nullable LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
     }
 }
