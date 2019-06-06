@@ -1,6 +1,7 @@
 package ru.hh.school.depmonitoring.service;
 
 import org.springframework.transaction.annotation.Transactional;
+import ru.hh.school.depmonitoring.dao.ArtifactDao;
 import ru.hh.school.depmonitoring.dao.DependencyDao;
 import ru.hh.school.depmonitoring.dao.RepositoryDao;
 import ru.hh.school.depmonitoring.dto.ArtefactTreeDto;
@@ -15,11 +16,16 @@ public class ArtefactService {
     private final RepositoryDao repositoryDao;
     private final DependencyDao dependencyDao;
     private final DependencyMapper dependencyMapper;
+    private final ArtifactDao artifactDao;
 
-    public ArtefactService(RepositoryDao repositoryDao, DependencyDao dependencyDao, DependencyMapper dependencyMapper) {
+    public ArtefactService(RepositoryDao repositoryDao,
+                           DependencyDao dependencyDao,
+                           DependencyMapper dependencyMapper,
+                           ArtifactDao artifactDao) {
         this.repositoryDao = repositoryDao;
         this.dependencyDao = dependencyDao;
         this.dependencyMapper = dependencyMapper;
+        this.artifactDao = artifactDao;
     }
 
     @Transactional(readOnly = true)
@@ -64,4 +70,16 @@ public class ArtefactService {
             dependencyDto.setChildren(children);
         }
     }
+
+    @Transactional(readOnly = true)
+    public List<String> getNames() {
+        return artifactDao.getNames();
+    }
+
+    @Transactional(readOnly = true)
+    public List<String> getNamesContains(String searchKeyword) {
+        return artifactDao.getNamesContains(searchKeyword);
+    }
+
+
 }
