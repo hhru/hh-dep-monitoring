@@ -122,6 +122,7 @@ public class DependencyLoader {
     private List<Integer> getVersionList(String version) {
         return Arrays.stream(version.split("\\D"))
                 .filter(StringUtils::isNumeric)
+                .filter(s -> s.length() < 5)
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
