@@ -157,7 +157,7 @@ public class DependencyLoader {
                 return dependency;
             }
             createEvent(parentRepository.getRepositoryId(), dependency.getArtifactVersion(), artifactVersion);
-            deleteDependency(dependency);
+            dependencyDao.delete(dependency);
         }
         Dependency dependency = new Dependency(parentRepository, artifactVersion, parentDependency);
         dependencyDao.create(dependency);
@@ -181,14 +181,6 @@ public class DependencyLoader {
             headDependency = headDependency.getParentDependency();
         }
         return headDependency;
-    }
-
-    private void deleteDependency(Dependency dependency) {
-        var dependencyList = dependencyDao.findByParentDependency(dependency);
-        for (var dependencyItem : dependencyList) {
-            deleteDependency(dependencyItem);
-        }
-        dependencyDao.delete(dependency);
     }
 
     private Artifact createArtifact(String artifactName, String groupName, Repository repository) {
